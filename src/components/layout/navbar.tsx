@@ -16,6 +16,7 @@ import {
   LayoutGrid,
   MapPin,
   Store,
+  Sparkles,
 } from "lucide-react";
 import { CATEGORIES_DATA, PRODUCTS_DATA } from "@/lib/catalog-data";
 import { PromotionTicker } from "@/components/layout/promotion-ticker";
@@ -102,16 +103,16 @@ export function Navbar() {
                 </div>
               </Link>
 
-              {/* "Todos nuestros productos ⌵" Dropdown Button */}
+              {/* "Categorías ⌵" Mega Menu Button */}
               <div className="hidden md:block relative" ref={megaMenuRef}>
                 <button
                   type="button"
                   onClick={() => setMegaMenuOpen(!megaMenuOpen)}
                   className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 text-xs sm:text-[13px] font-medium text-slate-900 transition-all cursor-pointer"
-                  aria-label="Todos nuestros productos"
+                  aria-label="Categorías"
                 >
                   <LayoutGrid className="size-4 text-[#ff6600] shrink-0" />
-                  <span>Todos nuestros productos</span>
+                  <span>Categorías</span>
                   <ChevronDown
                     className={`size-3.5 text-slate-500 transition-transform duration-200 ${
                       megaMenuOpen ? "rotate-180" : ""
@@ -119,48 +120,89 @@ export function Navbar() {
                   />
                 </button>
 
-                {/* Dropdown Menu */}
+                {/* Mega Menu Dropdown */}
                 {megaMenuOpen && (
-                  <div className="absolute top-full left-0 mt-2.5 w-80 sm:w-96 rounded-2xl bg-white border border-slate-200 shadow-2xl p-3.5 grid grid-cols-1 gap-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="px-2 py-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1 flex items-center justify-between">
-                      <span>Líneas de Trabajo</span>
+                  <div className="absolute top-full left-0 mt-2.5 w-[680px] lg:w-[820px] rounded-3xl bg-white border border-slate-200 shadow-2xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                    {/* Header */}
+                    <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100">
+                      <div>
+                        <h3 className="font-semibold text-sm text-slate-950">
+                          Categorías de Productos
+                        </h3>
+                        <p className="text-[11px] text-slate-500 mt-0.5">
+                          Líneas completas de uniformes, ropa de trabajo y protección industrial certificada
+                        </p>
+                      </div>
                       <Link
                         href="/catalogo"
                         onClick={() => setMegaMenuOpen(false)}
-                        className="text-[#ff6600] hover:underline font-medium normal-case text-xs"
+                        className="text-xs font-semibold text-[#ff6600] hover:text-[#ea580c] flex items-center gap-1 transition-colors"
                       >
-                        Ver todo
+                        <span>Ver Toda la Tienda</span>
+                        <ArrowRight className="size-3.5" />
                       </Link>
                     </div>
 
-                    {CATEGORIES_DATA.map((cat) => (
-                      <Link
-                        key={cat.slug}
-                        href={`/catalogo?categoria=${cat.slug}`}
-                        onClick={() => setMegaMenuOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 text-slate-800 hover:text-slate-950 transition-colors group"
+                    {/* Grid of Categories */}
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5">
+                      {CATEGORIES_DATA.map((cat) => (
+                        <Link
+                          key={cat.slug}
+                          href={`/catalogo?categoria=${cat.slug}`}
+                          onClick={() => setMegaMenuOpen(false)}
+                          className="flex items-center gap-3 p-2.5 rounded-2xl border border-slate-100 hover:border-slate-200 bg-slate-50/60 hover:bg-slate-100/80 transition-all group"
+                        >
+                          <div className="relative size-12 rounded-xl overflow-hidden bg-white border border-slate-200 shrink-0">
+                            <Image
+                              src={cat.image}
+                              alt={cat.name}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-200"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 group-hover:text-[#ff6600] transition-colors block truncate">
+                              {cat.name}
+                            </span>
+                            <p className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1 leading-snug mt-0.5">
+                              {cat.description}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Bottom Help / Wholesale Bar inside Mega Menu */}
+                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between bg-orange-50/70 rounded-2xl px-4 py-2.5 border border-orange-100">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="size-4 text-[#ff6600] shrink-0" />
+                        <span className="text-xs text-slate-800 font-medium">
+                          ¿Cotizaciones al por mayor o confección con bordado corporativo?
+                        </span>
+                      </div>
+                      <a
+                        href="https://wa.me/593993358701?text=%C2%A1Hola%20FYF%20Uniformes!%20Quisiera%20cotizar%20un%20pedido%20corporativo%20por%20mayor."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold text-[#ff6600] hover:underline flex items-center gap-1 shrink-0"
                       >
-                        <div className="relative size-9 rounded-lg overflow-hidden bg-slate-100 border border-slate-100 shrink-0">
-                          <Image
-                            src={cat.image}
-                            alt={cat.name}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-xs font-medium uppercase tracking-wider text-slate-900 group-hover:text-[#ff6600] transition-colors block truncate">
-                            {cat.name}
-                          </span>
-                          <p className="text-[11px] text-slate-500 truncate mt-0.5">
-                            {cat.description}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
+                        <span>Contactar Asesor</span>
+                        <ArrowRight className="size-3" />
+                      </a>
+                    </div>
                   </div>
                 )}
               </div>
+
+              {/* "Tienda" Button */}
+              <Link
+                href="/catalogo"
+                className="hidden md:flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 text-xs sm:text-[13px] font-medium text-slate-900 transition-all cursor-pointer shrink-0"
+                aria-label="Tienda"
+              >
+                <Store className="size-4 text-[#ff6600] shrink-0" />
+                <span>Tienda</span>
+              </Link>
             </div>
 
             {/* 2. Center: Wide Search Bar */}
