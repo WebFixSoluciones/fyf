@@ -88,74 +88,62 @@ export function CatalogSidebar({
     : [];
 
   return (
-    <aside className={cn("flex flex-col gap-6 text-slate-800 font-sans", className)}>
-      {/* Header with Title & Reset */}
-      <div className="flex items-center justify-between pb-3.5 border-b border-slate-200">
-        <div>
-          <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Filtros de Catálogo</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            {filteredProductsCount} de {totalProductsCount} productos
-          </p>
-        </div>
-
-        {activeFiltersCount > 0 && (
+    <aside className={cn("flex flex-col gap-5 text-neutral-800 font-sans", className)}>
+      {/* Reset button only if filters are active */}
+      {activeFiltersCount > 0 && (
+        <div className="flex items-center justify-end pb-1 border-b border-neutral-100">
           <button
             onClick={onResetFilters}
             type="button"
-            className="text-xs font-semibold text-amber-600 hover:text-amber-700 flex items-center gap-1 transition-colors"
+            className="text-xs font-medium text-[#ff6600] hover:underline flex items-center gap-1 transition-colors"
           >
             <RotateCcw className="w-3 h-3" />
-            <span>Limpiar</span>
+            <span>Limpiar filtros</span>
           </button>
-        )}
-      </div>
-
-      {/* Categorías Principales */}
-      <div className="space-y-2">
-        <h3 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
-          Líneas de Trabajo
-        </h3>
-        <div className="space-y-1">
-          <button
-            type="button"
-            onClick={() => onFilterChange({ categoria: undefined, subcategoria: undefined })}
-            className={cn(
-              "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-left transition-all",
-              !filters.categoria
-                ? "bg-black text-white font-semibold shadow-xs"
-                : "text-neutral-700 hover:bg-neutral-100"
-            )}
-          >
-            <span>Todas las Líneas</span>
-            <span className={cn("text-[11px]", !filters.categoria ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
-              {totalProductsCount}
-            </span>
-          </button>
-
-          {CATEGORIES_DATA.map((cat) => {
-            const isSelected = filters.categoria === cat.slug;
-            const count = categoryCounts[cat.slug] || 0;
-
-            return (
-              <button
-                key={cat.slug}
-                type="button"
-                onClick={() => onFilterChange({ categoria: cat.slug, subcategoria: undefined })}
-                className={cn(
-                  "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-left transition-all",
-                  isSelected
-                    ? "bg-black text-white font-semibold shadow-xs"
-                    : "text-neutral-700 hover:bg-neutral-100"
-                )}
-              >
-                <span className="truncate pr-2">{cat.name}</span>
-                <span className={cn("text-[11px]", isSelected ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
-                  {count}
-                </span>
-              </button>
-            );
-          })}
         </div>
+      )}
+
+      {/* Categorías Principales (Sin título redundante) */}
+      <div className="space-y-1">
+        <button
+          type="button"
+          onClick={() => onFilterChange({ categoria: undefined, subcategoria: undefined })}
+          className={cn(
+            "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-left transition-all",
+            !filters.categoria
+              ? "bg-black text-white font-semibold shadow-xs"
+              : "text-neutral-700 hover:bg-neutral-100"
+          )}
+        >
+          <span>Todas las Líneas</span>
+          <span className={cn("text-[11px]", !filters.categoria ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
+            {totalProductsCount}
+          </span>
+        </button>
+
+        {CATEGORIES_DATA.map((cat) => {
+          const isSelected = filters.categoria === cat.slug;
+          const count = categoryCounts[cat.slug] || 0;
+
+          return (
+            <button
+              key={cat.slug}
+              type="button"
+              onClick={() => onFilterChange({ categoria: cat.slug, subcategoria: undefined })}
+              className={cn(
+                "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-left transition-all",
+                isSelected
+                  ? "bg-black text-white font-semibold shadow-xs"
+                  : "text-neutral-700 hover:bg-neutral-100"
+              )}
+            >
+              <span className="truncate pr-2">{cat.name}</span>
+              <span className={cn("text-[11px]", isSelected ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
+                {count}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Subcategorías dinámicas si una categoría está seleccionada */}
@@ -188,32 +176,27 @@ export function CatalogSidebar({
         </div>
       )}
 
-      {/* Rangos de Precio */}
-      <div className="space-y-2 pt-2 border-t border-neutral-100">
-        <h3 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
-          Rango Estimado
-        </h3>
-        <div className="space-y-1">
-          {PRICE_RANGES.map((range) => {
-            const isSelected = (filters.precioRango || "all") === range.id;
-            return (
-              <button
-                key={range.id}
-                type="button"
-                onClick={() => onFilterChange({ precioRango: range.id })}
-                className={cn(
-                  "w-full flex flex-col text-left px-3.5 py-2 rounded-xl transition-colors text-xs",
-                  isSelected
-                    ? "bg-neutral-100 text-neutral-950 font-semibold"
-                    : "text-neutral-600 hover:bg-neutral-50"
-                )}
-              >
-                <span>{range.label}</span>
-                {range.desc && <span className="text-[10px] text-neutral-400 font-normal">{range.desc}</span>}
-              </button>
-            );
-          })}
-        </div>
+      {/* Rangos de Precio (Sin título redundante) */}
+      <div className="space-y-1 pt-3 border-t border-neutral-100">
+        {PRICE_RANGES.map((range) => {
+          const isSelected = (filters.precioRango || "all") === range.id;
+          return (
+            <button
+              key={range.id}
+              type="button"
+              onClick={() => onFilterChange({ precioRango: range.id })}
+              className={cn(
+                "w-full flex flex-col text-left px-3.5 py-2 rounded-xl transition-colors text-xs",
+                isSelected
+                  ? "bg-neutral-100 text-neutral-950 font-semibold"
+                  : "text-neutral-600 hover:bg-neutral-50"
+              )}
+            >
+              <span>{range.label}</span>
+              {range.desc && <span className="text-[10px] text-neutral-400 font-normal">{range.desc}</span>}
+            </button>
+          );
+        })}
       </div>
 
       {/* Corporate Quotation Box */}
