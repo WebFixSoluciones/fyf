@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useCart } from "@/context/cart-context";
 
 export function FloatingWhatsapp() {
   const pathname = usePathname();
+  const { isCartOpen } = useCart();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -12,8 +14,9 @@ export function FloatingWhatsapp() {
   }, []);
 
   if (!mounted) return null;
-  // Don't display inside admin dashboard
+  // Don't display inside admin dashboard or when cart drawer is open
   if (pathname?.startsWith("/admin")) return null;
+  if (isCartOpen) return null;
 
   const phoneNumber = "593993358701";
   const defaultMessage = "¡Hola FYF Uniformes! Quisiera información y cotización sobre uniformes y ropa de trabajo.";
@@ -35,7 +38,7 @@ export function FloatingWhatsapp() {
   };
 
   return (
-    <aside aria-label="Contacto directo por WhatsApp" className="fixed bottom-6 right-6 z-50 flex items-center group">
+    <aside aria-label="Contacto directo por WhatsApp" className="fixed bottom-6 right-6 z-40 flex items-center group">
       {/* Tooltip on hover */}
       <span className="hidden sm:inline-block pointer-events-none absolute right-16 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 bg-black text-white text-xs font-medium px-3.5 py-1.5 rounded-xl border border-neutral-800 shadow-2xl whitespace-nowrap">
         Chatea con un asesor FYF
@@ -45,14 +48,8 @@ export function FloatingWhatsapp() {
         type="button"
         onClick={handleClick}
         aria-label="Chatear por WhatsApp con FYF Uniformes"
-        className="relative size-14 rounded-full bg-black hover:bg-neutral-900 border border-neutral-800 text-white shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
+        className="relative size-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:bg-[#1da851] text-white shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer shadow-emerald-950/20"
       >
-        {/* Subtle pulsing badge */}
-        <span className="absolute -top-0.5 -right-0.5 flex size-3.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff6600] opacity-75" />
-          <span className="relative inline-flex rounded-full size-3.5 bg-[#ff6600]" />
-        </span>
-
         <svg
           className="size-7 fill-white group-hover:scale-105 transition-transform"
           viewBox="0 0 24 24"
