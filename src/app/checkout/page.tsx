@@ -13,7 +13,6 @@ import {
   Truck,
   ArrowLeft,
   Lock,
-  CheckCircle2,
   AlertCircle,
   ChevronDown,
   ChevronUp,
@@ -149,30 +148,29 @@ function CheckoutContent() {
       }
 
       // Order created successfully
-      const orderNumber = data.orderNumber || "ALN-2026-1001";
+      const orderNumber = data.orderNumber || "FYF-2026-1001";
       const orderId = data.orderId || "new";
 
       clearCart();
 
       // If WhatsApp order, open WhatsApp with confirmation text and redirect to success
       if (formData.paymentMethod === "whatsapp") {
-        const waText = `*¡Pedido Registrado con Éxito!*
+        const waText = `*¡Pedido Registrado con Éxito en FYF Uniformes!*
 *N° Pedido:* ${orderNumber}
 *Cliente:* ${formData.fullName} (C.I: ${formData.idNumber})
 *Teléfono:* ${formData.phone}
 *Entrega:* ${formData.city}, ${formData.address}
 *Total a pagar:* $${total.toFixed(2)} USD
 
-He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los datos bancarios para enviar el comprobante.`;
+He seleccionado pago por transferencia/WhatsApp. Por favor envíenme los datos bancarios para enviar el comprobante.`;
 
-        window.open(`https://wa.me/593985890956?text=${encodeURIComponent(waText)}`, "_blank");
+        window.open(`https://wa.me/593993358701?text=${encodeURIComponent(waText)}`, "_blank");
         router.push(`/pedido/${orderId}/exito?num=${orderNumber}&method=whatsapp`);
         return;
       }
 
       // If Payphone payment:
       if (formData.paymentMethod === "payphone") {
-        // En modo demostración / local, si Payphone está en sandbox, redirigimos a confirmación exitosa con simulación
         router.push(`/pedido/${orderId}/exito?num=${orderNumber}&method=payphone`);
       }
     } catch (err: any) {
@@ -182,102 +180,103 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50">
-      {/* Top Simple Shopify-style Header */}
-      <header className="bg-white border-b border-slate-200 py-2.5 sm:py-4 px-3 sm:px-8 sticky top-0 z-30">
-        <div className="w-[95%] max-w-[1720px] mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 sm:gap-3">
+    <div className="min-h-screen bg-white font-sans text-slate-900">
+      {/* Encabezado Simple y Limpio */}
+      <header className="bg-white border-b border-slate-200/80 py-3.5 px-4 sm:px-8 sticky top-0 z-30">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo.jpg"
               alt="FYF Uniformes"
-              width={180}
-              height={60}
-              className="h-10 sm:h-14 md:h-16 w-auto object-contain"
+              width={160}
+              height={50}
+              className="h-9 sm:h-12 w-auto object-contain"
+              priority
             />
           </Link>
-          <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-slate-500 font-semibold">
-            <Lock className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="hidden sm:inline">Pago Seguro y Encriptado 256-bit</span>
-            <span className="sm:hidden">Pago Seguro 256-bit</span>
+          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+            <Lock className="size-4 text-emerald-600 shrink-0" />
+            <span className="hidden sm:inline">Checkout Seguro · Encriptado 256-bit</span>
+            <span className="sm:hidden">Pago Seguro</span>
           </div>
         </div>
       </header>
 
-      <main className="w-[95%] max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
         <form onSubmit={handleSubmitOrder}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            {/* Columna Izquierda: Formulario de Checkout (7 cols) */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+            {/* Columna Izquierda: Formulario Continuo y Limpio (7 columnas) */}
+            <div className="lg:col-span-7 space-y-7">
               <Link
                 href="/catalogo"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-black transition-colors"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
+                <ArrowLeft className="size-3.5" />
                 <span>Volver a la tienda</span>
               </Link>
 
-              {/* Resumen Móvil Acordeón Desplegable (Shopify Style) */}
-              <div className="lg:hidden bg-white border border-slate-200/90 rounded-xl overflow-hidden shadow-2xs">
+              {/* Resumen Móvil Desplegable (visible solo en smartphone/tablet) */}
+              <div className="lg:hidden border border-slate-200 rounded-xl overflow-hidden bg-white">
                 <button
                   type="button"
                   onClick={() => setShowMobileSummary(!showMobileSummary)}
-                  className="w-full p-3 flex items-center justify-between bg-slate-50/80 hover:bg-slate-100/70 transition-colors text-left cursor-pointer"
+                  className="w-full p-4 flex items-center justify-between bg-slate-50/70 hover:bg-slate-100/70 transition-colors text-left cursor-pointer"
                 >
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
                     <ShoppingBag className="size-4 text-[#FF841D]" />
-                    <span>{showMobileSummary ? "Ocultar resumen de compra" : "Ver resumen de compra"}</span>
+                    <span>{showMobileSummary ? "Ocultar resumen del pedido" : "Ver resumen del pedido"}</span>
                     {showMobileSummary ? (
                       <ChevronUp className="size-3.5 text-slate-500" />
                     ) : (
                       <ChevronDown className="size-3.5 text-slate-500" />
                     )}
                   </div>
-                  <span className="font-display font-bold text-sm text-slate-900">
+                  <span className="font-bold text-sm text-slate-950">
                     {formatCurrency(total)}
                   </span>
                 </button>
 
                 {showMobileSummary && (
-                  <div className="p-3 border-t border-slate-200/80 space-y-2.5 bg-white">
+                  <div className="p-4 border-t border-slate-200 space-y-3 bg-white">
                     <div className="divide-y divide-slate-100 max-h-56 overflow-y-auto pr-1">
                       {checkoutItems.map((item) => (
-                        <div key={item.id} className="py-2 flex gap-2.5 items-center">
-                          <div className="relative size-11 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center shrink-0">
+                        <div key={item.id} className="py-2.5 flex gap-3 items-center">
+                          <div className="relative size-12 bg-slate-50 rounded-lg border border-slate-200/80 flex items-center justify-center shrink-0">
                             <Image
                               src={item.mainImage || "/logo.jpg"}
                               alt={item.productName}
-                              width={40}
-                              height={40}
+                              width={44}
+                              height={44}
                               className="object-contain p-0.5"
                             />
-                            <span className="absolute -top-1.5 -right-1.5 bg-slate-800 text-white text-[9px] font-bold size-4 rounded-full flex items-center justify-center shadow-xs">
+                            <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[10px] font-bold size-4.5 rounded-full flex items-center justify-center">
                               {item.quantity}
                             </span>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-xs text-slate-900 truncate">{item.productName}</h4>
-                            <div className="text-[10px] text-slate-500 truncate">
-                              <span>{item.sizeLabel}</span>
+                            <h4 className="font-medium text-xs text-slate-900 truncate">{item.productName}</h4>
+                            <div className="text-[11px] text-slate-500 truncate">
+                              <span>Talla: {item.sizeLabel}</span>
                               {item.shape && <span> · {item.shape}</span>}
-                              {item.withLogo && <span className="text-pink-600 font-semibold"> · +Logo</span>}
+                              {item.withLogo && <span className="text-[#FF841D] font-medium"> · +Personalizado</span>}
                             </div>
                           </div>
-                          <span className="font-bold text-xs text-slate-900 shrink-0">
+                          <span className="font-semibold text-xs text-slate-950 shrink-0">
                             {formatCurrency(item.unitPrice * item.quantity)}
                           </span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="border-t border-slate-100 pt-2 space-y-1 text-xs">
-                      <div className="flex justify-between text-slate-600 text-[11px]">
+                    <div className="border-t border-slate-100 pt-3 space-y-1.5 text-xs">
+                      <div className="flex justify-between text-slate-600">
                         <span>Subtotal</span>
-                        <span className="font-semibold text-slate-900">{formatCurrency(subtotal)}</span>
+                        <span className="font-medium text-slate-900">{formatCurrency(subtotal)}</span>
                       </div>
-                      <div className="flex justify-between text-slate-600 text-[11px]">
+                      <div className="flex justify-between text-slate-600">
                         <span>Envío</span>
-                        <span className="font-semibold text-slate-900">
+                        <span className="font-medium text-slate-900">
                           {shippingCost === 0 ? "Gratis" : formatCurrency(shippingCost)}
                         </span>
                       </div>
@@ -287,23 +286,25 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
               </div>
 
               {errorMessage && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0" />
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-xs sm:text-sm flex items-center gap-2.5">
+                  <AlertCircle className="size-4 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
-              {/* Bloque 1: Contacto */}
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 shadow-2xs">
-                <h2 className="font-display font-bold text-sm sm:text-base text-slate-900 mb-3 sm:mb-4 flex items-center justify-between">
-                  <span>1. Información de Contacto</span>
-                  <span className="text-[11px] text-slate-400 font-normal">Requerido</span>
-                </h2>
+              {/* 1. Información de Contacto */}
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+                    1. Información de Contacto
+                  </h2>
+                  <span className="text-xs text-slate-400 font-normal">Requerido</span>
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
-                      Correo Electrónico (para comprobante)
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
+                      Correo Electrónico (para comprobante y factura)
                     </label>
                     <input
                       type="email"
@@ -311,13 +312,13 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="ejemplo@pasteleria.com"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      placeholder="tu-correo@empresa.com"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
                       Nombres y Apellidos
                     </label>
                     <input
@@ -326,13 +327,13 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
-                      placeholder="Karla Morales"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      placeholder="Ej. Juan Pérez"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
                       Cédula o RUC (para facturación)
                     </label>
                     <input
@@ -341,13 +342,13 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       name="idNumber"
                       value={formData.idNumber}
                       onChange={handleInputChange}
-                      placeholder="1723456789001"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      placeholder="1723456789 o 1790012345001"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
 
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
                       Teléfono Celular (WhatsApp para coordinar entrega)
                     </label>
                     <input
@@ -357,26 +358,29 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="0991234567"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Bloque 2: Dirección de Envío */}
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 shadow-2xs">
-                <h2 className="font-display font-bold text-sm sm:text-base text-slate-900 mb-3 sm:mb-4">
-                  2. Dirección de Envío (Ecuador)
+              {/* Divisor limpio entre secciones */}
+              <div className="border-t border-slate-200/80 pt-6" />
+
+              {/* 2. Dirección de Entrega */}
+              <div className="space-y-3.5">
+                <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+                  2. Dirección de Entrega (Ecuador)
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                  <div>
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Provincia</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">Provincia</label>
                     <select
                       name="province"
                       value={formData.province}
                       onChange={handleInputChange}
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 bg-white focus:outline-none focus:border-alina-600"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all cursor-pointer"
                     >
                       <option value="Pichincha">Pichincha</option>
                       <option value="Guayas">Guayas</option>
@@ -390,8 +394,8 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                     </select>
                   </div>
 
-                  <div>
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Ciudad / Cantón</label>
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">Ciudad / Cantón</label>
                     <input
                       type="text"
                       required
@@ -399,12 +403,12 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="Quito"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
 
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
                       Calle Principal, Número y Secundaria
                     </label>
                     <input
@@ -414,12 +418,12 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       value={formData.address}
                       onChange={handleInputChange}
                       placeholder="Av. Amazonas N24-102 y Colón"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
 
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
                       Referencia de Entrega (Opcional)
                     </label>
                     <input
@@ -427,101 +431,100 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                       name="reference"
                       value={formData.reference}
                       onChange={handleInputChange}
-                      placeholder="Frente a la panadería / Portón blanco"
-                      className="w-full border border-slate-300 rounded-lg px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-alina-600"
+                      placeholder="Ej. Frente al parque / Edificio azul, timbre 2B"
+                      className="w-full h-12 rounded-xl border border-slate-200 bg-white px-3.5 text-sm text-black placeholder:text-slate-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Bloque 3: Método de Envío */}
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 shadow-2xs">
-                <h2 className="font-display font-bold text-sm sm:text-base text-slate-900 mb-2.5 sm:mb-3">
+              {/* Divisor limpio entre secciones */}
+              <div className="border-t border-slate-200/80 pt-6" />
+
+              {/* 3. Método de Envío (Contenedor agrupado de 1px sin tarjetas sueltas) */}
+              <div className="space-y-3.5">
+                <h2 className="text-base sm:text-lg font-semibold text-slate-900">
                   3. Método de Envío
                 </h2>
 
-                <div className="space-y-2">
+                <div className="border border-slate-200 rounded-xl overflow-hidden divide-y divide-slate-100 bg-white">
                   <label
-                    className={`flex items-center justify-between p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl border cursor-pointer transition-all ${
-                      formData.shippingMethod === "pichincha"
-                        ? "border-alina-600 bg-alina-50/40 ring-1 ring-alina-600"
-                        : "border-slate-200 hover:border-slate-300"
+                    className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${
+                      formData.shippingMethod === "pichincha" ? "bg-slate-50/80" : "hover:bg-slate-50/50"
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="flex items-center gap-3">
                       <input
                         type="radio"
                         name="shippingMethod"
                         value="pichincha"
                         checked={formData.shippingMethod === "pichincha"}
                         onChange={handleInputChange}
-                        className="text-alina-600 focus:ring-alina-500"
+                        className="size-4 text-black accent-black cursor-pointer"
                       />
                       <div>
-                        <div className="font-semibold text-xs text-slate-900">Envío Local (Pichincha / Quito)</div>
-                        <div className="text-[10px] sm:text-[11px] text-slate-500">Entrega 24-48 horas laborables</div>
+                        <div className="font-semibold text-sm text-slate-900">Envío Local (Pichincha / Quito)</div>
+                        <div className="text-xs text-slate-500 mt-0.5">Entrega 24-48 horas laborables</div>
                       </div>
                     </div>
-                    <span className="font-bold text-xs text-slate-900">$3.50</span>
+                    <span className="font-bold text-sm text-slate-900">$3.50</span>
                   </label>
 
                   <label
-                    className={`flex items-center justify-between p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl border cursor-pointer transition-all ${
-                      formData.shippingMethod === "national"
-                        ? "border-alina-600 bg-alina-50/40 ring-1 ring-alina-600"
-                        : "border-slate-200 hover:border-slate-300"
+                    className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${
+                      formData.shippingMethod === "national" ? "bg-slate-50/80" : "hover:bg-slate-50/50"
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="flex items-center gap-3">
                       <input
                         type="radio"
                         name="shippingMethod"
                         value="national"
                         checked={formData.shippingMethod === "national"}
                         onChange={handleInputChange}
-                        className="text-alina-600 focus:ring-alina-500"
+                        className="size-4 text-black accent-black cursor-pointer"
                       />
                       <div>
-                        <div className="font-semibold text-xs text-slate-900">Envío Nacional (Servientrega / LaarCourier)</div>
-                        <div className="text-[10px] sm:text-[11px] text-slate-500">A todo el Ecuador con guía de rastreo</div>
+                        <div className="font-semibold text-sm text-slate-900">Envío Nacional (Servientrega / LaarCourier)</div>
+                        <div className="text-xs text-slate-500 mt-0.5">A todo el Ecuador con guía de rastreo</div>
                       </div>
                     </div>
-                    <span className="font-bold text-xs text-slate-900">$5.50</span>
+                    <span className="font-bold text-sm text-slate-900">$5.50</span>
                   </label>
 
                   <label
-                    className={`flex items-center justify-between p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl border cursor-pointer transition-all ${
-                      formData.shippingMethod === "pickup"
-                        ? "border-alina-600 bg-alina-50/40 ring-1 ring-alina-600"
-                        : "border-slate-200 hover:border-slate-300"
+                    className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${
+                      formData.shippingMethod === "pickup" ? "bg-slate-50/80" : "hover:bg-slate-50/50"
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="flex items-center gap-3">
                       <input
                         type="radio"
                         name="shippingMethod"
                         value="pickup"
                         checked={formData.shippingMethod === "pickup"}
                         onChange={handleInputChange}
-                        className="text-[#FF841D] focus:ring-[#FF841D]"
+                        className="size-4 text-black accent-black cursor-pointer"
                       />
                       <div>
-                        <div className="font-semibold text-xs text-slate-900">Retiro en Planta FYF Uniformes</div>
-                        <div className="text-[10px] sm:text-[11px] text-slate-500">Parque Urb. Matovelle, Quito</div>
+                        <div className="font-semibold text-sm text-slate-900">Retiro en Planta FYF Uniformes</div>
+                        <div className="text-xs text-slate-500 mt-0.5">Parque Urb. Matovelle, Quito</div>
                       </div>
                     </div>
-                    <span className="font-bold text-xs text-emerald-700">GRATIS</span>
+                    <span className="font-bold text-sm text-emerald-700">GRATIS</span>
                   </label>
                 </div>
               </div>
+
             </div>
 
-            {/* Columna Derecha: Resumen de Pedido + Métodos de Pago + Botón de Pago (5 cols) */}
-            <div className="lg:col-span-5 space-y-4 sm:space-y-5 lg:sticky lg:top-24">
-              {/* Resumen del Carrito en Desktop */}
-              <div className="hidden lg:block bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 mb-3.5">
-                  <h2 className="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
+            {/* Columna Derecha: Panel Unificado de Resumen y Pago (5 columnas) */}
+            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+              <div className="border border-slate-200 rounded-2xl bg-slate-50/40 p-5 sm:p-6 space-y-6">
+                
+                {/* Header del Resumen */}
+                <div className="flex items-center justify-between border-b border-slate-200/80 pb-3.5">
+                  <h2 className="font-semibold text-xs uppercase text-slate-500 flex items-center gap-2">
                     <ShoppingBag className="size-4 text-[#FF841D]" />
                     <span>Resumen del Pedido</span>
                   </h2>
@@ -531,30 +534,30 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                 </div>
 
                 {/* Lista de productos */}
-                <div className="divide-y divide-slate-100 max-h-72 overflow-y-auto pr-1">
+                <div className="divide-y divide-slate-200/70 max-h-72 overflow-y-auto pr-1">
                   {checkoutItems.map((item) => (
-                    <div key={item.id} className="py-2.5 flex gap-3 items-center">
-                      <div className="relative size-12 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center shrink-0">
+                    <div key={item.id} className="py-3 flex gap-3.5 items-center">
+                      <div className="relative size-14 bg-white rounded-xl border border-slate-200/80 flex items-center justify-center shrink-0">
                         <Image
                           src={item.mainImage || "/logo.jpg"}
                           alt={item.productName}
-                          width={44}
-                          height={44}
-                          className="object-contain p-0.5"
+                          width={48}
+                          height={48}
+                          className="object-contain p-1"
                         />
-                        <span className="absolute -top-1.5 -right-1.5 bg-slate-800 text-white text-[9px] font-bold size-4 rounded-full flex items-center justify-center shadow-xs">
+                        <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[11px] font-bold size-5 rounded-full flex items-center justify-center">
                           {item.quantity}
                         </span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-xs text-slate-900 truncate">{item.productName}</h4>
-                        <div className="text-[10px] text-slate-500 truncate">
-                          <span>{item.sizeLabel}</span>
+                        <h4 className="font-medium text-sm text-slate-900 truncate">{item.productName}</h4>
+                        <div className="text-xs text-slate-500 truncate mt-0.5">
+                          <span>Talla: {item.sizeLabel}</span>
                           {item.shape && <span> · {item.shape}</span>}
-                          {item.withLogo && <span className="text-[#FF841D] font-semibold"> · +Personalizado</span>}
+                          {item.withLogo && <span className="text-[#FF841D] font-medium"> · +Personalizado</span>}
                         </div>
                       </div>
-                      <span className="font-bold text-xs text-slate-900 shrink-0">
+                      <span className="font-bold text-sm text-slate-950 shrink-0">
                         {formatCurrency(item.unitPrice * item.quantity)}
                       </span>
                     </div>
@@ -562,126 +565,123 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                 </div>
 
                 {/* Subtotal, Envío y Total */}
-                <div className="border-t border-slate-100 pt-3 mt-3 space-y-2 text-xs">
-                  <div className="flex justify-between text-slate-600 text-xs">
+                <div className="border-t border-slate-200/80 pt-4 space-y-2.5 text-sm">
+                  <div className="flex justify-between text-slate-600">
                     <span>Subtotal</span>
-                    <span className="font-semibold text-slate-900">{formatCurrency(subtotal)}</span>
+                    <span className="font-medium text-slate-900">{formatCurrency(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-600 text-xs">
+                  <div className="flex justify-between text-slate-600">
                     <span>Envío</span>
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-medium text-slate-900">
                       {shippingCost === 0 ? "Gratis" : formatCurrency(shippingCost)}
                     </span>
                   </div>
-                  <div className="border-t border-slate-200/80 pt-3 flex justify-between items-baseline">
-                    <span className="font-display font-bold text-sm text-slate-900">Total a Pagar</span>
-                    <span className="font-display font-extrabold text-xl text-slate-950">
+                  <div className="border-t border-slate-200 pt-3.5 flex justify-between items-baseline">
+                    <span className="text-base font-bold text-slate-900">Total a Pagar</span>
+                    <span className="text-2xl font-bold text-slate-950">
                       {formatCurrency(total)}
                     </span>
                   </div>
                 </div>
 
-                {/* Guarantees */}
-                <div className="bg-slate-50 rounded-xl p-3 sm:p-3.5 text-[11px] sm:text-xs text-slate-600 space-y-1.5 mt-4">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="size-3.5 sm:size-4 text-emerald-600 shrink-0" />
-                    <span className="font-medium">Compra protegida directamente por FYF Uniformes</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Truck className="size-3.5 sm:size-4 text-[#FF841D] shrink-0" />
-                    <span className="font-medium">Guía de rastreo asignada inmediatamente</span>
+                {/* Método de Pago integrado sin caja flotante */}
+                <div className="border-t border-slate-200/80 pt-4 space-y-2.5">
+                  <label className="block text-xs font-semibold uppercase text-slate-500">
+                    Método de Pago
+                  </label>
+                  <div className="border border-slate-200 rounded-xl overflow-hidden divide-y divide-slate-100 bg-white">
+                    {/* Opción Payphone */}
+                    <label
+                      className={`flex items-start gap-3 p-3.5 cursor-pointer transition-colors ${
+                        formData.paymentMethod === "payphone" ? "bg-slate-50/80" : "hover:bg-slate-50/50"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="payphone"
+                        checked={formData.paymentMethod === "payphone"}
+                        onChange={handleInputChange}
+                        className="mt-1 size-4 text-black accent-black cursor-pointer"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="font-semibold text-sm text-slate-900 flex items-center gap-1.5 truncate">
+                            <CreditCard className="size-4 text-slate-700 shrink-0" />
+                            <span>Tarjeta Crédito / Débito (Payphone)</span>
+                          </span>
+                          <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-200 shrink-0">
+                            Inmediato
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-0.5">
+                          Visa o Mastercard a través de Payphone Ecuador.
+                        </p>
+                      </div>
+                    </label>
+
+                    {/* Opción WhatsApp / Transferencia */}
+                    <label
+                      className={`flex items-start gap-3 p-3.5 cursor-pointer transition-colors ${
+                        formData.paymentMethod === "whatsapp" ? "bg-slate-50/80" : "hover:bg-slate-50/50"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="whatsapp"
+                        checked={formData.paymentMethod === "whatsapp"}
+                        onChange={handleInputChange}
+                        className="mt-1 size-4 text-black accent-black cursor-pointer"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="font-semibold text-sm text-slate-900 flex items-center gap-1.5 truncate">
+                            <MessageCircle className="size-4 text-emerald-600 shrink-0" />
+                            <span>Pedido por WhatsApp (Transferencia)</span>
+                          </span>
+                          <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded shrink-0">
+                            Personal
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-0.5">
+                          Coordinación y datos bancarios directos por WhatsApp.
+                        </p>
+                      </div>
+                    </label>
                   </div>
                 </div>
-              </div>
 
-              {/* Bloque 4: Método de Pago */}
-              <div className="bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 shadow-2xs">
-                <h2 className="font-display font-bold text-sm sm:text-base text-slate-900 mb-2.5 sm:mb-3">
-                  4. Método de Pago
-                </h2>
+                {/* Botón Principal de Pago */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full h-12 sm:h-13 bg-black hover:bg-neutral-900 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm sm:text-base transition-all active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                >
+                  {isSubmitting ? (
+                    <span>Procesando Pedido...</span>
+                  ) : formData.paymentMethod === "payphone" ? (
+                    <span>Pagar con Payphone · {formatCurrency(total)}</span>
+                  ) : (
+                    <span>Confirmar por WhatsApp · {formatCurrency(total)}</span>
+                  )}
+                </button>
 
-                <div className="space-y-2 sm:space-y-3">
-                  {/* Opción Payphone */}
-                  <label
-                    className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl border cursor-pointer transition-all ${
-                      formData.paymentMethod === "payphone"
-                        ? "border-alina-600 bg-alina-50/40 ring-1 ring-alina-600"
-                        : "border-slate-200 hover:border-slate-300"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="payphone"
-                      checked={formData.paymentMethod === "payphone"}
-                      onChange={handleInputChange}
-                      className="mt-1 text-alina-600 focus:ring-alina-500"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-1">
-                        <span className="font-bold text-xs text-slate-900 flex items-center gap-1 sm:gap-1.5 truncate">
-                          <CreditCard className="size-3.5 sm:size-4 text-alina-600 shrink-0" />
-                          <span>Tarjeta Crédito / Débito (Payphone)</span>
-                        </span>
-                        <span className="bg-emerald-50 text-emerald-800 text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded border border-emerald-200 shrink-0">
-                          Inmediato
-                        </span>
-                      </div>
-                      <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1">
-                        Paga seguro con Visa o Mastercard a través de Payphone Ecuador.
-                      </p>
-                    </div>
-                  </label>
-
-                  {/* Opción WhatsApp / Transferencia */}
-                  <label
-                    className={`flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl border cursor-pointer transition-all ${
-                      formData.paymentMethod === "whatsapp"
-                        ? "border-alina-600 bg-alina-50/40 ring-1 ring-alina-600"
-                        : "border-slate-200 hover:border-slate-300"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="whatsapp"
-                      checked={formData.paymentMethod === "whatsapp"}
-                      onChange={handleInputChange}
-                      className="mt-1 text-alina-600 focus:ring-alina-500"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-1">
-                        <span className="font-bold text-xs text-slate-900 flex items-center gap-1 sm:gap-1.5 truncate">
-                          <MessageCircle className="size-3.5 sm:size-4 text-emerald-600 shrink-0" />
-                          <span>Pedido por WhatsApp (Transferencia)</span>
-                        </span>
-                        <span className="bg-slate-100 text-slate-700 text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded shrink-0">
-                          Personal
-                        </span>
-                      </div>
-                      <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1">
-                        Tu pedido queda registrado y enviamos el detalle a WhatsApp para tu pago bancario.
-                      </p>
-                    </div>
-                  </label>
+                {/* Garantías y Confianza */}
+                <div className="border-t border-slate-200/80 pt-4 space-y-2 text-xs text-slate-500 font-medium">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
+                    <span>Compra protegida directamente por FYF Uniformes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Truck className="size-4 text-[#FF841D] shrink-0" />
+                    <span>Guía de rastreo asignada tras despacho</span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Botón de Pagar */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-display font-bold py-3.5 sm:py-4 px-4 sm:px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-xs sm:text-base disabled:opacity-50 cursor-pointer"
-              >
-                {isSubmitting ? (
-                  <span>Procesando Pedido...</span>
-                ) : formData.paymentMethod === "payphone" ? (
-                  <span>Pagar con Payphone · {formatCurrency(total)}</span>
-                ) : (
-                  <span>Confirmar por WhatsApp · {formatCurrency(total)}</span>
-                )}
-              </button>
+              </div>
             </div>
+
           </div>
         </form>
       </main>
@@ -693,7 +693,7 @@ export default function CheckoutPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4">
           <div className="text-center space-y-2">
             <div className="w-8 h-8 border-2 border-[#FF841D] border-t-transparent rounded-full animate-spin mx-auto" />
             <p className="text-xs font-semibold text-slate-600">Cargando checkout seguro de FYF Uniformes...</p>
