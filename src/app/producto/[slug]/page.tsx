@@ -30,7 +30,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <main className="mx-auto w-[85%] max-w-[1500px] flex-1 px-3 sm:px-6 py-3.5 sm:py-8">
+      <main className="mx-auto w-[95%] max-w-[1720px] flex-1 px-3 sm:px-6 py-3.5 sm:py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-500 mb-3 sm:mb-6 overflow-x-auto scrollbar-none whitespace-nowrap">
           <Link href="/" className="hover:text-slate-900 shrink-0">Inicio</Link>
@@ -54,13 +54,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
         />
       </main>
 
-      <section className="mx-auto w-[85%] max-w-[1500px] px-3 sm:px-6 pb-8 sm:pb-12">
+      <section className="mx-auto w-[95%] max-w-[1720px] px-3 sm:px-6 pb-8 sm:pb-12">
         <ComboBanner />
       </section>
 
       {relatedProducts.length > 0 && (
         <section className="border-t border-slate-100 bg-slate-50/60 py-8 sm:py-12">
-          <div className="mx-auto w-[85%] max-w-[1500px] px-3 sm:px-6">
+          <div className="mx-auto w-[95%] max-w-[1720px] px-3 sm:px-6">
             <div className="mb-7 flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Línea de Productos</p>

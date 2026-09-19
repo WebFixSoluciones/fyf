@@ -15,7 +15,7 @@
 }
 
 body {
-  color: #0f172a;
+  color: #111827;
   background-color: #ffffff;
   font-feature-settings: "rlig" 1, "calt" 1;
 }
@@ -29,8 +29,8 @@ body {
 }
 
 ::selection {
-  background: #fccce2;
-  color: #4b0520;
+  background: #ffedd5;
+  color: #9a3412;
 }
 
 /* Scrollbar styling */

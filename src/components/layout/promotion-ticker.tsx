@@ -60,27 +60,27 @@ export function PromotionTicker({
   const IconComp = activeNotice.icon;
 
   return (
-    <div className="w-full bg-slate-950 text-slate-300 border-b border-slate-800 text-[11px] font-normal transition-colors">
-      <div className="mx-auto w-[85%] max-w-[1500px] px-4 py-1.5 flex items-center justify-between gap-4">
+    <div className="w-full bg-black text-neutral-300 border-b border-neutral-800 text-[11px] font-normal transition-colors">
+      <div className="mx-auto w-[95%] max-w-[1720px] px-4 py-1.5 flex items-center justify-between gap-4">
         {/* Left: Contact info */}
-        <div className="hidden md:flex items-center gap-5 text-slate-400">
+        <div className="hidden md:flex items-center gap-5 text-neutral-400">
           <a
             href="https://wa.me/593993358701"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-white transition-colors"
           >
-            <Phone className="size-3 text-amber-400" />
+            <Phone className="size-3 text-[#ff6600]" />
             <span>+593 99 335 8701</span>
           </a>
-          <span className="text-slate-700">|</span>
+          <span className="text-neutral-800">|</span>
           <div className="flex items-center gap-1.5">
-            <MapPin className="size-3 text-amber-400" />
+            <MapPin className="size-3 text-[#ff6600]" />
             <span>Quito, Ecuador</span>
           </div>
-          <span className="text-slate-700">|</span>
+          <span className="text-neutral-800">|</span>
           <div className="flex items-center gap-1.5">
-            <Clock className="size-3 text-slate-400" />
+            <Clock className="size-3 text-neutral-400" />
             <span>Lun - Vie 08:00 - 18:00</span>
           </div>
         </div>
@@ -89,24 +89,24 @@ export function PromotionTicker({
         <div className="flex-1 flex items-center justify-center text-center">
           <Link
             href={activeNotice.link}
-            className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors truncate max-w-[320px] sm:max-w-md md:max-w-lg"
+            className="inline-flex items-center gap-2 hover:text-[#ff6600] transition-colors truncate max-w-[320px] sm:max-w-md md:max-w-lg"
           >
-            <IconComp className="size-3 text-amber-400 shrink-0" />
+            <IconComp className="size-3 text-[#ff6600] shrink-0" />
             <span className="truncate">{activeNotice.text}</span>
           </Link>
         </div>
 
         {/* Right: Quick actions */}
-        <div className="hidden sm:flex items-center gap-4 text-slate-400">
+        <div className="hidden sm:flex items-center gap-4 text-neutral-400">
           <Link href="/catalogo" className="hover:text-white transition-colors">
             Catálogo 2026
           </Link>
-          <span className="text-slate-700">|</span>
+          <span className="text-neutral-800">|</span>
           <a
             href="https://wa.me/593993358701?text=Hola%2C%20solicito%20asesor%C3%ADa%20comercial"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-400 font-semibold hover:underline"
+            className="text-[#ff6600] font-medium hover:underline"
           >
             Asesoría Online
           </a>

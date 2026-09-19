@@ -7,11 +7,11 @@ import { CATEGORIES_DATA } from "@/lib/catalog-data";
 
 export function CategoryGrid() {
   return (
-    <section className="mx-auto w-[85%] max-w-[1500px] px-4 py-10 sm:py-14">
+    <section className="mx-auto w-[95%] max-w-[1720px] px-4 py-10 sm:py-14">
       {/* Clean section title matching Image 2 */}
       <div className="text-center mb-8 sm:mb-10">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-normal text-slate-800 tracking-tight">
-          Explora Nuestras Líneas de <span className="font-semibold text-slate-950">Uniformes y Ropa de Trabajo</span>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-normal text-neutral-800 tracking-tight">
+          Explora Nuestras Líneas de <span className="font-semibold text-black">Uniformes y Ropa de Trabajo</span>
         </h2>
       </div>
 

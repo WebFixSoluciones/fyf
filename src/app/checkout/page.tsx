@@ -185,11 +185,11 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
     <div className="min-h-screen bg-slate-50/50">
       {/* Top Simple Shopify-style Header */}
       <header className="bg-white border-b border-slate-200 py-2.5 sm:py-4 px-3 sm:px-8 sticky top-0 z-30">
-        <div className="w-full max-w-[1600px] mx-auto flex items-center justify-between">
+        <div className="w-[95%] max-w-[1720px] mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 sm:gap-3">
             <Image
               src="/logo.jpg"
-              alt="Alina Shop"
+              alt="FYF Uniformes"
               width={180}
               height={60}
               className="h-10 sm:h-14 md:h-16 w-auto object-contain"
@@ -203,7 +203,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
         </div>
       </header>
 
-      <main className="w-full max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <main className="w-[95%] max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         <form onSubmit={handleSubmitOrder}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-start">
             
@@ -225,7 +225,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                   className="w-full p-3 flex items-center justify-between bg-slate-50/80 hover:bg-slate-100/70 transition-colors text-left cursor-pointer"
                 >
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
-                    <ShoppingBag className="size-4 text-alina-600" />
+                    <ShoppingBag className="size-4 text-[#ff6600]" />
                     <span>{showMobileSummary ? "Ocultar resumen de compra" : "Ver resumen de compra"}</span>
                     {showMobileSummary ? (
                       <ChevronUp className="size-3.5 text-slate-500" />
@@ -503,11 +503,11 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                         value="pickup"
                         checked={formData.shippingMethod === "pickup"}
                         onChange={handleInputChange}
-                        className="text-alina-600 focus:ring-alina-500"
+                        className="text-[#ff6600] focus:ring-[#ff6600]"
                       />
                       <div>
-                        <div className="font-semibold text-xs text-slate-900">Retiro en Taller Alina Shop</div>
-                        <div className="text-[10px] sm:text-[11px] text-slate-500">Previa coordinación de horario</div>
+                        <div className="font-semibold text-xs text-slate-900">Retiro en Planta FYF Uniformes</div>
+                        <div className="text-[10px] sm:text-[11px] text-slate-500">Parque Urb. Matovelle, Quito</div>
                       </div>
                     </div>
                     <span className="font-bold text-xs text-emerald-700">GRATIS</span>
@@ -518,40 +518,42 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
 
             {/* Columna Derecha: Resumen de Pedido + Métodos de Pago + Botón de Pago (5 cols) */}
             <div className="lg:col-span-5 space-y-4 sm:space-y-5 lg:sticky lg:top-24">
-              {/* Resumen del Pedido */}
-              <div className="bg-white border border-slate-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 shadow-2xs space-y-4 sm:space-y-5">
-                <h3 className="font-display font-bold text-sm sm:text-base text-slate-900 pb-2.5 sm:pb-3 border-b border-slate-100">
-                  Resumen del Pedido ({checkoutItems.length} {checkoutItems.length === 1 ? "producto" : "productos"})
-                </h3>
+              {/* Resumen del Carrito en Desktop */}
+              <div className="hidden lg:block bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 mb-3.5">
+                  <h2 className="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
+                    <ShoppingBag className="size-4 text-[#ff6600]" />
+                    <span>Resumen del Pedido</span>
+                  </h2>
+                  <span className="text-xs text-slate-500 font-medium">
+                    {checkoutItems.length} {checkoutItems.length === 1 ? "artículo" : "artículos"}
+                  </span>
+                </div>
 
-                {/* Items List */}
+                {/* Lista de productos */}
                 <div className="divide-y divide-slate-100 max-h-72 overflow-y-auto pr-1">
                   {checkoutItems.map((item) => (
-                    <div key={item.id} className="py-2.5 sm:py-3 flex gap-2.5 sm:gap-3 items-center">
-                      <div className="relative size-12 sm:size-14 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center shrink-0">
+                    <div key={item.id} className="py-2.5 flex gap-3 items-center">
+                      <div className="relative size-12 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center shrink-0">
                         <Image
                           src={item.mainImage || "/logo.jpg"}
                           alt={item.productName}
-                          width={48}
-                          height={48}
-                          className="object-contain p-0.5 sm:p-1"
+                          width={44}
+                          height={44}
+                          className="object-contain p-0.5"
                         />
-                        <span className="absolute -top-1.5 -right-1.5 bg-slate-800 text-white text-[9px] sm:text-[10px] font-bold size-4.5 sm:size-5 rounded-full flex items-center justify-center shadow-xs">
+                        <span className="absolute -top-1.5 -right-1.5 bg-slate-800 text-white text-[9px] font-bold size-4 rounded-full flex items-center justify-center shadow-xs">
                           {item.quantity}
                         </span>
                       </div>
-
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-xs text-slate-900 truncate">
-                          {item.productName}
-                        </h4>
-                        <div className="text-[10px] sm:text-[11px] text-slate-500 truncate">
+                        <h4 className="font-semibold text-xs text-slate-900 truncate">{item.productName}</h4>
+                        <div className="text-[10px] text-slate-500 truncate">
                           <span>{item.sizeLabel}</span>
                           {item.shape && <span> · {item.shape}</span>}
-                          {item.withLogo && <span className="text-pink-600 font-semibold"> · +Logo</span>}
+                          {item.withLogo && <span className="text-[#ff6600] font-semibold"> · +Personalizado</span>}
                         </div>
                       </div>
-
                       <span className="font-bold text-xs text-slate-900 shrink-0">
                         {formatCurrency(item.unitPrice * item.quantity)}
                       </span>
@@ -559,37 +561,34 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                   ))}
                 </div>
 
-                {/* Cost calculations */}
-                <div className="border-t border-slate-100 pt-3 sm:pt-4 space-y-1.5 sm:space-y-2 text-xs">
-                  <div className="flex justify-between text-slate-600">
+                {/* Subtotal, Envío y Total */}
+                <div className="border-t border-slate-100 pt-3 mt-3 space-y-2 text-xs">
+                  <div className="flex justify-between text-slate-600 text-xs">
                     <span>Subtotal</span>
                     <span className="font-semibold text-slate-900">{formatCurrency(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-600">
-                    <span>Costo de Envío</span>
+                  <div className="flex justify-between text-slate-600 text-xs">
+                    <span>Envío</span>
                     <span className="font-semibold text-slate-900">
                       {shippingCost === 0 ? "Gratis" : formatCurrency(shippingCost)}
                     </span>
                   </div>
-                  <div className="border-t border-slate-200 pt-2.5 sm:pt-3 flex justify-between items-baseline">
-                    <span className="font-display font-bold text-xs sm:text-sm text-slate-900">Total a Pagar</span>
-                    <div className="text-right">
-                      <span className="text-[10px] text-slate-400 font-medium mr-1">USD</span>
-                      <span className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 tracking-tight">
-                        {formatCurrency(total)}
-                      </span>
-                    </div>
+                  <div className="border-t border-slate-200/80 pt-3 flex justify-between items-baseline">
+                    <span className="font-display font-bold text-sm text-slate-900">Total a Pagar</span>
+                    <span className="font-display font-extrabold text-xl text-slate-950">
+                      {formatCurrency(total)}
+                    </span>
                   </div>
                 </div>
 
                 {/* Guarantees */}
-                <div className="bg-slate-50 rounded-xl p-3 sm:p-3.5 text-[11px] sm:text-xs text-slate-600 space-y-1.5">
+                <div className="bg-slate-50 rounded-xl p-3 sm:p-3.5 text-[11px] sm:text-xs text-slate-600 space-y-1.5 mt-4">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="size-3.5 sm:size-4 text-emerald-600 shrink-0" />
-                    <span className="font-medium">Compra protegida directamente por Alina Shop</span>
+                    <span className="font-medium">Compra protegida directamente por FYF Uniformes</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Truck className="size-3.5 sm:size-4 text-alina-600 shrink-0" />
+                    <Truck className="size-3.5 sm:size-4 text-[#ff6600] shrink-0" />
                     <span className="font-medium">Guía de rastreo asignada inmediatamente</span>
                   </div>
                 </div>
@@ -696,8 +695,8 @@ export default function CheckoutPage() {
       fallback={
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
           <div className="text-center space-y-2">
-            <div className="w-8 h-8 border-2 border-alina-600 border-t-transparent rounded-full animate-spin mx-auto" />
-            <p className="text-xs font-semibold text-slate-600">Cargando checkout seguro de Alina Shop...</p>
+            <div className="w-8 h-8 border-2 border-[#ff6600] border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-xs font-semibold text-slate-600">Cargando checkout seguro de FYF Uniformes...</p>
           </div>
         </div>
       }

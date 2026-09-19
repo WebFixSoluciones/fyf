@@ -74,8 +74,8 @@ export function Navbar() {
         {/* Top Corporate Bar */}
         <PromotionTicker />
 
-        {/* Main Navbar: 85% width */}
-        <div className="mx-auto w-[85%] max-w-[1500px]">
+        {/* Main Navbar: 95% width */}
+        <div className="mx-auto w-[95%] max-w-[1720px]">
           <div className="flex h-18 sm:h-20 items-center justify-between gap-4 lg:gap-8">
             {/* 1. Left: Logo FYF (Clicking goes to Home) */}
             <div className="flex items-center shrink-0">
@@ -303,7 +303,7 @@ export function Navbar() {
                   setMobileMenuOpen(false);
                   setLoginModalOpen(true);
                 }}
-                className="mt-3 flex items-center justify-center gap-2 bg-slate-900 text-white font-medium text-xs py-3 rounded-xl shadow-xs"
+                className="mt-3 flex items-center justify-center gap-2 bg-black hover:bg-neutral-900 text-white font-medium text-xs py-3 rounded-xl shadow-xs transition-colors"
               >
                 <User className="size-4" />
                 <span>Ingresar a Mi Cuenta</span>

@@ -101,7 +101,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Dark overlay backdrop */}
       <div
-        className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-black/75 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
@@ -118,27 +118,27 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-5 min-h-[420px]">
           {/* Left Panel: Value proposition (Desktop) */}
-          <div className="hidden md:flex md:col-span-2 bg-slate-950 text-white p-6 sm:p-8 flex-col justify-between relative overflow-hidden">
+          <div className="hidden md:flex md:col-span-2 bg-black text-white p-6 sm:p-8 flex-col justify-between relative overflow-hidden">
             <div className="relative z-10">
               <div className="flex items-center gap-2.5 mb-6">
-                <div className="relative size-10 rounded-full overflow-hidden border border-slate-700 bg-white shrink-0">
+                <div className="relative size-10 rounded-full overflow-hidden border border-neutral-700 bg-white shrink-0">
                   <Image src="/logo.jpg" alt="FYF Uniformes" fill className="object-cover" />
                 </div>
                 <div>
                   <span className="block text-sm font-semibold text-white leading-tight uppercase tracking-wider">
                     FYF Uniformes
                   </span>
-                  <span className="block text-[10px] text-amber-400 uppercase tracking-widest font-medium">
+                  <span className="block text-[10px] text-[#ff6600] uppercase tracking-widest font-medium">
                     Portal Clientes
                   </span>
                 </div>
               </div>
 
-              <h3 className="text-base font-medium text-slate-100 mb-6 leading-snug">
+              <h3 className="text-base font-medium text-white mb-6 leading-snug">
                 Gestiona tus pedidos y cotizaciones en un solo lugar
               </h3>
 
-              <div className="space-y-4 text-xs text-slate-300">
+              <div className="space-y-4 text-xs text-neutral-300">
                 <div className="flex items-start gap-3">
                   <PackageCheck className="size-4 text-[#ff6600] shrink-0 mt-0.5" />
                   <span>Seguimiento en tiempo real de órdenes de uniformes</span>
@@ -154,7 +154,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               </div>
             </div>
 
-            <div className="relative z-10 pt-6 border-t border-slate-800/80 text-[11px] text-slate-400">
+            <div className="relative z-10 pt-6 border-t border-neutral-800 text-[11px] text-neutral-400">
               ¿Dudas con tu compra? Contáctanos directamente al WhatsApp comercial.
             </div>
           </div>
@@ -163,7 +163,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <div className="md:col-span-3 p-6 sm:p-8 flex flex-col justify-center bg-white">
             {/* Header */}
             <div className="mb-6">
-              <h2 className="text-xl font-medium text-slate-950 tracking-tight">
+              <h2 className="text-xl font-medium text-black tracking-tight">
                 {tab === "login" ? "Iniciar sesión" : "Crear cuenta"}
               </h2>
               <p className="text-xs text-slate-500 mt-1">

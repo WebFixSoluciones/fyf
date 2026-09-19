@@ -25,11 +25,11 @@ export function ContactSection() {
 
   return (
     <section id="contacto" className="bg-white py-14 sm:py-20 border-t border-slate-100">
-      <div className="mx-auto w-[85%] max-w-[1500px] px-4">
+      <div className="mx-auto w-[95%] max-w-[1720px] px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Left Column: Heading, description & Map Preview */}
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-slate-950">
+            <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-neutral-950">
               CONTÁCTANOS
             </h2>
 

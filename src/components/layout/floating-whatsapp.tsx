@@ -38,17 +38,17 @@ export function FloatingWhatsapp() {
     <aside aria-label="Contacto directo por WhatsApp" className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
       {/* Orange accent tag on top */}
       <div className="mr-3 -mb-1 z-10">
-        <span className="inline-block w-8 h-1 bg-[#ea580c] rounded-full shadow-xs" />
+        <span className="inline-block w-8 h-1 bg-[#ff6600] rounded-full shadow-xs" />
       </div>
 
       <button
         type="button"
         onClick={handleClick}
         aria-label="¿Necesitas un producto? Chatea con un asesor por WhatsApp"
-        className="group relative flex items-center gap-2.5 rounded-full bg-[#075e54] hover:bg-[#064d45] text-white px-4 py-2.5 shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-95"
+        className="group relative flex items-center gap-2.5 rounded-full bg-black hover:bg-neutral-900 border border-neutral-800 text-white px-4 py-2.5 shadow-2xl transition-all duration-200 hover:scale-[1.03] active:scale-95"
       >
         <svg
-          className="w-5 h-5 fill-current shrink-0 text-white"
+          className="w-5 h-5 fill-current shrink-0 text-[#ff6600]"
           viewBox="0 0 24 24"
         >
           <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.072-2.182-.544-1.745-.722-2.883-2.493-2.97-2.609-.087-.116-.708-.942-.708-1.796 0-.855.449-1.277.608-1.45.16-.174.348-.217.464-.217.116 0 .232.001.333.006.107.005.25.04.391.378.145.348.493 1.202.536 1.29.043.087.072.188.014.304-.058.116-.087.188-.174.289l-.261.304c-.087.101-.179.209-.077.384.101.174.45 0.742.966 1.202.664.591 1.224.774 1.398.861.174.087.29.13.333.203.044.072.044.42-.1.825z" />
