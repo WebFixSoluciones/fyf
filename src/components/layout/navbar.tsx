@@ -125,14 +125,9 @@ export function Navbar() {
                   <div className="absolute top-full left-0 mt-2.5 w-[680px] lg:w-[820px] rounded-3xl bg-white border border-slate-200 shadow-2xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     {/* Header */}
                     <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100">
-                      <div>
-                        <h3 className="font-semibold text-sm text-slate-950">
-                          Categorías de Productos
-                        </h3>
-                        <p className="text-[11px] text-slate-500 mt-0.5">
-                          Líneas completas de uniformes, ropa de trabajo y protección industrial certificada
-                        </p>
-                      </div>
+                      <h3 className="font-semibold text-sm text-slate-950">
+                        Categorías de Productos
+                      </h3>
                       <Link
                         href="/catalogo"
                         onClick={() => setMegaMenuOpen(false)}
@@ -152,7 +147,7 @@ export function Navbar() {
                           onClick={() => setMegaMenuOpen(false)}
                           className="flex items-center gap-3 p-2.5 rounded-2xl border border-slate-100 hover:border-slate-200 bg-slate-50/60 hover:bg-slate-100/80 transition-all group"
                         >
-                          <div className="relative size-12 rounded-xl overflow-hidden bg-white border border-slate-200 shrink-0">
+                          <div className="relative size-11 rounded-xl overflow-hidden bg-white border border-slate-200 shrink-0">
                             <Image
                               src={cat.image}
                               alt={cat.name}
@@ -161,12 +156,9 @@ export function Navbar() {
                             />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 group-hover:text-[#FF841D] transition-colors block truncate">
+                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 group-hover:text-[#FF841D] transition-colors block leading-snug">
                               {cat.name}
                             </span>
-                            <p className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1 leading-snug mt-0.5">
-                              {cat.description}
-                            </p>
                           </div>
                         </Link>
                       ))}
