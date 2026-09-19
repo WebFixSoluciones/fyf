@@ -1,0 +1,178 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  CLIENTE
+}
+
+enum OrderStatus {
+  PENDIENTE
+  PAGADO
+  EN_PREPARACION
+  ENVIADO
+  ENTREGADO
+  CANCELADO
+}
+
+enum PaymentMethod {
+  PAYPHONE_CARD
+  WHATSAPP_ORDER
+  TRANSFERENCIA_DIRECTA
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  phone         String?
+  role          Role      @default(CLIENTE)
+  addresses     Address[]
+  orders        Order[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Address {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipient    String
+  idNumber     String   // Cédula o RUC
+  phone        String
+  province     String
+  city         String
+  street       String
+  reference    String?
+  isDefault    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  order       Int       @default(0)
+  products    Product[]
+}
+
+model Product {
+  id              String           @id @default(cuid())
+  sku             String           @unique
+  name            String
+  slug            String           @unique
+  description     String
+  material        String?          // Ej: "MDF 3mm", "Acrílico", "Cartulina"
+  categoryId      String
+  category        Category         @relation(fields: [categoryId], references: [id])
+  mainImage       String           // URL en Vercel Blob o placeholder
+  images          String[]         // Galería
+  hasLogoOption   Boolean          @default(false) // Grabado láser (+ $0.20)
+  logoPriceExtra  Decimal          @default(0.20) @db.Decimal(10, 2)
+  allowCustomSize Boolean          @default(false) // Medidas bajo pedido
+  isActive        Boolean          @default(true)
+  variants        ProductVariant[]
+  interactions    WhatsAppInteraction[]
+  orderItems      OrderItem[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id            String   @id @default(cuid())
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  code          String?  // Ej: BBRSL10, TAC001
+  sizeLabel     String   // Ej: "10 cm", "20 cm", "30x15 cm"
+  shape         String?  // Ej: "Rizada", "Cuadrada", "Redonda", "Estrella", "Corazón", "Punta Redonda"
+  color         String?  // Ej: "Blanco", "Wengué", "Dorado"
+  unitPrice     Decimal  @db.Decimal(10, 2) // Precio unitario base (<12)
+  dozenPrice    Decimal  @db.Decimal(10, 2) // Precio por docena (12-49)
+  wholesalePrice Decimal @db.Decimal(10, 2) // Precio al por mayor (50+)
+  stock         Int      @default(999)
+  isActive      Boolean  @default(true)
+}
+
+model Order {
+  id                    String            @id @default(cuid())
+  orderNumber           String            @unique // Ej: ALN-2026-1001
+  userId                String?
+  user                  User?             @relation(fields: [userId], references: [id])
+  customerName          String
+  customerIdNumber      String            // Cédula o RUC
+  customerEmail         String
+  customerPhone         String
+  shippingAddress       String
+  shippingCity          String
+  shippingProvince      String
+  shippingReference     String?
+  paymentMethod         PaymentMethod
+  paymentStatus         String            @default("PENDING") // PENDING, APPROVED, REJECTED
+  payphoneTransactionId String?
+  orderStatus           OrderStatus       @default(PENDIENTE)
+  subtotal              Decimal           @db.Decimal(10, 2)
+  shippingCost          Decimal           @default(0.00) @db.Decimal(10, 2)
+  total                 Decimal           @db.Decimal(10, 2)
+  notes                 String?
+  items                 OrderItem[]
+  tracking              ShippingTracking?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+}
+
+model OrderItem {
+  id              String   @id @default(cuid())
+  orderId         String
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id])
+  variantDetails  Json     // { size, shape, color, customDimensions, withLogo }
+  quantity        Int
+  unitPrice       Decimal  @db.Decimal(10, 2)
+  subtotal        Decimal  @db.Decimal(10, 2)
+}
+
+model ShippingTracking {
+  id            String    @id @default(cuid())
+  orderId       String    @unique
+  order         Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  courier       String    // Ej: "Servientrega", "LaarCourier", "Entrega Local", "Cooperativa"
+  trackingNumber String
+  trackingUrl   String?
+  shippedAt     DateTime  @default(now())
+  deliveredAt   DateTime?
+  notes         String?
+}
+
+model WhatsAppInteraction {
+  id             String   @id @default(cuid())
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variantDetails Json     // Parámetros con los que se dio clic
+  calculatedPrice Decimal @db.Decimal(10, 2)
+  quantity       Int
+  createdAt      DateTime @default(now())
+}
+
+model StoreSettings {
+  id                    String   @id @default("default")
+  whatsappPrimary       String   @default("593993358701")
+  whatsappSecondary     String   @default("593988742584")
+  whatsappActiveNumber  String   @default("593993358701")
+  whatsappTemplate      String   @default("Hola FYF Uniformes, deseo realizar una cotización/pedido: *{orderNumber}*...")
+  payphoneClientId      String?
+  payphoneAppId         String?
+  payphoneToken         String?
+  payphoneIsSandbox     Boolean  @default(true)
+  shippingBasePichincha Decimal  @default(3.50) @db.Decimal(10, 2)
+  shippingBaseNational  Decimal  @default(5.50) @db.Decimal(10, 2)
+  updatedAt             DateTime @updatedAt
+}

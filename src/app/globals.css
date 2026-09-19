@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 335 80% 57%;
+    --primary-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+  }
+}
+
+body {
+  color: #0f172a;
+  background-color: #ffffff;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.alina-bokeh {
+  background-image:
+    radial-gradient(circle at 9% 14%, rgba(255, 255, 255, 0.9) 0 0.55rem, transparent 0.65rem),
+    radial-gradient(circle at 87% 18%, rgba(255, 255, 255, 0.8) 0 0.9rem, transparent 1rem),
+    radial-gradient(circle at 78% 78%, rgba(255, 255, 255, 0.72) 0 0.45rem, transparent 0.55rem),
+    radial-gradient(circle at 20% 84%, rgba(255, 255, 255, 0.7) 0 0.75rem, transparent 0.85rem);
+}
+
+::selection {
+  background: #fccce2;
+  color: #4b0520;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Hero Slider Auto-play Progress Bar */
+@keyframes heroProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-hero-progress {
+  animation: heroProgress 5000ms linear forwards;
+}

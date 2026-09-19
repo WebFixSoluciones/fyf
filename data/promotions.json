@@ -1,0 +1,40 @@
+{
+  "popup": {
+    "enabled": false,
+    "badge": "FYF UNIFORMES CORPORATIVOS",
+    "title": "Fabricantes Directos en Ecuador",
+    "description": "Uniformes de trabajo, ropa ignífuga, ropa térmica y calzado industrial certificado con más de 20 años de experiencia.",
+    "buttonText": "Ver Catálogo",
+    "buttonUrl": "/catalogo",
+    "imageUrl": "https://www.fyf.com.ec/wp-content/uploads/2025/04/uniformes-y-ropa-de-trabajo-en-ecuador.jpg",
+    "updatedAt": "2026-09-19T00:00:00.000Z"
+  },
+  "ticker": {
+    "enabled": true,
+    "intervalSeconds": 5,
+    "messages": [
+      {
+        "id": "msg_1",
+        "icon": "truck",
+        "text": "Envíos directos a todo el Ecuador con cobertura nacional",
+        "highlight": "todo el Ecuador",
+        "linkUrl": "/contactos"
+      },
+      {
+        "id": "msg_2",
+        "icon": "shield",
+        "text": "Prendas de alta durabilidad con normativas de seguridad laboral",
+        "highlight": "normativas de seguridad",
+        "linkUrl": "/catalogo"
+      },
+      {
+        "id": "msg_3",
+        "icon": "sparkles",
+        "text": "Personalización total con bordados y cintas reflectivas para tu empresa",
+        "highlight": "Personalización total",
+        "linkUrl": "/catalogo?categoria=uniformes-personalizados"
+      }
+    ]
+  },
+  "updatedAt": "2026-09-19T00:00:00.000Z"
+}
