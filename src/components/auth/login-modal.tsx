@@ -128,7 +128,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   <span className="block text-sm font-semibold text-white leading-tight uppercase tracking-wider">
                     FYF Uniformes
                   </span>
-                  <span className="block text-[10px] text-[#ff6600] uppercase tracking-widest font-medium">
+                  <span className="block text-[10px] text-[#FF841D] uppercase tracking-widest font-medium">
                     Portal Clientes
                   </span>
                 </div>
@@ -140,15 +140,15 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
               <div className="space-y-4 text-xs text-neutral-300">
                 <div className="flex items-start gap-3">
-                  <PackageCheck className="size-4 text-[#ff6600] shrink-0 mt-0.5" />
+                  <PackageCheck className="size-4 text-[#FF841D] shrink-0 mt-0.5" />
                   <span>Seguimiento en tiempo real de órdenes de uniformes</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <BookmarkCheck className="size-4 text-[#ff6600] shrink-0 mt-0.5" />
+                  <BookmarkCheck className="size-4 text-[#FF841D] shrink-0 mt-0.5" />
                   <span>Guarda productos para cotizaciones corporativas rápidas</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <FileText className="size-4 text-[#ff6600] shrink-0 mt-0.5" />
+                  <FileText className="size-4 text-[#FF841D] shrink-0 mt-0.5" />
                   <span>Descarga de comprobantes y órdenes de confección</span>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       placeholder="nombre@empresa.com"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
-                      className="w-full pl-10 pr-3.5 py-2.5 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#FF841D] focus:ring-1 focus:ring-[#FF841D] transition-colors"
                     />
                   </div>
                 </div>
@@ -216,7 +216,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     <button
                       type="button"
                       onClick={() => setError("Por favor contacta a ventas@fyf.com.ec para restablecer tu acceso.")}
-                      className="text-[11px] text-slate-500 hover:text-[#ff6600] hover:underline"
+                      className="text-[11px] text-slate-500 hover:text-[#FF841D] hover:underline"
                     >
                       ¿Olvidaste tu contraseña?
                     </button>
@@ -229,7 +229,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       placeholder="••••••••"
                       value={loginPassword}
                       onChange={(e) => setLoginPassword(e.target.value)}
-                      className="w-full pl-10 pr-10 py-2.5 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                      className="w-full pl-10 pr-10 py-2.5 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#FF841D] focus:ring-1 focus:ring-[#FF841D] transition-colors"
                     />
                     <button
                       type="button"
@@ -245,7 +245,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium text-xs sm:text-sm py-3 rounded-lg shadow-sm transition-all duration-200 active:scale-[0.99] disabled:opacity-60"
+                  className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-medium text-xs sm:text-sm py-3 rounded-lg shadow-sm transition-all duration-200 active:scale-[0.99] disabled:opacity-60"
                 >
                   {loading ? "Verificando..." : "Iniciar sesión"}
                 </button>
@@ -281,7 +281,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       placeholder="Empresa o Nombre Completo"
                       value={regName}
                       onChange={(e) => setRegName(e.target.value)}
-                      className="w-full pl-10 pr-3.5 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                      className="w-full pl-10 pr-3.5 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#FF841D] focus:ring-1 focus:ring-[#FF841D] transition-colors"
                     />
                   </div>
                 </div>
@@ -298,7 +298,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       placeholder="contacto@empresa.com"
                       value={regEmail}
                       onChange={(e) => setRegEmail(e.target.value)}
-                      className="w-full pl-10 pr-3.5 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                      className="w-full pl-10 pr-3.5 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#FF841D] focus:ring-1 focus:ring-[#FF841D] transition-colors"
                     />
                   </div>
                 </div>
@@ -315,7 +315,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       placeholder="0991234567"
                       value={regPhone}
                       onChange={(e) => setRegPhone(e.target.value)}
-                      className="w-full pl-10 pr-3.5 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                      className="w-full pl-10 pr-3.5 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#FF841D] focus:ring-1 focus:ring-[#FF841D] transition-colors"
                     />
                   </div>
                 </div>
@@ -332,7 +332,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       placeholder="Mínimo 6 caracteres"
                       value={regPassword}
                       onChange={(e) => setRegPassword(e.target.value)}
-                      className="w-full pl-10 pr-10 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                      className="w-full pl-10 pr-10 py-2 text-xs text-slate-900 border border-slate-300 rounded-lg focus:outline-none focus:border-[#FF841D] focus:ring-1 focus:ring-[#FF841D] transition-colors"
                     />
                     <button
                       type="button"
@@ -348,7 +348,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium text-xs sm:text-sm py-2.5 rounded-lg shadow-sm transition-all duration-200 active:scale-[0.99] disabled:opacity-60 mt-1"
+                  className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-medium text-xs sm:text-sm py-2.5 rounded-lg shadow-sm transition-all duration-200 active:scale-[0.99] disabled:opacity-60 mt-1"
                 >
                   {loading ? "Creando cuenta..." : "Registrarme"}
                 </button>
@@ -362,7 +362,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                       setError("");
                       setSuccess("");
                     }}
-                    className="text-xs font-medium text-[#ff6600] hover:underline"
+                    className="text-xs font-medium text-[#FF841D] hover:underline"
                   >
                     Iniciar sesión
                   </button>

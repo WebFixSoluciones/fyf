@@ -23,7 +23,7 @@ export function CategoryGrid() {
             href={`/catalogo?categoria=${cat.slug}`}
             className="group flex flex-col items-center text-center transition-transform duration-200 hover:-translate-y-1"
           >
-            <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-slate-200 shadow-xs group-hover:shadow-md transition-all border-b-4 border-b-[#ff6600]">
+            <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-slate-200 shadow-xs group-hover:shadow-md transition-all border-b-4 border-b-[#FF841D]">
               <Image
                 src={cat.image}
                 alt={cat.name}
@@ -33,7 +33,7 @@ export function CategoryGrid() {
               />
             </div>
 
-            <h3 className="mt-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-wider text-slate-900 group-hover:text-[#ff6600] transition-colors leading-snug line-clamp-2">
+            <h3 className="mt-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-wider text-slate-900 group-hover:text-[#FF841D] transition-colors leading-snug line-clamp-2">
               {cat.name}
             </h3>
           </Link>

@@ -149,7 +149,7 @@ export function HeroSlider() {
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Subtle background ambient light */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#ff6600]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF841D]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-neutral-800/40 rounded-full blur-3xl pointer-events-none" />
 
       {/* Slide Content Container: 95% content width for reading balance */}
@@ -158,15 +158,15 @@ export function HeroSlider() {
           {/* Left Column: Information & Actions */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-5 sm:space-y-6">
             {/* Category / Badge Pill */}
-            <div className="inline-flex items-center gap-2 self-start rounded-full bg-[#ff6600]/10 border border-[#ff6600]/30 px-3.5 py-1 text-xs font-semibold text-[#ff6600] tracking-wider uppercase">
-              <span className="size-1.5 rounded-full bg-[#ff6600] animate-pulse" />
+            <div className="inline-flex items-center gap-2 self-start rounded-full bg-[#FF841D]/10 border border-[#FF841D]/30 px-3.5 py-1 text-xs font-semibold text-[#FF841D] tracking-wider uppercase">
+              <span className="size-1.5 rounded-full bg-[#FF841D] animate-pulse" />
               <span>{slide.badge}</span>
             </div>
 
             {/* Title (High contrast, minimalist Inter) */}
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-[1.18] transition-all duration-300">
               {slide.titlePrefix}
-              <span className="text-[#ff6600] font-semibold">{slide.titleHighlight}</span>
+              <span className="text-[#FF841D] font-semibold">{slide.titleHighlight}</span>
             </h1>
 
             {/* Minimalist Subtitle */}
@@ -178,8 +178,8 @@ export function HeroSlider() {
             <ul className="space-y-2 pt-1 sm:pt-2">
               {slide.specs.map((spec, idx) => (
                 <li key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm text-neutral-300 font-normal">
-                  <span className="size-4.5 rounded-full bg-[#ff6600]/15 border border-[#ff6600]/40 flex items-center justify-center shrink-0">
-                    <Check className="size-3 text-[#ff6600]" />
+                  <span className="size-4.5 rounded-full bg-[#FF841D]/15 border border-[#FF841D]/40 flex items-center justify-center shrink-0">
+                    <Check className="size-3 text-[#FF841D]" />
                   </span>
                   <span>{spec}</span>
                 </li>
@@ -190,7 +190,7 @@ export function HeroSlider() {
             <div className="flex flex-wrap items-center gap-3 pt-2 sm:pt-4">
               <Link
                 href={slide.primaryCtaLink}
-                className="bg-[#ff6600] hover:bg-[#ea580c] active:scale-[0.98] text-white font-medium px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all text-xs sm:text-sm flex items-center gap-2 cursor-pointer"
+                className="bg-[#FF841D] hover:bg-[#e57212] active:scale-[0.98] text-white font-medium px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all text-xs sm:text-sm flex items-center gap-2 cursor-pointer"
               >
                 <span>{slide.primaryCtaText}</span>
                 <ArrowRight className="size-4" />
@@ -205,7 +205,7 @@ export function HeroSlider() {
                 {slide.secondaryCtaLink.includes("wa.me") ? (
                   <MessageCircle className="size-4 text-[#25D366]" />
                 ) : (
-                  <ShieldCheck className="size-4 text-[#ff6600]" />
+                  <ShieldCheck className="size-4 text-[#FF841D]" />
                 )}
                 <span>{slide.secondaryCtaText}</span>
               </Link>
@@ -231,7 +231,7 @@ export function HeroSlider() {
 
               {/* Floating Top Badge */}
               <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10 bg-neutral-950/85 backdrop-blur-md border border-neutral-700 px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-1.5">
-                <Sparkles className="size-3.5 text-[#ff6600]" />
+                <Sparkles className="size-3.5 text-[#FF841D]" />
                 <span className="text-[11px] sm:text-xs font-semibold text-white">
                   {slide.floatingBadge}
                 </span>
@@ -249,7 +249,7 @@ export function HeroSlider() {
                   />
                 </div>
                 <div className="min-w-0 pr-1">
-                  <span className="block text-[9px] font-bold text-[#ff6600] uppercase tracking-wider truncate">
+                  <span className="block text-[9px] font-bold text-[#FF841D] uppercase tracking-wider truncate">
                     {slide.subProduct.tag}
                   </span>
                   <p className="text-[11px] font-medium text-white truncate leading-tight mt-0.5">
@@ -275,7 +275,7 @@ export function HeroSlider() {
                 aria-label={`Ir al slider ${idx + 1}: ${s.badge}`}
                 className={`transition-all duration-300 rounded-full cursor-pointer flex items-center ${
                   current === idx
-                    ? "w-8 sm:w-10 h-2 sm:h-2.5 bg-[#ff6600]"
+                    ? "w-8 sm:w-10 h-2 sm:h-2.5 bg-[#FF841D]"
                     : "w-2 sm:w-2.5 h-2 sm:h-2.5 bg-neutral-700 hover:bg-neutral-500"
                 }`}
               />

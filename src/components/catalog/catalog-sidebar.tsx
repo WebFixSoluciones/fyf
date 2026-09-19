@@ -95,7 +95,7 @@ export function CatalogSidebar({
           <button
             onClick={onResetFilters}
             type="button"
-            className="text-xs font-medium text-[#ff6600] hover:underline flex items-center gap-1 transition-colors"
+            className="text-xs font-medium text-[#FF841D] hover:underline flex items-center gap-1 transition-colors"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Limpiar filtros</span>
@@ -116,7 +116,7 @@ export function CatalogSidebar({
           )}
         >
           <span>Todas las Líneas</span>
-          <span className={cn("text-[11px]", !filters.categoria ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
+          <span className={cn("text-[11px]", !filters.categoria ? "text-[#FF841D] font-semibold" : "text-neutral-400")}>
             {totalProductsCount}
           </span>
         </button>
@@ -138,7 +138,7 @@ export function CatalogSidebar({
               )}
             >
               <span className="truncate pr-2">{cat.name}</span>
-              <span className={cn("text-[11px]", isSelected ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
+              <span className={cn("text-[11px]", isSelected ? "text-[#FF841D] font-semibold" : "text-neutral-400")}>
                 {count}
               </span>
             </button>
@@ -168,7 +168,7 @@ export function CatalogSidebar({
                   )}
                 >
                   <span className="truncate">{sub.label}</span>
-                  {isSelected && <Check className="w-3.5 h-3.5 text-[#ff6600] shrink-0 ml-1" />}
+                  {isSelected && <Check className="w-3.5 h-3.5 text-[#FF841D] shrink-0 ml-1" />}
                 </button>
               );
             })}
@@ -202,7 +202,7 @@ export function CatalogSidebar({
       {/* Corporate Quotation Box */}
       <div className="mt-auto pt-4 border-t border-neutral-200">
         <div className="rounded-2xl bg-neutral-50 border border-neutral-200/80 p-4 text-center">
-          <ShieldCheck className="size-6 text-[#ff6600] mx-auto mb-2" />
+          <ShieldCheck className="size-6 text-[#FF841D] mx-auto mb-2" />
           <h4 className="text-xs font-semibold text-neutral-900 uppercase">¿Cotización al por Mayor?</h4>
           <p className="text-[11px] text-neutral-500 mt-1 leading-relaxed">
             Atendemos requerimientos corporativos e industriales con confección y bordado a medida.

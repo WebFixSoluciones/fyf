@@ -225,7 +225,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                   className="w-full p-3 flex items-center justify-between bg-slate-50/80 hover:bg-slate-100/70 transition-colors text-left cursor-pointer"
                 >
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
-                    <ShoppingBag className="size-4 text-[#ff6600]" />
+                    <ShoppingBag className="size-4 text-[#FF841D]" />
                     <span>{showMobileSummary ? "Ocultar resumen de compra" : "Ver resumen de compra"}</span>
                     {showMobileSummary ? (
                       <ChevronUp className="size-3.5 text-slate-500" />
@@ -503,7 +503,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                         value="pickup"
                         checked={formData.shippingMethod === "pickup"}
                         onChange={handleInputChange}
-                        className="text-[#ff6600] focus:ring-[#ff6600]"
+                        className="text-[#FF841D] focus:ring-[#FF841D]"
                       />
                       <div>
                         <div className="font-semibold text-xs text-slate-900">Retiro en Planta FYF Uniformes</div>
@@ -522,7 +522,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
               <div className="hidden lg:block bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 mb-3.5">
                   <h2 className="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
-                    <ShoppingBag className="size-4 text-[#ff6600]" />
+                    <ShoppingBag className="size-4 text-[#FF841D]" />
                     <span>Resumen del Pedido</span>
                   </h2>
                   <span className="text-xs text-slate-500 font-medium">
@@ -551,7 +551,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                         <div className="text-[10px] text-slate-500 truncate">
                           <span>{item.sizeLabel}</span>
                           {item.shape && <span> · {item.shape}</span>}
-                          {item.withLogo && <span className="text-[#ff6600] font-semibold"> · +Personalizado</span>}
+                          {item.withLogo && <span className="text-[#FF841D] font-semibold"> · +Personalizado</span>}
                         </div>
                       </div>
                       <span className="font-bold text-xs text-slate-900 shrink-0">
@@ -588,7 +588,7 @@ He seleccionado pago directo por transferencia/WhatsApp. Por favor envíenme los
                     <span className="font-medium">Compra protegida directamente por FYF Uniformes</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Truck className="size-3.5 sm:size-4 text-[#ff6600] shrink-0" />
+                    <Truck className="size-3.5 sm:size-4 text-[#FF841D] shrink-0" />
                     <span className="font-medium">Guía de rastreo asignada inmediatamente</span>
                   </div>
                 </div>
@@ -695,7 +695,7 @@ export default function CheckoutPage() {
       fallback={
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
           <div className="text-center space-y-2">
-            <div className="w-8 h-8 border-2 border-[#ff6600] border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-8 h-8 border-2 border-[#FF841D] border-t-transparent rounded-full animate-spin mx-auto" />
             <p className="text-xs font-semibold text-slate-600">Cargando checkout seguro de FYF Uniformes...</p>
           </div>
         </div>

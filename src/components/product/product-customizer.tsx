@@ -290,7 +290,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             <div className="border border-slate-200 rounded-xl p-3 sm:p-4 bg-white shadow-2xs">
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <label className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                  <Sliders className="w-3.5 h-3.5 text-[#ff6600]" />
+                  <Sliders className="w-3.5 h-3.5 text-[#FF841D]" />
                   Tallas y Medidas
                 </label>
                 {product.allowCustomSize && (
@@ -389,12 +389,12 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                     Bordado computarizado o estampado de alta definición en tu uniforme
                   </p>
                 </div>
-                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-xs text-[#ff6600] shrink-0 ml-2">
+                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-xs text-[#FF841D] shrink-0 ml-2">
                   <input
                     type="checkbox"
                     checked={withLogo}
                     onChange={(e) => setWithLogo(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-300 text-[#ff6600] focus:ring-orange-500"
+                    className="w-4 h-4 rounded border-slate-300 text-[#FF841D] focus:ring-orange-500"
                   />
                   <span>Incluir Logo</span>
                 </label>
@@ -410,7 +410,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
           >
             <summary className="p-3 sm:p-4 font-display text-xs font-bold uppercase tracking-wider text-slate-900 cursor-pointer flex items-center justify-between select-none hover:bg-slate-100/60 transition-colors">
               <span className="flex items-center gap-2">
-                <FileText className="size-4 text-[#ff6600]" />
+                <FileText className="size-4 text-[#FF841D]" />
                 <span>Ficha Técnica & Especificaciones</span>
               </span>
               <ChevronDown className="size-4 text-slate-500 transition-transform duration-200 group-open:rotate-180" />
@@ -537,7 +537,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-sm active:scale-[0.99] cursor-pointer"
+                className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-medium py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-sm active:scale-[0.99] cursor-pointer"
               >
                 <ShoppingBag className="size-4.5 shrink-0" />
                 <span>Agregar al Carrito</span>
@@ -827,12 +827,12 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               Bordado computarizado o estampado de alta definición en tu uniforme
             </p>
           </div>
-          <label className="flex items-center gap-2 cursor-pointer font-bold text-xs text-[#ff6600]">
+          <label className="flex items-center gap-2 cursor-pointer font-bold text-xs text-[#FF841D]">
             <input
               type="checkbox"
               checked={withLogo}
               onChange={(e) => setWithLogo(e.target.checked)}
-              className="w-4 h-4 rounded border-slate-300 text-[#ff6600] focus:ring-orange-500"
+              className="w-4 h-4 rounded border-slate-300 text-[#FF841D] focus:ring-orange-500"
             />
             <span>Incluir Logo</span>
           </label>
@@ -899,7 +899,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         <button
           type="button"
           onClick={handleAddToCart}
-          className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md text-sm active:scale-[0.99]"
+          className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md text-sm active:scale-[0.99]"
         >
           <ShoppingBag className="size-4.5" />
           <span>Agregar al Carrito</span>

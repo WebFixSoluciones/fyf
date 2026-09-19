@@ -37,7 +37,7 @@ export function Footer() {
       <div className="border-b border-neutral-800 py-8 bg-[#0a0a0a]">
         <div className="mx-auto w-[95%] max-w-[1720px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="flex items-center gap-3.5">
-            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#ff6600] flex items-center justify-center shrink-0">
+            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#FF841D] flex items-center justify-center shrink-0">
               <Truck className="size-5" />
             </div>
             <div>
@@ -47,7 +47,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#ff6600] flex items-center justify-center shrink-0">
+            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#FF841D] flex items-center justify-center shrink-0">
               <Factory className="size-5" />
             </div>
             <div>
@@ -57,7 +57,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#ff6600] flex items-center justify-center shrink-0">
+            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#FF841D] flex items-center justify-center shrink-0">
               <ShieldCheck className="size-5" />
             </div>
             <div>
@@ -67,7 +67,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-3.5">
-            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#ff6600] flex items-center justify-center shrink-0">
+            <div className="size-11 rounded-xl bg-neutral-900 border border-neutral-800 text-[#FF841D] flex items-center justify-center shrink-0">
               <MessageCircle className="size-5" />
             </div>
             <div>
@@ -82,7 +82,7 @@ export function Footer() {
       <div className="border-b border-neutral-800 py-8 bg-black">
         <div className="mx-auto w-[95%] max-w-[1720px] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="max-w-md text-center md:text-left">
-            <span className="text-[#ff6600] text-[11px] font-medium uppercase tracking-wider block mb-1">
+            <span className="text-[#FF841D] text-[11px] font-medium uppercase tracking-wider block mb-1">
               Boletín Corporativo & Ofertas
             </span>
             <h3 className="text-white text-base sm:text-lg font-medium tracking-tight">
@@ -107,11 +107,11 @@ export function Footer() {
                   placeholder="Tu correo electrónico..."
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="flex-1 bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#ff6600] transition-colors"
+                  className="flex-1 bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FF841D] transition-colors"
                 />
                 <button
                   type="submit"
-                  className="bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium text-xs px-5 py-2.5 rounded-xl shadow-xs transition-colors shrink-0 flex items-center gap-1.5"
+                  className="bg-[#FF841D] hover:bg-[#e57212] text-white font-medium text-xs px-5 py-2.5 rounded-xl shadow-xs transition-colors shrink-0 flex items-center gap-1.5"
                 >
                   <span>Suscribirme</span>
                   <ArrowRight className="size-3.5" />
@@ -147,19 +147,19 @@ export function Footer() {
 
             <div className="pt-2 text-xs space-y-1 text-neutral-300">
               <div className="flex items-center gap-2">
-                <MapPin className="size-3.5 text-[#ff6600] shrink-0" />
+                <MapPin className="size-3.5 text-[#FF841D] shrink-0" />
                 <span>Parque Urb. Matovelle, N51 y Juan Alzuro, Quito</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="size-3.5 text-[#ff6600] shrink-0" />
+                <Phone className="size-3.5 text-[#FF841D] shrink-0" />
                 <span>+593 99 335 8701 / 09 8874 2584</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="size-3.5 text-[#ff6600] shrink-0" />
+                <Mail className="size-3.5 text-[#FF841D] shrink-0" />
                 <span>ventas@fyf.com.ec</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="size-3.5 text-[#ff6600] shrink-0" />
+                <Clock className="size-3.5 text-[#FF841D] shrink-0" />
                 <span>Lun - Vie: 08:00 - 18:00</span>
               </div>
             </div>
@@ -244,7 +244,7 @@ export function Footer() {
                   href="https://wa.me/593993358701?text=Hola%20deseo%20asesoria%20comercial%20para%20uniformes"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors text-[#ff6600]"
+                  className="hover:text-white transition-colors text-[#FF841D]"
                 >
                   Asesoría Comercial Directa
                 </a>

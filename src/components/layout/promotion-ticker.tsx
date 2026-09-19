@@ -59,9 +59,9 @@ export function PromotionTicker({
       <div className="mx-auto w-[95%] max-w-[1720px] px-4 flex items-center justify-center text-center">
         <Link
           href={activeNotice.link}
-          className="inline-flex items-center gap-2 hover:text-[#ff6600] transition-colors text-neutral-200 group truncate max-w-full"
+          className="inline-flex items-center gap-2 hover:text-[#FF841D] transition-colors text-neutral-200 group truncate max-w-full"
         >
-          <Megaphone className="size-3.5 text-[#ff6600] shrink-0" />
+          <Megaphone className="size-3.5 text-[#FF841D] shrink-0" />
           <span className="truncate">{activeNotice.text}</span>
           <ChevronRight className="size-3 text-neutral-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
         </Link>

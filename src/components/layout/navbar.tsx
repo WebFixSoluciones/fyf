@@ -111,7 +111,7 @@ export function Navbar() {
                   className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 text-xs sm:text-[13px] font-medium text-slate-900 transition-all cursor-pointer"
                   aria-label="Categorías"
                 >
-                  <LayoutGrid className="size-4 text-[#ff6600] shrink-0" />
+                  <LayoutGrid className="size-4 text-[#FF841D] shrink-0" />
                   <span>Categorías</span>
                   <ChevronDown
                     className={`size-3.5 text-slate-500 transition-transform duration-200 ${
@@ -136,7 +136,7 @@ export function Navbar() {
                       <Link
                         href="/catalogo"
                         onClick={() => setMegaMenuOpen(false)}
-                        className="text-xs font-semibold text-[#ff6600] hover:text-[#ea580c] flex items-center gap-1 transition-colors"
+                        className="text-xs font-semibold text-[#FF841D] hover:text-[#e57212] flex items-center gap-1 transition-colors"
                       >
                         <span>Ver Toda la Tienda</span>
                         <ArrowRight className="size-3.5" />
@@ -161,7 +161,7 @@ export function Navbar() {
                             />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 group-hover:text-[#ff6600] transition-colors block truncate">
+                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 group-hover:text-[#FF841D] transition-colors block truncate">
                               {cat.name}
                             </span>
                             <p className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1 leading-snug mt-0.5">
@@ -175,7 +175,7 @@ export function Navbar() {
                     {/* Bottom Help / Wholesale Bar inside Mega Menu */}
                     <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between bg-orange-50/70 rounded-2xl px-4 py-2.5 border border-orange-100">
                       <div className="flex items-center gap-2">
-                        <Sparkles className="size-4 text-[#ff6600] shrink-0" />
+                        <Sparkles className="size-4 text-[#FF841D] shrink-0" />
                         <span className="text-xs text-slate-800 font-medium">
                           ¿Cotizaciones al por mayor o confección con bordado corporativo?
                         </span>
@@ -184,7 +184,7 @@ export function Navbar() {
                         href="https://wa.me/593993358701?text=%C2%A1Hola%20FYF%20Uniformes!%20Quisiera%20cotizar%20un%20pedido%20corporativo%20por%20mayor."
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-bold text-[#ff6600] hover:underline flex items-center gap-1 shrink-0"
+                        className="text-xs font-bold text-[#FF841D] hover:underline flex items-center gap-1 shrink-0"
                       >
                         <span>Contactar Asesor</span>
                         <ArrowRight className="size-3" />
@@ -200,7 +200,7 @@ export function Navbar() {
                 className="hidden md:flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 text-xs sm:text-[13px] font-medium text-slate-900 transition-all cursor-pointer shrink-0"
                 aria-label="Tienda"
               >
-                <Store className="size-4 text-[#ff6600] shrink-0" />
+                <Store className="size-4 text-[#FF841D] shrink-0" />
                 <span>Tienda</span>
               </Link>
             </div>
@@ -211,7 +211,7 @@ export function Navbar() {
               ref={searchContainerRef}
             >
               <form onSubmit={handleSearchSubmit} className="relative w-full">
-                <div className="relative flex items-center w-full bg-slate-50 hover:bg-slate-100/70 focus-within:bg-white border border-slate-200/90 focus-within:border-[#ff6600] rounded-2xl transition-all focus-within:ring-2 focus-within:ring-[#ff6600]/10 overflow-hidden">
+                <div className="relative flex items-center w-full bg-slate-50 hover:bg-slate-100/70 focus-within:bg-white border border-slate-200/90 focus-within:border-[#FF841D] rounded-2xl transition-all focus-within:ring-2 focus-within:ring-[#FF841D]/10 overflow-hidden">
                   <Search className="size-4 text-slate-400 ml-4 shrink-0 pointer-events-none" />
                   <input
                     type="text"
@@ -250,7 +250,7 @@ export function Navbar() {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <span className="text-[10px] font-medium text-[#ff6600] uppercase tracking-wider block">
+                          <span className="text-[10px] font-medium text-[#FF841D] uppercase tracking-wider block">
                             {item.categoryTag || "FYF Uniformes"}
                           </span>
                           <p className="text-xs font-medium text-slate-900 truncate">
@@ -283,7 +283,7 @@ export function Navbar() {
                 className="hidden sm:flex items-center gap-2 text-slate-700 hover:text-slate-950 text-xs sm:text-[13px] font-medium transition-colors cursor-pointer group px-2 py-1.5 rounded-xl hover:bg-slate-50"
                 title="Mi Cuenta / Iniciar Sesión"
               >
-                <User className="size-5 text-slate-600 group-hover:text-[#ff6600] transition-colors shrink-0" />
+                <User className="size-5 text-slate-600 group-hover:text-[#FF841D] transition-colors shrink-0" />
                 <span>Ingresar</span>
               </button>
 
@@ -293,7 +293,7 @@ export function Navbar() {
                 className="hidden sm:flex items-center gap-2 text-slate-700 hover:text-slate-950 text-xs sm:text-[13px] font-medium transition-colors group px-2 py-1.5 rounded-xl hover:bg-slate-50"
                 title="Rastreo de Pedidos"
               >
-                <MapPin className="size-5 text-slate-600 group-hover:text-[#ff6600] transition-colors shrink-0" />
+                <MapPin className="size-5 text-slate-600 group-hover:text-[#FF841D] transition-colors shrink-0" />
                 <span>Rastreo</span>
               </Link>
 
@@ -306,7 +306,7 @@ export function Navbar() {
               >
                 <ShoppingBag className="size-5.5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 bg-[#ff6600] text-white text-[10px] font-bold size-4.5 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="absolute -top-0.5 -right-0.5 bg-[#FF841D] text-white text-[10px] font-bold size-4.5 rounded-full flex items-center justify-center shadow-xs">
                     {totalItems}
                   </span>
                 )}
@@ -355,7 +355,7 @@ export function Navbar() {
                   }}
                   className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-medium hover:bg-slate-200"
                 >
-                  <User className="size-4 text-[#ff6600]" />
+                  <User className="size-4 text-[#FF841D]" />
                   <span>Ingresar</span>
                 </button>
 
@@ -364,7 +364,7 @@ export function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-medium hover:bg-slate-200"
                 >
-                  <MapPin className="size-4 text-[#ff6600]" />
+                  <MapPin className="size-4 text-[#FF841D]" />
                   <span>Rastreo</span>
                 </Link>
               </div>
@@ -396,7 +396,7 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="mt-2 flex items-center justify-center gap-2 bg-black hover:bg-neutral-900 text-white font-medium text-xs py-3 rounded-xl shadow-xs transition-colors"
               >
-                <Store className="size-4 text-[#ff6600]" />
+                <Store className="size-4 text-[#FF841D]" />
                 <span>Ver Tienda Completa</span>
               </Link>
             </nav>

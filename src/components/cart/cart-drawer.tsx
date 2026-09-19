@@ -27,7 +27,7 @@ export function CartDrawer() {
           {/* Header */}
           <div className="px-4 py-3.5 sm:px-6 sm:py-4 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
             <div className="flex items-center gap-2">
-              <ShoppingBag className="size-4.5 text-[#ff6600]" />
+              <ShoppingBag className="size-4.5 text-[#FF841D]" />
               <h2 className="font-display font-bold text-base sm:text-lg text-slate-900">Tu Carrito</h2>
               <span className="bg-orange-50 text-orange-800 text-[11px] font-bold px-2 py-0.5 rounded-full border border-orange-200">
                 {items.length} {items.length === 1 ? "ítem" : "ítems"}
@@ -46,7 +46,7 @@ export function CartDrawer() {
           <div className="flex-1 overflow-y-auto px-3.5 sm:px-6 py-2 sm:py-4 divide-y divide-slate-100">
             {items.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6">
-                <div className="size-14 sm:size-16 bg-orange-50 text-[#ff6600] rounded-full flex items-center justify-center mb-3">
+                <div className="size-14 sm:size-16 bg-orange-50 text-[#FF841D] rounded-full flex items-center justify-center mb-3">
                   <ShoppingBag className="size-7 sm:size-8" />
                 </div>
                 <h3 className="font-display font-semibold text-slate-800 text-sm sm:text-base mb-1">
@@ -153,7 +153,7 @@ export function CartDrawer() {
                   setIsCartOpen(false);
                   router.push("/checkout");
                 }}
-                className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-display font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-xs sm:text-sm cursor-pointer active:scale-[0.99]"
+                className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-display font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-xs sm:text-sm cursor-pointer active:scale-[0.99]"
               >
                 <span>Proceder al Pago Seguro</span>
                 <ArrowRight className="size-4" />

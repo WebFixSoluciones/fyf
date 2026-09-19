@@ -12,7 +12,7 @@ export default function TrackingPage() {
       <main className="flex-1 w-[95%] max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center max-w-xl mx-auto mb-8">
           <div className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-800 text-xs font-medium px-3 py-1 rounded-full mb-3">
-            <Truck className="w-3.5 h-3.5 text-[#ff6600]" />
+            <Truck className="w-3.5 h-3.5 text-[#FF841D]" />
             <span>Seguimiento de Envíos en Tiempo Real</span>
           </div>
           <h1 className="font-display font-bold text-3xl sm:text-4xl text-neutral-900 tracking-tight">

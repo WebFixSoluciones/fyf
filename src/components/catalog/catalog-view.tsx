@@ -276,10 +276,10 @@ export function CatalogView({
           onClick={() => setIsMobileDrawerOpen(true)}
           className="inline-flex items-center gap-2 rounded-lg bg-white border border-neutral-300 px-3.5 py-2 text-xs font-semibold text-neutral-800 shadow-2xs hover:bg-neutral-50 transition-colors"
         >
-          <SlidersHorizontal className="size-4 text-[#ff6600]" />
+          <SlidersHorizontal className="size-4 text-[#FF841D]" />
           <span>Filtros y Categorías</span>
           {activeFilters.length > 0 && (
-            <span className="flex size-5 items-center justify-center rounded-full bg-[#ff6600] text-[10px] font-bold text-white">
+            <span className="flex size-5 items-center justify-center rounded-full bg-[#FF841D] text-[10px] font-bold text-white">
               {activeFilters.length}
             </span>
           )}
@@ -290,7 +290,7 @@ export function CatalogView({
           <select
             value={filters.orden || "relevancia"}
             onChange={(e) => handleFilterChange({ orden: e.target.value })}
-            className="rounded-lg border border-neutral-300 bg-white py-2 px-2.5 text-xs font-medium text-neutral-800 focus:outline-none focus:border-[#ff6600] shadow-2xs"
+            className="rounded-lg border border-neutral-300 bg-white py-2 px-2.5 text-xs font-medium text-neutral-800 focus:outline-none focus:border-[#FF841D] shadow-2xs"
           >
             <option value="relevancia">Relevancia</option>
             <option value="precio-menor">Menor Precio</option>
@@ -334,7 +334,7 @@ export function CatalogView({
               <select
                 value={filters.orden || "relevancia"}
                 onChange={(e) => handleFilterChange({ orden: e.target.value })}
-                className="rounded-xl border border-neutral-300 bg-white py-1.5 px-3 text-xs font-medium text-neutral-800 focus:outline-none focus:border-[#ff6600] shadow-2xs cursor-pointer"
+                className="rounded-xl border border-neutral-300 bg-white py-1.5 px-3 text-xs font-medium text-neutral-800 focus:outline-none focus:border-[#FF841D] shadow-2xs cursor-pointer"
               >
                 <option value="relevancia">Más destacados</option>
                 <option value="precio-menor">Menor precio primero</option>

@@ -44,7 +44,7 @@ export function FeaturesSection() {
 
       <div className="relative mx-auto w-[95%] max-w-[1720px] px-4">
         {/* Title with left orange line matching Image 3 */}
-        <div className="border-l-[3px] border-[#ff6600] pl-4 mb-10 sm:mb-14">
+        <div className="border-l-[3px] border-[#FF841D] pl-4 mb-10 sm:mb-14">
           <span className="block text-xl sm:text-2xl font-light tracking-tight text-neutral-300">
             Lo que nos hace
           </span>
@@ -61,7 +61,7 @@ export function FeaturesSection() {
               <div key={idx} className="flex flex-col items-center text-center sm:items-start sm:text-left">
                 {/* Minimalist line icon with circle */}
                 <div className="size-12 rounded-full border border-neutral-800 flex items-center justify-center text-white mb-4 bg-neutral-900/60 backdrop-blur-xs">
-                  <IconComponent className="size-6 stroke-[1.5] text-[#ff6600]" />
+                  <IconComponent className="size-6 stroke-[1.5] text-[#FF841D]" />
                 </div>
 
                 {/* Title */}
