@@ -14,6 +14,7 @@ import {
   ArrowRight,
   User,
   LayoutGrid,
+  MapPin,
   Store,
 } from "lucide-react";
 import { CATEGORIES_DATA, PRODUCTS_DATA } from "@/lib/catalog-data";
@@ -55,7 +56,8 @@ export function Navbar() {
       return (
         p.name.toLowerCase().includes(trimmed) ||
         (p.categoryTag?.toLowerCase() || "").includes(trimmed) ||
-        p.description.toLowerCase().includes(trimmed)
+        p.description.toLowerCase().includes(trimmed) ||
+        p.sku.toLowerCase().includes(trimmed)
       );
     }).slice(0, 6);
   }, [query]);
@@ -71,16 +73,17 @@ export function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-        {/* Top Corporate Bar */}
+        {/* Top Corporate Announcement Bar */}
         <PromotionTicker />
 
-        {/* Main Navbar: 95% width */}
+        {/* Main Navbar Row: 95% width container */}
         <div className="mx-auto w-[95%] max-w-[1720px]">
-          <div className="flex h-18 sm:h-20 items-center justify-between gap-4 lg:gap-8">
-            {/* 1. Left: Logo FYF (Clicking goes to Home) */}
-            <div className="flex items-center shrink-0">
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-slate-200 shadow-xs bg-white shrink-0 group-hover:scale-105 transition-transform duration-200">
+          <div className="flex h-18 sm:h-20 items-center justify-between gap-3 sm:gap-6">
+            {/* 1. Left: Logo FYF + "Todos nuestros productos ⌵" */}
+            <div className="flex items-center gap-3 sm:gap-5 shrink-0">
+              {/* Logo (links to Home) */}
+              <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+                <div className="relative size-11 sm:size-12 rounded-full overflow-hidden border border-slate-200 shadow-xs bg-white shrink-0 group-hover:scale-105 transition-transform duration-200">
                   <Image
                     src="/logo.jpg"
                     alt="FYF Uniformes"
@@ -89,7 +92,7 @@ export function Navbar() {
                     priority
                   />
                 </div>
-                <div className="flex flex-col justify-center">
+                <div className="hidden sm:flex flex-col justify-center">
                   <span className="text-base sm:text-lg font-semibold tracking-tight text-slate-950 uppercase leading-none font-sans">
                     FYF UNIFORMES
                   </span>
@@ -98,197 +101,246 @@ export function Navbar() {
                   </span>
                 </div>
               </Link>
-            </div>
 
-            {/* 2. Center: Centered Navigation (Categorías + Tienda) and Search */}
-            <div className="hidden lg:flex items-center justify-center gap-6 flex-1 max-w-2xl mx-auto">
-              {/* Categorías Dropdown Button */}
-              <div className="relative" ref={megaMenuRef}>
+              {/* "Todos nuestros productos ⌵" Dropdown Button */}
+              <div className="hidden md:block relative" ref={megaMenuRef}>
                 <button
                   type="button"
                   onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-[13px] font-medium text-slate-800 hover:text-black hover:bg-slate-100/80 border border-slate-200/80 transition-all"
-                  aria-label="Ver Categorías"
+                  className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-slate-100/80 hover:bg-slate-200/70 border border-slate-200/80 text-xs sm:text-[13px] font-medium text-slate-900 transition-all cursor-pointer"
+                  aria-label="Todos nuestros productos"
                 >
                   <LayoutGrid className="size-4 text-[#ff6600] shrink-0" />
-                  <span>Categorías</span>
-                  <ChevronDown className={`size-3.5 text-slate-500 transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`} />
+                  <span>Todos nuestros productos</span>
+                  <ChevronDown
+                    className={`size-3.5 text-slate-500 transition-transform duration-200 ${
+                      megaMenuOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
 
+                {/* Dropdown Menu */}
                 {megaMenuOpen && (
-                  <div className="absolute top-full left-0 mt-3 w-96 rounded-2xl bg-white border border-neutral-200 shadow-xl p-3.5 grid grid-cols-1 gap-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="px-2 py-1 text-[11px] font-medium text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1">
-                      Todas las Categorías
+                  <div className="absolute top-full left-0 mt-2.5 w-80 sm:w-96 rounded-2xl bg-white border border-slate-200 shadow-2xl p-3.5 grid grid-cols-1 gap-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                    <div className="px-2 py-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1 flex items-center justify-between">
+                      <span>Líneas de Trabajo</span>
+                      <Link
+                        href="/catalogo"
+                        onClick={() => setMegaMenuOpen(false)}
+                        className="text-[#ff6600] hover:underline font-medium normal-case text-xs"
+                      >
+                        Ver todo
+                      </Link>
                     </div>
+
                     {CATEGORIES_DATA.map((cat) => (
                       <Link
                         key={cat.slug}
                         href={`/catalogo?categoria=${cat.slug}`}
                         onClick={() => setMegaMenuOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-slate-950 transition-colors"
+                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 text-slate-800 hover:text-slate-950 transition-colors group"
                       >
                         <div className="relative size-9 rounded-lg overflow-hidden bg-slate-100 border border-slate-100 shrink-0">
-                          <Image src={cat.image} alt={cat.name} fill className="object-cover" />
+                          <Image
+                            src={cat.image}
+                            alt={cat.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform"
+                          />
                         </div>
-                        <span className="text-xs font-medium uppercase tracking-wider text-slate-800">
-                          {cat.name}
-                        </span>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs font-medium uppercase tracking-wider text-slate-900 group-hover:text-[#ff6600] transition-colors block truncate">
+                            {cat.name}
+                          </span>
+                          <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                            {cat.description}
+                          </p>
+                        </div>
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
+            </div>
 
-              {/* Tienda Link */}
-              <Link
-                href="/catalogo"
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-[13px] font-medium text-slate-800 hover:text-black hover:bg-slate-100/80 border border-slate-200/80 transition-all"
-              >
-                <Store className="size-4 text-[#ff6600] shrink-0" />
-                <span>Tienda</span>
-              </Link>
-
-              {/* Centered Search Bar */}
-              <div className="relative flex-1" ref={searchContainerRef}>
-                <form onSubmit={handleSearchSubmit} className="relative">
+            {/* 2. Center: Wide Search Bar */}
+            <div
+              className="hidden md:flex items-center flex-1 max-w-2xl mx-3 lg:mx-6 relative"
+              ref={searchContainerRef}
+            >
+              <form onSubmit={handleSearchSubmit} className="relative w-full">
+                <div className="relative flex items-center w-full bg-slate-50 hover:bg-slate-100/70 focus-within:bg-white border border-slate-200/90 focus-within:border-[#ff6600] rounded-2xl transition-all focus-within:ring-2 focus-within:ring-[#ff6600]/10 overflow-hidden">
+                  <Search className="size-4 text-slate-400 ml-4 shrink-0 pointer-events-none" />
                   <input
                     type="text"
-                    placeholder="Buscar en la tienda..."
+                    placeholder="Buscar uniformes, overoles, ropa térmica, calzado, sku..."
                     value={query}
                     onChange={(e) => {
                       setQuery(e.target.value);
                       setIsSearchFocused(true);
                     }}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-300 rounded-full pl-9 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#ff6600] focus:ring-1 focus:ring-[#ff6600] transition-colors"
+                    className="w-full bg-transparent border-none pl-3 pr-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
                   />
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-slate-400 pointer-events-none" />
-                </form>
+                </div>
+              </form>
 
-                {/* Autocomplete Dropdown */}
-                {isSearchFocused && searchResults.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden z-50 animate-in fade-in duration-100">
-                    <div className="p-2 space-y-1">
-                      {searchResults.map((item) => (
-                        <Link
-                          key={item.slug}
-                          href={`/producto/${item.slug}`}
-                          onClick={() => {
-                            setIsSearchFocused(false);
-                            setQuery("");
-                          }}
-                          className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors"
-                        >
-                          <div className="relative size-10 rounded-lg overflow-hidden bg-white border border-slate-100 shrink-0">
-                            <Image src={item.mainImage} alt={item.name} fill className="object-contain p-1" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-[10px] font-medium text-[#ff6600] uppercase tracking-wider block">
-                              {item.categoryTag || "FYF Uniformes"}
-                            </span>
-                            <p className="text-xs font-medium text-slate-900 truncate">
-                              {item.name}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="border-t border-slate-100 p-2 text-center bg-slate-50">
-                      <button
-                        type="button"
-                        onClick={handleSearchSubmit}
-                        className="text-xs font-medium text-slate-800 hover:text-black flex items-center justify-center gap-1 w-full"
+              {/* Autocomplete Dropdown */}
+              {isSearchFocused && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden z-50 animate-in fade-in duration-100">
+                  <div className="p-2 space-y-1">
+                    {searchResults.map((item) => (
+                      <Link
+                        key={item.slug}
+                        href={`/producto/${item.slug}`}
+                        onClick={() => {
+                          setIsSearchFocused(false);
+                          setQuery("");
+                        }}
+                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors"
                       >
-                        <span>Ver todos los resultados en Tienda</span>
-                        <ArrowRight className="size-3" />
-                      </button>
-                    </div>
+                        <div className="relative size-10 rounded-lg overflow-hidden bg-white border border-slate-100 shrink-0">
+                          <Image
+                            src={item.mainImage}
+                            alt={item.name}
+                            fill
+                            className="object-contain p-1"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] font-medium text-[#ff6600] uppercase tracking-wider block">
+                            {item.categoryTag || "FYF Uniformes"}
+                          </span>
+                          <p className="text-xs font-medium text-slate-900 truncate">
+                            {item.name}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                )}
-              </div>
+                  <div className="border-t border-slate-100 p-2 text-center bg-slate-50">
+                    <button
+                      type="button"
+                      onClick={handleSearchSubmit}
+                      className="text-xs font-medium text-slate-800 hover:text-black flex items-center justify-center gap-1 w-full cursor-pointer"
+                    >
+                      <span>Ver todos los resultados en Tienda</span>
+                      <ArrowRight className="size-3" />
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* 3. Right: Action Icons (Login Icon + Cart Icon + Mobile Menu) */}
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-              {/* Mobile Search Trigger Icon */}
-              <div className="lg:hidden relative w-36 sm:w-48">
-                <form onSubmit={handleSearchSubmit}>
-                  <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-full pl-8 pr-3 py-1.5 text-xs"
-                  />
-                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3 text-slate-400" />
-                </form>
-              </div>
+            {/* 3. Right Actions: [Ingresar] [Rastreo] [Carrito] */}
+            <div className="flex items-center gap-3 sm:gap-5 lg:gap-6 shrink-0">
+              {/* Ingresar (Icon + Text) */}
+              <button
+                type="button"
+                onClick={() => setLoginModalOpen(true)}
+                className="hidden sm:flex items-center gap-2 text-slate-700 hover:text-slate-950 text-xs sm:text-[13px] font-medium transition-colors cursor-pointer group px-2 py-1.5 rounded-xl hover:bg-slate-50"
+                title="Mi Cuenta / Iniciar Sesión"
+              >
+                <User className="size-5 text-slate-600 group-hover:text-[#ff6600] transition-colors shrink-0" />
+                <span>Ingresar</span>
+              </button>
+
+              {/* Rastreo (Icon + Text) */}
+              <Link
+                href="/rastreo"
+                className="hidden sm:flex items-center gap-2 text-slate-700 hover:text-slate-950 text-xs sm:text-[13px] font-medium transition-colors group px-2 py-1.5 rounded-xl hover:bg-slate-50"
+                title="Rastreo de Pedidos"
+              >
+                <MapPin className="size-5 text-slate-600 group-hover:text-[#ff6600] transition-colors shrink-0" />
+                <span>Rastreo</span>
+              </Link>
 
               {/* ShoppingBag / Cart Trigger Icon */}
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
                 aria-label="Abrir Carrito"
-                className="relative p-2.5 rounded-full hover:bg-slate-100 text-slate-700 hover:text-slate-950 transition-colors shrink-0"
+                className="relative p-2 rounded-xl text-slate-800 hover:text-black hover:bg-slate-100/80 transition-colors cursor-pointer"
               >
-                <ShoppingBag className="size-5" />
+                <ShoppingBag className="size-5.5" />
                 {totalItems > 0 && (
-                  <span className="absolute top-1 right-1 bg-[#ff6600] text-white text-[10px] font-semibold size-4 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="absolute -top-0.5 -right-0.5 bg-[#ff6600] text-white text-[10px] font-bold size-4.5 rounded-full flex items-center justify-center shadow-xs">
                     {totalItems}
                   </span>
                 )}
               </button>
 
-              {/* User / Login Trigger (ONLY THE ICON, opens login modal) */}
-              <button
-                type="button"
-                onClick={() => setLoginModalOpen(true)}
-                aria-label="Iniciar Sesión"
-                className="p-2.5 rounded-full hover:bg-slate-100 text-slate-700 hover:text-[#ff6600] transition-colors shrink-0"
-                title="Mi Cuenta / Iniciar Sesión"
-              >
-                <User className="size-5" />
-              </button>
-
-              {/* Mobile Menu Toggle */}
+              {/* Mobile Menu Toggle Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Abrir Menú"
-                className="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
+                className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
               </button>
             </div>
           </div>
+
+          {/* Mobile Search Row (visible on small screens below md) */}
+          <div className="md:hidden pb-3 pt-1">
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <div className="relative flex items-center w-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+                <Search className="size-4 text-slate-400 ml-3 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Buscar uniformes, calzado, sku..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="w-full bg-transparent border-none pl-2.5 pr-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                />
+              </div>
+            </form>
+          </div>
         </div>
 
         {/* Mobile Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-100 bg-white px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-150">
+          <div className="md:hidden border-t border-slate-100 bg-white px-5 py-5 space-y-4 animate-in slide-in-from-top-2 duration-150">
             <nav className="flex flex-col gap-3">
-              <Link
-                href="/catalogo"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-sm font-medium text-slate-900 py-1"
-              >
-                <Store className="size-4 text-[#ff6600]" />
-                <span>Tienda Completa</span>
-              </Link>
+              {/* Quick links */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setLoginModalOpen(true);
+                  }}
+                  className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-medium hover:bg-slate-200"
+                >
+                  <User className="size-4 text-[#ff6600]" />
+                  <span>Ingresar</span>
+                </button>
 
-              <div className="pt-2 border-t border-slate-100">
-                <span className="text-xs font-medium text-slate-400 uppercase tracking-wider block mb-2">
-                  Categorías
+                <Link
+                  href="/rastreo"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-medium hover:bg-slate-200"
+                >
+                  <MapPin className="size-4 text-[#ff6600]" />
+                  <span>Rastreo</span>
+                </Link>
+              </div>
+
+              {/* Categorías */}
+              <div className="pt-3 border-t border-slate-100">
+                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                  Líneas de Trabajo
                 </span>
-                <div className="grid grid-cols-1 gap-2 pl-1">
+                <div className="grid grid-cols-1 gap-2">
                   {CATEGORIES_DATA.map((cat) => (
                     <Link
                       key={cat.slug}
                       href={`/catalogo?categoria=${cat.slug}`}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-2 text-xs font-normal text-slate-700 hover:text-black py-1 uppercase tracking-wider"
+                      className="flex items-center gap-3 p-1.5 rounded-lg text-xs font-normal text-slate-800 hover:bg-slate-50 uppercase tracking-wider"
                     >
-                      <div className="relative size-6 rounded-md overflow-hidden bg-slate-100 shrink-0">
+                      <div className="relative size-7 rounded-md overflow-hidden bg-slate-100 shrink-0">
                         <Image src={cat.image} alt={cat.name} fill className="object-cover" />
                       </div>
                       <span>{cat.name}</span>
@@ -297,17 +349,14 @@ export function Navbar() {
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setLoginModalOpen(true);
-                }}
-                className="mt-3 flex items-center justify-center gap-2 bg-black hover:bg-neutral-900 text-white font-medium text-xs py-3 rounded-xl shadow-xs transition-colors"
+              <Link
+                href="/catalogo"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 bg-black hover:bg-neutral-900 text-white font-medium text-xs py-3 rounded-xl shadow-xs transition-colors"
               >
-                <User className="size-4" />
-                <span>Ingresar a Mi Cuenta</span>
-              </button>
+                <Store className="size-4 text-[#ff6600]" />
+                <span>Ver Tienda Completa</span>
+              </Link>
             </nav>
           </div>
         )}
