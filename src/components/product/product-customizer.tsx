@@ -213,7 +213,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               </div>
               <div className="text-right">
                 <span className="text-xs text-slate-600 block">
-                  Total ({quantity} unds): <strong className="text-alina-700 font-bold">{formatCurrency(pricing.itemSubtotal)}</strong>
+                  Total ({quantity} unds): <strong className="text-slate-900 font-bold">{formatCurrency(pricing.itemSubtotal)}</strong>
                 </span>
                 {pricing.savingsTotal > 0 && (
                   <span className="inline-block text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 mt-0.5">
@@ -230,7 +230,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             {availableShapes.length > 0 && (
               <div>
                 <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 sm:mb-2">
-                  1. Forma de la base: <span className="font-semibold text-alina-600 normal-case">{selectedShape}</span>
+                  1. Forma de la base: <span className="font-semibold text-[#FF841D] normal-case">{selectedShape}</span>
                 </label>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {availableShapes.map((shape) => (
@@ -240,7 +240,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                       onClick={() => setSelectedShape(shape)}
                       className={`px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-medium border transition-all ${
                         selectedShape === shape
-                          ? "bg-alina-50 border-alina-600 text-alina-700 font-bold shadow-2xs"
+                          ? "bg-orange-50 border-[#FF841D] text-[#FF841D] font-bold shadow-2xs"
                           : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
                       }`}
                     >
@@ -263,7 +263,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                     onClick={() => setSelectedColor("Blanco")}
                     className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border text-xs font-medium transition-all ${
                       selectedColor === "Blanco"
-                        ? "border-alina-600 bg-white ring-1 ring-alina-600 font-bold shadow-2xs"
+                        ? "border-[#FF841D] bg-white ring-1 ring-[#FF841D] font-bold shadow-2xs"
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     }`}
                   >
@@ -275,7 +275,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                     onClick={() => setSelectedColor("Wengué")}
                     className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border text-xs font-medium transition-all ${
                       selectedColor === "Wengué"
-                        ? "border-alina-600 bg-white ring-1 ring-alina-600 font-bold shadow-2xs"
+                        ? "border-[#FF841D] bg-white ring-1 ring-[#FF841D] font-bold shadow-2xs"
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     }`}
                   >
@@ -286,26 +286,26 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               </div>
             )}
 
-            {/* 3. Selector de Medidas o Medida Personalizada */}
-            <div className="border border-slate-200 rounded-xl p-3 sm:p-4 bg-white shadow-2xs">
-              <div className="flex items-center justify-between mb-2 sm:mb-3">
+            {/* 3. Selector de Medidas o Medida Personalizada (Sin card pesada anidada) */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
                 <label className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
                   <Sliders className="w-3.5 h-3.5 text-[#FF841D]" />
-                  Tallas y Medidas
+                  <span>Tallas y Medidas</span>
                 </label>
                 {product.allowCustomSize && (
-                  <span className="text-[10px] sm:text-[11px] text-alina-600 font-semibold bg-alina-50 px-2 py-0.5 rounded border border-alina-200">
+                  <span className="text-[10px] sm:text-[11px] text-[#FF841D] font-semibold bg-orange-50 px-2 py-0.5 rounded border border-orange-200">
                     A Medida Disp.
                   </span>
                 )}
               </div>
 
               {product.allowCustomSize && (
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 p-1 bg-slate-100 rounded-lg mb-2.5 sm:mb-3">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 p-1 bg-slate-100 rounded-xl mb-2">
                   <button
                     type="button"
                     onClick={() => setIsCustomSize(false)}
-                    className={`py-1 sm:py-1.5 text-xs font-semibold rounded-md transition-all ${
+                    className={`py-1 sm:py-1.5 text-xs font-semibold rounded-lg transition-all ${
                       !isCustomSize
                         ? "bg-white text-slate-900 shadow-xs"
                         : "text-slate-600 hover:text-slate-900"
@@ -316,7 +316,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                   <button
                     type="button"
                     onClick={() => setIsCustomSize(true)}
-                    className={`py-1 sm:py-1.5 text-xs font-semibold rounded-md transition-all ${
+                    className={`py-1 sm:py-1.5 text-xs font-semibold rounded-lg transition-all ${
                       isCustomSize
                         ? "bg-white text-slate-900 shadow-xs"
                         : "text-slate-600 hover:text-slate-900"
@@ -328,19 +328,19 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               )}
 
               {!isCustomSize ? (
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 sm:gap-2">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {product.variants.map((v, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => setSelectedVariantIndex(idx)}
-                      className={`p-1.5 sm:p-2 rounded-lg border text-left transition-all ${
+                      className={`p-2 rounded-xl border text-left transition-all ${
                         selectedVariantIndex === idx
-                          ? "border-alina-600 bg-alina-50/50 ring-1 ring-alina-600 font-bold"
-                          : "border-slate-200 bg-white hover:border-slate-300"
+                          ? "border-[#FF841D] bg-orange-50/40 ring-1 ring-[#FF841D] font-bold shadow-2xs"
+                          : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
                       }`}
                     >
-                      <div className="font-semibold text-[11px] sm:text-xs text-slate-900 truncate">{v.sizeLabel}</div>
+                      <div className="font-semibold text-xs text-slate-900 truncate">{v.sizeLabel}</div>
                       <div className="text-[10px] sm:text-[11px] text-slate-500">{formatCurrency(v.dozenPrice)} doc.</div>
                     </button>
                   ))}
@@ -359,7 +359,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                         max="100"
                         value={customWidth}
                         onChange={(e) => setCustomWidth(Math.max(5, Number(e.target.value)))}
-                        className="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-900 focus:outline-none focus:border-alina-600"
+                        className="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-900 focus:outline-none focus:border-[#FF841D]"
                       />
                     </div>
                     <div>
@@ -370,7 +370,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                         max="100"
                         value={customHeight}
                         onChange={(e) => setCustomHeight(Math.max(5, Number(e.target.value)))}
-                        className="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-900 focus:outline-none focus:border-alina-600"
+                        className="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-900 focus:outline-none focus:border-[#FF841D]"
                       />
                     </div>
                   </div>
@@ -380,7 +380,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
 
             {/* 4. Personalización con Logotipo Bordado / Estampado */}
             {product.hasLogoOption && (
-              <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 sm:p-3.5 flex items-center justify-between">
+              <div className="bg-slate-50/60 border border-slate-200/80 rounded-xl p-2.5 sm:p-3 flex items-center justify-between">
                 <div>
                   <div className="font-display font-semibold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>¿Personalizar con el logo de tu empresa?</span>
@@ -402,20 +402,20 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             )}
           </div>
 
-          {/* Ficha Técnica Detallada y Especificaciones (Siempre abierta) */}
+          {/* Ficha Técnica Detallada y Especificaciones (Ligera y limpia, sin sobrecarga de cards) */}
           <details 
-            className="group rounded-xl border border-slate-200/90 bg-slate-50/70 overflow-hidden text-xs" 
+            className="group border-t border-slate-200 pt-3 text-xs" 
             open={isSpecsOpen}
             onToggle={(e) => setIsSpecsOpen(e.currentTarget.open)}
           >
-            <summary className="p-3 sm:p-4 font-display text-xs font-bold uppercase tracking-wider text-slate-900 cursor-pointer flex items-center justify-between select-none hover:bg-slate-100/60 transition-colors">
+            <summary className="py-2 font-display text-xs font-bold uppercase tracking-wider text-slate-900 cursor-pointer flex items-center justify-between select-none hover:text-[#FF841D] transition-colors">
               <span className="flex items-center gap-2">
                 <FileText className="size-4 text-[#FF841D]" />
                 <span>Ficha Técnica & Especificaciones</span>
               </span>
               <ChevronDown className="size-4 text-slate-500 transition-transform duration-200 group-open:rotate-180" />
             </summary>
-            <div className="px-3 pb-3.5 sm:px-4 sm:pb-4 border-t border-slate-200/60 pt-2.5 sm:pt-3">
+            <div className="pt-2.5 pb-2">
               <ul className="text-xs text-slate-600 space-y-2.5 leading-relaxed">
                 <li className="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-2">
                   <span className="font-semibold text-slate-800 w-32 shrink-0">Material / Tejido:</span>
@@ -458,7 +458,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               </div>
               <div className="mt-1 flex items-center justify-between text-xs text-slate-600 font-medium">
                 <span>Total ({quantity} {quantity === 1 ? "und" : "unds"}):</span>
-                <strong className="text-alina-700 font-bold text-sm">{formatCurrency(pricing.itemSubtotal)}</strong>
+                <strong className="text-slate-950 font-bold text-sm">{formatCurrency(pricing.itemSubtotal)}</strong>
               </div>
 
               {pricing.savingsTotal > 0 && (
@@ -600,7 +600,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               <span className="text-[10px] text-slate-500 font-medium">/und</span>
             </div>
             <div className="text-[11px] text-slate-600 truncate font-semibold mt-0.5">
-              Total: <span className="text-alina-700 font-bold">{formatCurrency(pricing.itemSubtotal)}</span> ({quantity} {quantity === 1 ? "und" : "unds"})
+              Total: <span className="text-slate-950 font-bold">{formatCurrency(pricing.itemSubtotal)}</span> ({quantity} {quantity === 1 ? "und" : "unds"})
             </div>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
@@ -624,7 +624,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             <button
               type="button"
               onClick={handleAddToCart}
-              className="bg-alina-50 border border-alina-600 text-alina-700 font-bold text-xs p-2.5 rounded-xl shadow-xs active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+              className="bg-orange-50 border border-[#FF841D] text-[#FF841D] font-bold text-xs p-2.5 rounded-xl shadow-xs active:scale-95 transition-all flex items-center justify-center cursor-pointer hover:bg-orange-100"
               title="Agregar al carrito"
               aria-label="Agregar al carrito"
             >
@@ -652,7 +652,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
           </div>
           <div className="text-xs text-slate-500 mt-0.5">
             Total ({quantity} unds):{" "}
-            <strong className="text-alina-600 font-bold">{formatCurrency(pricing.itemSubtotal)}</strong>
+            <strong className="text-slate-900 font-bold">{formatCurrency(pricing.itemSubtotal)}</strong>
           </div>
         </div>
 
@@ -668,7 +668,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
       {availableShapes.length > 0 && (
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-            1. Forma: <span className="font-semibold text-alina-600 normal-case">{selectedShape}</span>
+            1. Forma: <span className="font-semibold text-[#FF841D] normal-case">{selectedShape}</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {availableShapes.map((shape) => (
@@ -678,7 +678,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                 onClick={() => setSelectedShape(shape)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
                   selectedShape === shape
-                    ? "bg-alina-50 border-alina-600 text-alina-700 font-bold shadow-2xs"
+                    ? "bg-orange-50 border-[#FF841D] text-[#FF841D] font-bold shadow-2xs"
                     : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
                 }`}
               >
@@ -701,7 +701,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               onClick={() => setSelectedColor("Blanco")}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-medium transition-all ${
                 selectedColor === "Blanco"
-                  ? "border-alina-600 bg-white ring-1 ring-alina-600 font-bold"
+                  ? "border-[#FF841D] bg-white ring-1 ring-[#FF841D] font-bold"
                   : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
               }`}
             >
@@ -713,7 +713,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               onClick={() => setSelectedColor("Wengué")}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-medium transition-all ${
                 selectedColor === "Wengué"
-                  ? "border-alina-600 bg-white ring-1 ring-alina-600 font-bold"
+                  ? "border-[#FF841D] bg-white ring-1 ring-[#FF841D] font-bold"
                   : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
               }`}
             >
@@ -724,15 +724,15 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         </div>
       )}
 
-      {/* 3. Selector de Medidas o Medida Personalizada */}
-      <div className="border border-slate-200 rounded-xl p-4 bg-white shadow-2xs">
-        <div className="flex items-center justify-between mb-3">
+      {/* 3. Selector de Medidas o Medida Personalizada (Sin card exterior pesada) */}
+      <div className="space-y-2.5">
+        <div className="flex items-center justify-between">
           <label className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-            <Sliders className="w-4 h-4 text-alina-600" />
-            3. Medida y Dimensiones
+            <Sliders className="w-4 h-4 text-[#FF841D]" />
+            <span>3. Medida y Dimensiones</span>
           </label>
           {product.allowCustomSize && (
-            <span className="text-[11px] text-alina-600 font-semibold bg-alina-50 px-2 py-0.5 rounded border border-alina-200">
+            <span className="text-[11px] text-[#FF841D] font-semibold bg-orange-50 px-2 py-0.5 rounded border border-orange-200">
               Fabricación a Medida Disponible
             </span>
           )}
@@ -772,10 +772,10 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                 key={idx}
                 type="button"
                 onClick={() => setSelectedVariantIndex(idx)}
-                className={`p-2 rounded-lg border text-left transition-all ${
+                className={`p-2 rounded-xl border text-left transition-all ${
                   selectedVariantIndex === idx
-                    ? "border-alina-600 bg-alina-50/50 ring-1 ring-alina-600"
-                    : "border-slate-200 bg-white hover:border-slate-300"
+                    ? "border-[#FF841D] bg-orange-50/50 ring-1 ring-[#FF841D] font-bold"
+                    : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
                 }`}
               >
                 <div className="font-semibold text-xs text-slate-900 truncate">{v.sizeLabel}</div>
@@ -797,7 +797,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                   max="100"
                   value={customWidth}
                   onChange={(e) => setCustomWidth(Math.max(5, Number(e.target.value)))}
-                  className="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-900 focus:outline-none focus:border-alina-600"
+                  className="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-900 focus:outline-none focus:border-[#FF841D]"
                 />
               </div>
               <div>
@@ -808,7 +808,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                   max="100"
                   value={customHeight}
                   onChange={(e) => setCustomHeight(Math.max(5, Number(e.target.value)))}
-                  className="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-900 focus:outline-none focus:border-alina-600"
+                  className="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-900 focus:outline-none focus:border-[#FF841D]"
                 />
               </div>
             </div>
@@ -934,7 +934,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
           <span>Pagos Seguros Payphone</span>
         </div>
         <div className="flex items-center justify-center gap-1.5">
-          <Truck className="w-3.5 h-3.5 text-alina-600 shrink-0" />
+          <Truck className="w-3.5 h-3.5 text-[#FF841D] shrink-0" />
           <span>Envíos Servientrega / Laar</span>
         </div>
         <div className="flex items-center justify-center gap-1.5">

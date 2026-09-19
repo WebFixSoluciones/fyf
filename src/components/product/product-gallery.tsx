@@ -15,14 +15,14 @@ export function ProductGallery({ mainImage, images = [], productName }: ProductG
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Main Large View */}
-      <div className="w-full aspect-square bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden relative flex items-center justify-center p-8 group">
+      {/* Main Large View - Clean transparent presentation without box/border */}
+      <div className="w-full aspect-square relative flex items-center justify-center group">
         <Image
           src={selectedImage}
           alt={productName}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+          className="object-contain group-hover:scale-105 transition-transform duration-300"
           priority
         />
       </div>
@@ -37,7 +37,7 @@ export function ProductGallery({ mainImage, images = [], productName }: ProductG
               aria-label={`Ver vista ${idx + 1} de ${productName}`}
               className={`w-20 h-20 rounded-xl overflow-hidden border-2 shrink-0 p-1 bg-white transition-all ${
                 selectedImage === img
-                  ? "border-alina-600 ring-2 ring-alina-100"
+                  ? "border-[#FF841D] ring-2 ring-[#FF841D]/20"
                   : "border-slate-200 hover:border-slate-300"
               }`}
             >
