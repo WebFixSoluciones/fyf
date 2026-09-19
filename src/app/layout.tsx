@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { FloatingWhatsapp } from "@/components/layout/floating-whatsapp";
 import { CookieConsent } from "@/components/common/cookie-consent";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.fyf.com.ec"),
@@ -45,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={inter.variable}>
-      <body className="font-sans antialiased bg-white text-slate-900 min-h-screen flex flex-col">
+    <html lang="es" className={GeistSans.variable}>
+      <body className={`${GeistSans.className} font-sans antialiased bg-white text-slate-900 min-h-screen flex flex-col`}>
         <CartProvider>
           {children}
           <CartDrawer />
