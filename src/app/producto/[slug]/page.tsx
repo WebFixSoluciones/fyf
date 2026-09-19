@@ -54,10 +54,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
         />
       </main>
 
-      <section className="mx-auto w-[95%] max-w-[1720px] px-3 sm:px-6 pb-8 sm:pb-12">
-        <ComboBanner />
-      </section>
-
+      {/* 1. Productos Relacionados Primero */}
       {relatedProducts.length > 0 && (
         <section className="border-t border-slate-100 bg-slate-50/60 py-8 sm:py-12">
           <div className="mx-auto w-[95%] max-w-[1720px] px-3 sm:px-6">
@@ -66,7 +63,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Línea de Productos</p>
                 <h2 className="mt-1 font-bold text-2xl text-slate-950">Más productos relacionados</h2>
               </div>
-              <Link href={`/catalogo?categoria=${product.categorySlug}`} className="hidden items-center gap-1 text-xs sm:text-sm font-bold text-slate-900 hover:text-amber-600 sm:flex transition-colors">
+              <Link href={`/catalogo?categoria=${product.categorySlug}`} className="hidden items-center gap-1 text-xs sm:text-sm font-bold text-slate-900 hover:text-[#FF841D] sm:flex transition-colors">
                 <span>Ver categoría</span> <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </div>
@@ -74,6 +71,11 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 2. Banner Rediseñado Abajo antes del Pie de Página */}
+      <section className="mx-auto w-[95%] max-w-[1720px] px-3 sm:px-6 py-8 sm:py-12">
+        <ComboBanner />
+      </section>
 
       <Footer />
     </div>
