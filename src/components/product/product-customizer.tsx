@@ -11,7 +11,6 @@ import {
   ShoppingBag, 
   ShieldCheck, 
   Sparkles,
-  Sliders,
   Truck,
   Clock,
   PackageCheck,
@@ -101,6 +100,32 @@ export function ProductCustomizer({
   const sizeDisplayText = isCustomSize
     ? `${customWidth}x${customHeight} cm (A Medida)`
     : activeVariant.sizeLabel;
+
+  const sizeHeading = useMemo(() => {
+    const isFootwear = 
+      (product as any).categorySlug === 'calzado-industrial' ||
+      /bot[ií]n|zapato|calzado|bota/i.test(product.name);
+
+    if (isFootwear) {
+      return "Talla de calzado";
+    }
+
+    const isNumeric = product.variants?.length > 0 && product.variants.every((v) => /^\d+$/.test(v.sizeLabel.trim()));
+    if (isNumeric) {
+      return "Talla";
+    }
+
+    const isAlpha = product.variants?.length > 0 && product.variants.every((v) => /^(xs|s|m|l|xl|xxl|xxxl|[2-5]?xl)$/i.test(v.sizeLabel.trim()));
+    if (isAlpha) {
+      return "Talla";
+    }
+
+    if (product.variants?.some((v) => v.sizeLabel.toLowerCase().includes('cm') || v.sizeLabel.includes('x'))) {
+      return "Medida";
+    }
+
+    return "Talla";
+  }, [product]);
 
   // Registrar analítica y abrir WhatsApp
   const handleWhatsAppBuy = async () => {
@@ -286,13 +311,17 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               </div>
             )}
 
-            {/* 3. Selector de Medidas o Medida Personalizada (Sin card pesada anidada) */}
+            {/* Selector Minimalista de Tallas / Medidas */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <label className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                  <Sliders className="w-3.5 h-3.5 text-[#FF841D]" />
-                  <span>Tallas y Medidas</span>
-                </label>
+                <div>
+                  <span className="text-xs font-medium text-slate-500">
+                    {sizeHeading}{" "}
+                    <strong className="font-bold text-slate-950 text-sm ml-1">
+                      {activeVariant.sizeLabel}
+                    </strong>
+                  </span>
+                </div>
                 {product.allowCustomSize && (
                   <span className="text-[10px] sm:text-[11px] text-[#FF841D] font-semibold bg-orange-50 px-2 py-0.5 rounded border border-orange-200">
                     A Medida Disp.
@@ -328,22 +357,24 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               )}
 
               {!isCustomSize ? (
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                  {product.variants.map((v, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setSelectedVariantIndex(idx)}
-                      className={`p-2 rounded-xl border text-left transition-all ${
-                        selectedVariantIndex === idx
-                          ? "border-[#FF841D] bg-orange-50/40 ring-1 ring-[#FF841D] font-bold shadow-2xs"
-                          : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
-                      }`}
-                    >
-                      <div className="font-semibold text-xs text-slate-900 truncate">{v.sizeLabel}</div>
-                      <div className="text-[10px] sm:text-[11px] text-slate-500">{formatCurrency(v.dozenPrice)} doc.</div>
-                    </button>
-                  ))}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-1">
+                  {product.variants.map((v, idx) => {
+                    const isSelected = selectedVariantIndex === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setSelectedVariantIndex(idx)}
+                        className={`min-w-[48px] h-12 px-3 rounded-xl border flex items-center justify-center text-sm transition-all cursor-pointer select-none active:scale-95 ${
+                          isSelected
+                            ? "bg-black text-white border-black font-bold shadow-xs"
+                            : "bg-white border-slate-200 text-slate-800 font-medium hover:border-slate-400 hover:text-black hover:bg-slate-50"
+                        }`}
+                      >
+                        {v.sizeLabel}
+                      </button>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="space-y-2.5 pt-1">
@@ -724,15 +755,19 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         </div>
       )}
 
-      {/* 3. Selector de Medidas o Medida Personalizada (Sin card exterior pesada) */}
+      {/* 3. Selector Minimalista de Tallas / Medidas */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-            <Sliders className="w-4 h-4 text-[#FF841D]" />
-            <span>3. Medida y Dimensiones</span>
-          </label>
+          <div>
+            <span className="text-xs font-medium text-slate-500">
+              {sizeHeading}{" "}
+              <strong className="font-bold text-slate-950 text-sm ml-1">
+                {activeVariant.sizeLabel}
+              </strong>
+            </span>
+          </div>
           {product.allowCustomSize && (
-            <span className="text-[11px] text-[#FF841D] font-semibold bg-orange-50 px-2 py-0.5 rounded border border-orange-200">
+            <span className="text-[10px] sm:text-[11px] text-[#FF841D] font-semibold bg-orange-50 px-2 py-0.5 rounded border border-orange-200">
               Fabricación a Medida Disponible
             </span>
           )}
@@ -749,7 +784,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
-              Medidas de Tienda
+              Medidas Estándar
             </button>
             <button
               type="button"
@@ -766,22 +801,24 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         )}
 
         {!isCustomSize ? (
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-            {product.variants.map((v, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setSelectedVariantIndex(idx)}
-                className={`p-2 rounded-xl border text-left transition-all ${
-                  selectedVariantIndex === idx
-                    ? "border-[#FF841D] bg-orange-50/50 ring-1 ring-[#FF841D] font-bold"
-                    : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
-                }`}
-              >
-                <div className="font-semibold text-xs text-slate-900 truncate">{v.sizeLabel}</div>
-                <div className="text-[11px] text-slate-500">{formatCurrency(v.dozenPrice)} doc.</div>
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            {product.variants.map((v, idx) => {
+              const isSelected = selectedVariantIndex === idx;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setSelectedVariantIndex(idx)}
+                  className={`min-w-[46px] h-11 px-3 rounded-lg border flex items-center justify-center text-sm transition-all cursor-pointer select-none active:scale-95 ${
+                    isSelected
+                      ? "bg-black text-white border-black font-bold shadow-xs"
+                      : "bg-white border-slate-200 text-slate-800 font-medium hover:border-slate-400 hover:text-black"
+                  }`}
+                >
+                  {v.sizeLabel}
+                </button>
+              );
+            })}
           </div>
         ) : (
           <div className="space-y-3 pt-1">
