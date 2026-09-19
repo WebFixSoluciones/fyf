@@ -144,17 +144,17 @@ export function HeroSlider() {
   return (
     <section 
       aria-label="Destacados FYF Uniformes" 
-      className="mx-auto w-[95%] max-w-[1720px] pt-4 sm:pt-6"
+      className="w-full bg-neutral-950 border-b border-neutral-800 relative overflow-hidden text-white"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-neutral-950 border border-neutral-800 shadow-2xl text-white">
-        {/* Subtle background ambient light */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#ff6600]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-neutral-800/40 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle background ambient light */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#ff6600]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-neutral-800/40 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Slide Content */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-14 min-h-[520px] lg:min-h-[580px]">
+      {/* Slide Content Container: 95% content width for reading balance */}
+      <div className="mx-auto w-[95%] max-w-[1720px]">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center px-4 py-8 sm:py-12 lg:py-16 min-h-[500px] lg:min-h-[560px]">
           {/* Left Column: Information & Actions */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-5 sm:space-y-6">
             {/* Category / Badge Pill */}
@@ -260,9 +260,11 @@ export function HeroSlider() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Controls Bar: Progress Dots & Arrow Controls */}
-        <div className="relative z-10 border-t border-neutral-800/80 px-6 sm:px-10 py-3.5 bg-neutral-950/70 backdrop-blur-xs flex items-center justify-between">
+      {/* Bottom Controls Bar: Full width border with 95% inner layout */}
+      <div className="relative z-10 border-t border-neutral-800/80 bg-neutral-950/80 backdrop-blur-xs py-3.5">
+        <div className="mx-auto w-[95%] max-w-[1720px] px-4 flex items-center justify-between">
           {/* Slide Indicator Buttons */}
           <div className="flex items-center gap-2">
             {slides.map((s, idx) => (
