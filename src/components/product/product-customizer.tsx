@@ -227,13 +227,12 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             <div className="lg:hidden mt-3 p-3 bg-slate-50 border border-slate-200/90 rounded-xl flex items-center justify-between">
               <div>
                 <span className="text-xs font-medium uppercase text-slate-500 block">
-                  Precio unitario
+                  Precio
                 </span>
                 <div className="flex items-baseline gap-1.5">
                   <span className="font-display font-bold text-2xl text-slate-950">
                     {formatCurrency(pricing.effectiveUnitPrice)}
                   </span>
-                  <span className="text-[11px] text-slate-500 font-medium">/ und</span>
                 </div>
               </div>
               <div className="text-right">
@@ -479,13 +478,12 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             {/* Header del Precio */}
             <div className="border-b border-slate-100 pb-4">
               <span className="text-xs font-medium uppercase text-slate-500 block mb-1">
-                Precio por Unidad
+                Precio
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="font-display font-bold text-3xl text-slate-950 tracking-tight">
                   {formatCurrency(pricing.effectiveUnitPrice)}
                 </span>
-                <span className="text-xs font-medium text-slate-500">/ und</span>
               </div>
               <div className="mt-1 flex items-center justify-between text-xs text-slate-600 font-medium">
                 <span>Total ({quantity} {quantity === 1 ? "und" : "unds"}):</span>
@@ -498,12 +496,6 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                   <span>Ahorras {formatCurrency(pricing.savingsTotal)} por volumen</span>
                 </div>
               )}
-            </div>
-
-            {/* Disponibilidad de Taller */}
-            <div className="flex items-center gap-2 text-xs">
-              <span className="size-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-              <span className="font-semibold text-slate-800">En taller para despacho</span>
             </div>
 
             {/* Selector de Cantidad */}
@@ -628,7 +620,6 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               <span className="font-display font-bold text-lg text-slate-950 tracking-tight leading-none">
                 {formatCurrency(pricing.effectiveUnitPrice)}
               </span>
-              <span className="text-[10px] text-slate-500 font-medium">/und</span>
             </div>
             <div className="text-[11px] text-slate-600 truncate font-semibold mt-0.5">
               Total: <span className="text-slate-950 font-bold">{formatCurrency(pricing.itemSubtotal)}</span> ({quantity} {quantity === 1 ? "und" : "unds"})
@@ -679,7 +670,6 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             <span className="font-display font-bold text-3xl text-slate-900 tracking-tight">
               {formatCurrency(pricing.effectiveUnitPrice)}
             </span>
-            <span className="text-slate-500 text-xs font-medium">/ unidad</span>
           </div>
           <div className="text-xs text-slate-500 mt-0.5">
             Total ({quantity} unds):{" "}
