@@ -9,7 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        foreground: "oklch(var(--foreground) / <alpha-value>)",
+        black: "oklch(var(--foreground) / <alpha-value>)",
         fyf: {
+          black: "oklch(var(--foreground) / <alpha-value>)",
           orange: "#FF841D",
           hover: "#e57212",
           50: "#fff8f1",
