@@ -23,7 +23,7 @@ function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isDirect = searchParams.get("direct") === "true";
-  const { items: cartItems, directBuyItem, clearCart } = useCart();
+  const { items: cartItems, directBuyItem, clearCart, setIsCartOpen } = useCart();
   const [showMobileSummary, setShowMobileSummary] = useState(false);
 
   // Determine active checkout items: if direct buy, take direct item; otherwise full cart
@@ -181,10 +181,21 @@ He seleccionado pago por transferencia/WhatsApp. Por favor envíenme los datos b
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
-      {/* Encabezado Simple y Limpio */}
-      <header className="bg-white border-b border-slate-200/80 py-3.5 px-4 sm:px-8 sticky top-0 z-30">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+      {/* Encabezado Espacioso y Limpio */}
+      <header className="bg-white border-b border-slate-200/80 py-4 px-4 sm:px-8 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          {/* Izquierda: Volver a la tienda (Arriba, negro sólido, icono y texto grandes) */}
+          <Link
+            href="/catalogo"
+            className="inline-flex items-center gap-2.5 text-sm sm:text-base font-semibold text-black hover:opacity-75 transition-all shrink-0 cursor-pointer"
+          >
+            <ArrowLeft className="size-5 shrink-0 stroke-[2.25]" />
+            <span className="hidden sm:inline">Volver a la tienda</span>
+            <span className="sm:hidden">Tienda</span>
+          </Link>
+
+          {/* Centro: Logo FYF */}
+          <Link href="/" className="flex items-center justify-center shrink-0">
             <Image
               src="/logo.jpg"
               alt="FYF Uniformes"
@@ -194,27 +205,32 @@ He seleccionado pago por transferencia/WhatsApp. Por favor envíenme los datos b
               priority
             />
           </Link>
-          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-            <Lock className="size-4 text-emerald-600 shrink-0" />
-            <span className="hidden sm:inline">Checkout Seguro · Encriptado 256-bit</span>
-            <span className="sm:hidden">Pago Seguro</span>
-          </div>
+
+          {/* Derecha: Ver carrito */}
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
+            className="inline-flex items-center gap-2.5 text-sm sm:text-base font-semibold text-black hover:opacity-75 transition-all shrink-0 cursor-pointer"
+          >
+            <span className="hidden sm:inline">Ver carrito</span>
+            <div className="relative flex items-center justify-center">
+              <ShoppingBag className="size-5 shrink-0 stroke-[2]" />
+              {checkoutItems.length > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-black text-white text-[10px] font-bold size-4.5 rounded-full flex items-center justify-center leading-none">
+                  {checkoutItems.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              )}
+            </div>
+          </button>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <form onSubmit={handleSubmitOrder}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Columna Izquierda: Formulario Continuo y Limpio (7 columnas) */}
             <div className="lg:col-span-7 space-y-7">
-              <Link
-                href="/catalogo"
-                className="inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-black transition-colors"
-              >
-                <ArrowLeft className="size-3.5" />
-                <span>Volver a la tienda</span>
-              </Link>
 
               {/* Resumen Móvil Desplegable (visible solo en smartphone/tablet) */}
               <div className="lg:hidden border border-slate-200 rounded-xl overflow-hidden bg-white">
@@ -669,6 +685,10 @@ He seleccionado pago por transferencia/WhatsApp. Por favor envíenme los datos b
 
                 {/* Garantías y Confianza */}
                 <div className="border-t border-slate-200/80 pt-4 space-y-2 text-xs text-slate-500 font-medium">
+                  <div className="flex items-center gap-2">
+                    <Lock className="size-4 text-emerald-600 shrink-0" />
+                    <span>Pago Seguro y Encriptado 256-bit</span>
+                  </div>
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
                     <span>Compra protegida directamente por FYF Uniformes</span>
