@@ -149,7 +149,7 @@ export function CatalogSidebar({
       {/* Subcategorías dinámicas si una categoría está seleccionada */}
       {currentCategorySubcategories.length > 0 && (
         <div className="space-y-2 pt-2 border-t border-neutral-100">
-          <h3 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
+          <h3 className="text-xs font-semibold text-neutral-900 uppercase">
             Tipo de Prenda
           </h3>
           <div className="space-y-1">

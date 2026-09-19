@@ -60,7 +60,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           <div className="mx-auto w-[95%] max-w-[1720px] px-3 sm:px-6">
             <div className="mb-7 flex items-end justify-between gap-4">
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Línea de Productos</p>
+                <p className="text-xs font-normal uppercase text-slate-500">Línea de Productos</p>
                 <h2 className="mt-1 font-bold text-2xl text-slate-950">Más productos relacionados</h2>
               </div>
               <Link href={`/catalogo?categoria=${product.categorySlug}`} className="hidden items-center gap-1 text-xs sm:text-sm font-bold text-slate-900 hover:text-[#FF841D] sm:flex transition-colors">

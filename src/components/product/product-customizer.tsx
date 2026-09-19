@@ -212,7 +212,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
           {/* Cabecera del Producto */}
           <div className="border-b border-slate-100 pb-3 sm:pb-4">
             <div className="flex items-center gap-2">
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-xs font-normal uppercase text-slate-500">
                 {(product as any).categoryTag || "Línea FYF Uniformes"}
               </span>
             </div>
@@ -226,7 +226,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             {/* Micro-resumen de precio visible de inmediato en smartphone */}
             <div className="lg:hidden mt-3 p-3 bg-slate-50 border border-slate-200/90 rounded-xl flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+                <span className="text-xs font-medium uppercase text-slate-500 block">
                   Precio unitario
                 </span>
                 <div className="flex items-baseline gap-1.5">
@@ -254,7 +254,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             {/* 1. Selector de Forma (si aplica) */}
             {availableShapes.length > 0 && (
               <div>
-                <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 sm:mb-2">
+                <label className="block text-xs font-medium uppercase text-slate-700 mb-1.5 sm:mb-2">
                   1. Forma de la base: <span className="font-semibold text-[#FF841D] normal-case">{selectedShape}</span>
                 </label>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -279,7 +279,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             {/* 2. Selector de Color / Acabado */}
             {product.material?.includes("MDF") && (
               <div>
-                <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 sm:mb-2">
+                <label className="block text-xs font-medium uppercase text-slate-700 mb-1.5 sm:mb-2">
                   2. Acabado / Color: <span className="font-semibold text-slate-900 normal-case">{selectedColor}</span>
                 </label>
                 <div className="flex gap-2 sm:gap-3">
@@ -439,7 +439,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             open={isSpecsOpen}
             onToggle={(e) => setIsSpecsOpen(e.currentTarget.open)}
           >
-            <summary className="py-2 font-display text-xs font-bold uppercase tracking-wider text-slate-900 cursor-pointer flex items-center justify-between select-none hover:text-[#FF841D] transition-colors">
+            <summary className="py-2 font-display text-xs font-semibold uppercase text-slate-900 cursor-pointer flex items-center justify-between select-none hover:text-[#FF841D] transition-colors">
               <span className="flex items-center gap-2">
                 <FileText className="size-4 text-[#FF841D]" />
                 <span>Ficha Técnica & Especificaciones</span>
@@ -478,7 +478,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
           <div className="rounded-2xl border-2 border-slate-200/90 bg-white p-5 shadow-lg space-y-5">
             {/* Header del Precio */}
             <div className="border-b border-slate-100 pb-4">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
+              <span className="text-xs font-medium uppercase text-slate-500 block mb-1">
                 Precio por Unidad
               </span>
               <div className="flex items-baseline gap-2">
@@ -508,7 +508,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
 
             {/* Selector de Cantidad */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-medium uppercase text-slate-700 mb-2">
                 Cantidad:
               </label>
               <div className="flex items-center border border-slate-300 rounded-xl bg-white overflow-hidden shadow-2xs">
@@ -698,7 +698,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
       {/* 1. Selector de Forma (si aplica) */}
       {availableShapes.length > 0 && (
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+          <label className="block text-xs font-medium uppercase text-slate-700 mb-2">
             1. Forma: <span className="font-semibold text-[#FF841D] normal-case">{selectedShape}</span>
           </label>
           <div className="flex flex-wrap gap-2">
@@ -723,7 +723,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
       {/* 2. Selector de Color / Acabado */}
       {product.material?.includes("MDF") && (
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+          <label className="block text-xs font-medium uppercase text-slate-700 mb-2">
             2. Color del MDF: <span className="font-semibold text-slate-900 normal-case">{selectedColor}</span>
           </label>
           <div className="flex gap-3">
@@ -878,7 +878,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
 
       {/* 5. Selector de Cantidad */}
       <div className="flex items-center gap-4">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-700">Cantidad:</label>
+        <label className="text-xs font-medium uppercase text-slate-700">Cantidad:</label>
         <div className="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden">
           <button
             type="button"

@@ -22,18 +22,18 @@ export function QuickViewModal() {
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <div className="md:col-span-5 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center p-6 relative aspect-square">
+          <div className="md:col-span-5 bg-white flex items-center justify-center p-4 relative aspect-square">
             <Image
               src={quickViewProduct.mainImage || "/logo.jpg"}
               alt={quickViewProduct.name}
               fill
-              className="object-contain p-4"
+              className="object-contain p-2"
             />
           </div>
 
           <div className="md:col-span-7">
             <div className="mb-3">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-alina-600">
+              <span className="text-xs font-normal uppercase text-slate-500">
                 Vista Rápida
               </span>
               <h3 className="font-display font-semibold text-xl text-slate-900 mt-0.5">

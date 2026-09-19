@@ -37,16 +37,21 @@ export function ProductGrid({ products, className }: ProductGridProps) {
             </div>
 
             {/* Product Meta */}
-            <div className="pt-3 flex flex-col">
-              {/* Category Tag (High Contrast) */}
-              <span className="text-[10px] sm:text-[11px] font-medium tracking-wider text-[#FF841D] uppercase">
+            <div className="pt-2.5 flex flex-col">
+              {/* Category Tag (Minimalist Saleor Style) */}
+              <span className="text-xs font-normal uppercase text-slate-500">
                 {product.categoryTag || product.categorySlug?.replace("-", " ")}
               </span>
 
               {/* Product Title */}
-              <h3 className="mt-1 text-xs sm:text-[13px] font-medium text-slate-900 leading-snug line-clamp-3 group-hover:text-[#FF841D] transition-colors">
+              <h3 className="mt-1 text-sm font-medium text-slate-900 leading-snug line-clamp-2 group-hover:text-[#FF841D] transition-colors">
                 {product.name}
               </h3>
+
+              {/* Price */}
+              <p className="mt-1 text-sm font-bold text-slate-950">
+                ${(product.variants?.[0]?.unitPrice ?? 45).toFixed(2)}
+              </p>
             </div>
           </Link>
         );

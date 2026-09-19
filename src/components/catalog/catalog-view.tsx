@@ -347,7 +347,7 @@ export function CatalogView({
           {/* CHIPS DE FILTROS ACTIVOS */}
           {activeFilters.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1">
+              <span className="text-xs font-medium text-slate-500 uppercase mr-1">
                 Filtros activos:
               </span>
               {activeFilters.map((chip, idx) => (
@@ -355,10 +355,10 @@ export function CatalogView({
                   key={idx}
                   type="button"
                   onClick={() => handleFilterChange({ [chip.key]: chip.value })}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 hover:bg-alina-50 border border-slate-200 hover:border-alina-300 px-3 py-1 text-xs font-semibold text-slate-800 hover:text-alina-700 transition-colors group shadow-2xs"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 px-3 py-1 text-xs font-medium text-slate-800 hover:text-[#FF841D] transition-colors group shadow-2xs"
                 >
                   <span>{chip.label}</span>
-                  <X className="size-3 text-slate-400 group-hover:text-alina-600" />
+                  <X className="size-3 text-slate-400 group-hover:text-[#FF841D]" />
                 </button>
               ))}
 

@@ -97,7 +97,7 @@ export function Navbar() {
                   <span className="text-base sm:text-lg font-semibold tracking-tight text-slate-950 uppercase leading-none font-sans">
                     FYF UNIFORMES
                   </span>
-                  <span className="text-[10px] sm:text-[11px] font-medium tracking-wider text-slate-500 uppercase mt-1">
+                  <span className="text-[10px] sm:text-[11px] font-medium text-slate-600 uppercase mt-0.5">
                     Ropa de Trabajo
                   </span>
                 </div>
@@ -115,7 +115,7 @@ export function Navbar() {
                   <span>Categorías</span>
                   <ChevronDown
                     className={`size-3.5 text-slate-500 transition-transform duration-200 ${
-                      megaMenuOpen ? "rotate-180" : ""
+                      megaMenuOpen ? "rotate-180 text-[#FF841D]" : ""
                     }`}
                   />
                 </button>
@@ -156,7 +156,7 @@ export function Navbar() {
                             />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-900 group-hover:text-[#FF841D] transition-colors block leading-snug">
+                            <span className="text-xs font-medium uppercase text-slate-900 group-hover:text-[#FF841D] transition-colors block leading-snug">
                               {cat.name}
                             </span>
                           </div>
@@ -242,7 +242,7 @@ export function Navbar() {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <span className="text-[10px] font-medium text-[#FF841D] uppercase tracking-wider block">
+                          <span className="text-[11px] font-normal text-slate-500 uppercase block">
                             {item.categoryTag || "FYF Uniformes"}
                           </span>
                           <p className="text-xs font-medium text-slate-900 truncate">
@@ -363,7 +363,7 @@ export function Navbar() {
 
               {/* Categorías */}
               <div className="pt-3 border-t border-slate-100">
-                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                <span className="text-xs font-medium text-slate-500 uppercase block mb-2">
                   Líneas de Trabajo
                 </span>
                 <div className="grid grid-cols-1 gap-2">
@@ -372,7 +372,7 @@ export function Navbar() {
                       key={cat.slug}
                       href={`/catalogo?categoria=${cat.slug}`}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-3 p-1.5 rounded-lg text-xs font-normal text-slate-800 hover:bg-slate-50 uppercase tracking-wider"
+                      className="flex items-center gap-3 p-1.5 rounded-lg text-xs font-normal text-slate-800 hover:bg-slate-50 uppercase"
                     >
                       <div className="relative size-7 rounded-md overflow-hidden bg-slate-100 shrink-0">
                         <Image src={cat.image} alt={cat.name} fill className="object-cover" />

@@ -33,7 +33,7 @@ export function CategoryGrid() {
               />
             </div>
 
-            <h3 className="mt-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-wider text-slate-900 group-hover:text-[#FF841D] transition-colors leading-snug line-clamp-2">
+            <h3 className="mt-2.5 text-xs font-medium uppercase text-slate-900 group-hover:text-[#FF841D] transition-colors leading-snug line-clamp-2">
               {cat.name}
             </h3>
           </Link>

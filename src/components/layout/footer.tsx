@@ -82,7 +82,7 @@ export function Footer() {
       <div className="border-b border-neutral-800 py-8 bg-black">
         <div className="mx-auto w-[95%] max-w-[1720px] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="max-w-md text-center md:text-left">
-            <span className="text-[#FF841D] text-[11px] font-medium uppercase tracking-wider block mb-1">
+            <span className="text-[#FF841D] text-xs font-medium uppercase block mb-1">
               Boletín Corporativo & Ofertas
             </span>
             <h3 className="text-white text-base sm:text-lg font-medium tracking-tight">
@@ -167,7 +167,7 @@ export function Footer() {
 
           {/* Categorías Principales */}
           <div>
-            <h4 className="text-white font-medium text-xs uppercase tracking-wider mb-3.5 text-neutral-200">
+            <h4 className="text-white font-medium text-xs uppercase mb-3.5 text-neutral-200">
               Categorías
             </h4>
             <ul className="space-y-2 text-[11px]">
@@ -175,7 +175,7 @@ export function Footer() {
                 <li key={cat.slug}>
                   <Link
                     href={`/catalogo?categoria=${cat.slug}`}
-                    className="text-neutral-400 hover:text-white transition-colors block uppercase tracking-wider"
+                    className="text-neutral-400 hover:text-white transition-colors block uppercase"
                   >
                     {cat.name}
                   </Link>
@@ -186,7 +186,7 @@ export function Footer() {
 
           {/* Atención al Cliente */}
           <div>
-            <h4 className="text-white font-medium text-xs uppercase tracking-wider mb-3.5 text-neutral-200">
+            <h4 className="text-white font-medium text-xs uppercase mb-3.5 text-neutral-200">
               Atención al Cliente
             </h4>
             <ul className="space-y-2 text-[11px]">
@@ -225,7 +225,7 @@ export function Footer() {
 
           {/* Tienda y Enlaces */}
           <div>
-            <h4 className="text-white font-medium text-xs uppercase tracking-wider mb-3.5 text-neutral-200">
+            <h4 className="text-white font-medium text-xs uppercase mb-3.5 text-neutral-200">
               Tienda Virtual
             </h4>
             <ul className="space-y-2 text-[11px]">
