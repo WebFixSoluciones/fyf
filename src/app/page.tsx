@@ -4,6 +4,7 @@ import React from "react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ProductGrid } from "@/components/catalog/product-grid";
+import { HeroSlider } from "@/components/home/hero-slider";
 import { CategoryGrid } from "@/components/home/category-grid";
 import { FeaturesSection } from "@/components/home/features-section";
 import { ContactSection } from "@/components/home/contact-section";
@@ -22,6 +23,9 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1 w-full">
+        {/* Hero Section con 3 Sliders */}
+        <HeroSlider />
+
         {/* 1. Categorías: Explora Nuestras Líneas de Uniformes y Ropa de Trabajo (Imagen 2) */}
         <CategoryGrid />
 
