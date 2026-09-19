@@ -112,7 +112,7 @@ export function CatalogSidebar({
 
       {/* Categorías Principales */}
       <div className="space-y-2">
-        <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+        <h3 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
           Líneas de Trabajo
         </h3>
         <div className="space-y-1">
@@ -120,14 +120,14 @@ export function CatalogSidebar({
             type="button"
             onClick={() => onFilterChange({ categoria: undefined, subcategoria: undefined })}
             className={cn(
-              "w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-left transition-colors",
+              "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-left transition-all",
               !filters.categoria
-                ? "bg-slate-900 text-white font-bold"
-                : "text-slate-700 hover:bg-slate-100"
+                ? "bg-black text-white font-semibold shadow-xs"
+                : "text-neutral-700 hover:bg-neutral-100"
             )}
           >
             <span>Todas las Líneas</span>
-            <span className={cn("text-[10px]", !filters.categoria ? "text-amber-400" : "text-slate-400")}>
+            <span className={cn("text-[11px]", !filters.categoria ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
               {totalProductsCount}
             </span>
           </button>
@@ -142,14 +142,14 @@ export function CatalogSidebar({
                 type="button"
                 onClick={() => onFilterChange({ categoria: cat.slug, subcategoria: undefined })}
                 className={cn(
-                  "w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-left transition-colors",
+                  "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-left transition-all",
                   isSelected
-                    ? "bg-slate-900 text-white font-bold"
-                    : "text-slate-700 hover:bg-slate-100"
+                    ? "bg-black text-white font-semibold shadow-xs"
+                    : "text-neutral-700 hover:bg-neutral-100"
                 )}
               >
                 <span className="truncate pr-2">{cat.name}</span>
-                <span className={cn("text-[10px]", isSelected ? "text-amber-400" : "text-slate-400")}>
+                <span className={cn("text-[11px]", isSelected ? "text-[#ff6600] font-semibold" : "text-neutral-400")}>
                   {count}
                 </span>
               </button>
@@ -160,8 +160,8 @@ export function CatalogSidebar({
 
       {/* Subcategorías dinámicas si una categoría está seleccionada */}
       {currentCategorySubcategories.length > 0 && (
-        <div className="space-y-2 pt-2 border-t border-slate-100">
-          <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+        <div className="space-y-2 pt-2 border-t border-neutral-100">
+          <h3 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
             Tipo de Prenda
           </h3>
           <div className="space-y-1">
@@ -173,14 +173,14 @@ export function CatalogSidebar({
                   type="button"
                   onClick={() => onFilterChange({ subcategoria: isSelected ? undefined : sub.id })}
                   className={cn(
-                    "w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs text-left transition-colors",
+                    "w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs text-left transition-colors",
                     isSelected
-                      ? "bg-amber-50 text-amber-900 font-bold border border-amber-200"
-                      : "text-slate-600 hover:bg-slate-50"
+                      ? "bg-orange-50 text-orange-950 font-medium border border-orange-200"
+                      : "text-neutral-600 hover:bg-neutral-50"
                   )}
                 >
                   <span className="truncate">{sub.label}</span>
-                  {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
+                  {isSelected && <Check className="w-3.5 h-3.5 text-[#ff6600] shrink-0 ml-1" />}
                 </button>
               );
             })}
@@ -189,8 +189,8 @@ export function CatalogSidebar({
       )}
 
       {/* Rangos de Precio */}
-      <div className="space-y-2 pt-2 border-t border-slate-100">
-        <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+      <div className="space-y-2 pt-2 border-t border-neutral-100">
+        <h3 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
           Rango Estimado
         </h3>
         <div className="space-y-1">
@@ -202,14 +202,14 @@ export function CatalogSidebar({
                 type="button"
                 onClick={() => onFilterChange({ precioRango: range.id })}
                 className={cn(
-                  "w-full flex flex-col text-left px-3 py-1.5 rounded-lg transition-colors text-xs",
+                  "w-full flex flex-col text-left px-3.5 py-2 rounded-xl transition-colors text-xs",
                   isSelected
-                    ? "bg-slate-100 text-slate-950 font-bold"
-                    : "text-slate-600 hover:bg-slate-50"
+                    ? "bg-neutral-100 text-neutral-950 font-semibold"
+                    : "text-neutral-600 hover:bg-neutral-50"
                 )}
               >
                 <span>{range.label}</span>
-                {range.desc && <span className="text-[10px] text-slate-400 font-normal">{range.desc}</span>}
+                {range.desc && <span className="text-[10px] text-neutral-400 font-normal">{range.desc}</span>}
               </button>
             );
           })}
@@ -217,18 +217,18 @@ export function CatalogSidebar({
       </div>
 
       {/* Corporate Quotation Box */}
-      <div className="mt-auto pt-4 border-t border-slate-200">
-        <div className="rounded-2xl bg-slate-50 border border-slate-200/80 p-4 text-center">
-          <ShieldCheck className="size-6 text-amber-600 mx-auto mb-2" />
-          <h4 className="text-xs font-bold text-slate-900 uppercase">¿Cotización al por Mayor?</h4>
-          <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
-            Atendemos requerimientos corporativos e industriales con bordado personalizado.
+      <div className="mt-auto pt-4 border-t border-neutral-200">
+        <div className="rounded-2xl bg-neutral-50 border border-neutral-200/80 p-4 text-center">
+          <ShieldCheck className="size-6 text-[#ff6600] mx-auto mb-2" />
+          <h4 className="text-xs font-semibold text-neutral-900 uppercase">¿Cotización al por Mayor?</h4>
+          <p className="text-[11px] text-neutral-500 mt-1 leading-relaxed">
+            Atendemos requerimientos corporativos e industriales con confección y bordado a medida.
           </p>
           <a
             href="https://wa.me/593993358701?text=Hola%20FYF%20Uniformes,%20deseo%20una%20cotización%20corporativa"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center justify-center gap-1.5 w-full rounded-xl bg-slate-900 hover:bg-black text-white px-3 py-2 text-xs font-bold transition-colors"
+            className="mt-3 inline-flex items-center justify-center gap-1.5 w-full rounded-xl bg-black hover:bg-neutral-900 text-white px-3 py-2 text-xs font-medium transition-colors"
           >
             <MessageCircle className="size-3.5" />
             <span>Consultar Asesor</span>

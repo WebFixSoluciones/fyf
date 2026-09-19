@@ -257,29 +257,29 @@ export function CatalogView({
       {/* HEADER PRINCIPAL DE TIENDA COMPLETA */}
       <div className="mb-6 border-b border-slate-200/80 pb-4">
         <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-          <h1 className="font-display font-semibold text-lg sm:text-xl text-slate-900 tracking-tight shrink-0">
-            {currentCategory ? currentCategory.name : "Catálogo & Tienda de Insumos"}
+          <h1 className="font-display font-semibold text-lg sm:text-xl text-neutral-900 tracking-tight shrink-0">
+            {currentCategory ? currentCategory.name : "Catálogo & Tienda de Uniformes"}
           </h1>
-          <span className="hidden sm:inline text-slate-300 font-normal select-none">—</span>
-          <p className="text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+          <span className="hidden sm:inline text-neutral-300 font-normal select-none">—</span>
+          <p className="text-xs sm:text-sm text-neutral-500 font-normal leading-relaxed">
             {currentCategory
               ? currentCategory.description
-              : "Bases de torta en MDF personalizadas con corte láser, toppers en acrílico espejado, cajas de acetato cristal 360° y complementos para pastelerías de todo el Ecuador."}
+              : "Catálogo oficial de uniformes corporativos, ropa de trabajo, ropa térmica para cuartos fríos, overoles ignífugos y calzado industrial en Ecuador."}
           </p>
         </div>
       </div>
 
       {/* BARRA DE CONTROL PARA MÓVILES (BOTÓN FILTRAR + ORDENAR) */}
-      <div className="lg:hidden flex items-center justify-between gap-3 mb-6 p-3 rounded-xl bg-slate-50 border border-slate-200">
+      <div className="lg:hidden flex items-center justify-between gap-3 mb-6 p-3 rounded-xl bg-neutral-50 border border-neutral-200">
         <button
           type="button"
           onClick={() => setIsMobileDrawerOpen(true)}
-          className="inline-flex items-center gap-2 rounded-lg bg-white border border-slate-300 px-3.5 py-2 text-xs font-bold text-slate-800 shadow-2xs hover:bg-slate-50 transition-colors"
+          className="inline-flex items-center gap-2 rounded-lg bg-white border border-neutral-300 px-3.5 py-2 text-xs font-semibold text-neutral-800 shadow-2xs hover:bg-neutral-50 transition-colors"
         >
-          <SlidersHorizontal className="size-4 text-alina-600" />
+          <SlidersHorizontal className="size-4 text-[#ff6600]" />
           <span>Filtros y Categorías</span>
           {activeFilters.length > 0 && (
-            <span className="flex size-5 items-center justify-center rounded-full bg-alina-600 text-[10px] font-bold text-white">
+            <span className="flex size-5 items-center justify-center rounded-full bg-[#ff6600] text-[10px] font-bold text-white">
               {activeFilters.length}
             </span>
           )}
@@ -290,7 +290,7 @@ export function CatalogView({
           <select
             value={filters.orden || "relevancia"}
             onChange={(e) => handleFilterChange({ orden: e.target.value })}
-            className="rounded-lg border border-slate-300 bg-white py-2 px-2.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-alina-600 shadow-2xs"
+            className="rounded-lg border border-neutral-300 bg-white py-2 px-2.5 text-xs font-medium text-neutral-800 focus:outline-none focus:border-[#ff6600] shadow-2xs"
           >
             <option value="relevancia">Relevancia</option>
             <option value="precio-menor">Menor Precio</option>
@@ -300,11 +300,11 @@ export function CatalogView({
         </div>
       </div>
 
-      {/* LAYOUT PRINCIPAL: BARRA LATERAL (COLUMNA IZQUIERDA COMPACTA) + PRODUCTOS (COLUMNA DERECHA) */}
+      {/* LAYOUT PRINCIPAL: BARRA LATERAL (AMPLIADA) + PRODUCTOS (COLUMNA DERECHA) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
-        {/* BARRA LATERAL EN ESCRITORIO (REDUCIDA: 2-3 COLS) */}
-        <div className="hidden lg:block lg:col-span-3 xl:col-span-2 2xl:col-span-2 lg:sticky lg:top-24">
-          <div className="rounded-2xl border border-slate-200/90 bg-white p-3.5 sm:p-4 shadow-sm">
+        {/* BARRA LATERAL EN ESCRITORIO (MÁS ANCHA: 4 COLS EN LG, 3 COLS EN XL/2XL) */}
+        <div className="hidden lg:block lg:col-span-4 xl:col-span-3 2xl:col-span-3 lg:sticky lg:top-24">
+          <div className="rounded-2xl border border-neutral-200/90 bg-white p-4 sm:p-5 shadow-xs">
             <CatalogSidebar
               filters={filters}
               onFilterChange={handleFilterChange}
@@ -316,25 +316,25 @@ export function CatalogView({
           </div>
         </div>
 
-        {/* COLUMNA DERECHA: BARRA SUPERIOR DE RESULTADOS + PRODUCTOS (AMPLIADA: 9-10 COLS) */}
-        <div className="lg:col-span-9 xl:col-span-10 2xl:col-span-10 space-y-6">
+        {/* COLUMNA DERECHA: BARRA SUPERIOR DE RESULTADOS + PRODUCTOS */}
+        <div className="lg:col-span-8 xl:col-span-9 2xl:col-span-9 space-y-6">
           {/* Barra Superior de Control de la Cuadrícula */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-3.5 rounded-2xl border border-slate-200/80 bg-slate-50/60">
-            <div className="text-xs font-semibold text-slate-600">
-              Mostrando <strong className="text-slate-900 font-bold">{sortedProducts.length}</strong> de{" "}
+          <div className="flex flex-wrap items-center justify-between gap-4 p-3.5 rounded-2xl border border-neutral-200/80 bg-neutral-50/60">
+            <div className="text-xs font-medium text-neutral-600">
+              Mostrando <strong className="text-neutral-900 font-semibold">{sortedProducts.length}</strong> de{" "}
               {products.length} productos
             </div>
 
             {/* Selector de Ordenamiento */}
-            <div className="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-600">
-              <span className="flex items-center gap-1 font-semibold text-slate-700">
-                <ArrowUpDown className="size-3.5 text-slate-500" />
+            <div className="hidden sm:flex items-center gap-2 text-xs font-medium text-neutral-600">
+              <span className="flex items-center gap-1 font-medium text-neutral-700">
+                <ArrowUpDown className="size-3.5 text-neutral-500" />
                 Ordenar por:
               </span>
               <select
                 value={filters.orden || "relevancia"}
                 onChange={(e) => handleFilterChange({ orden: e.target.value })}
-                className="rounded-xl border border-slate-300 bg-white py-1.5 px-3 text-xs font-semibold text-slate-800 focus:outline-none focus:border-alina-600 shadow-2xs cursor-pointer"
+                className="rounded-xl border border-neutral-300 bg-white py-1.5 px-3 text-xs font-medium text-neutral-800 focus:outline-none focus:border-[#ff6600] shadow-2xs cursor-pointer"
               >
                 <option value="relevancia">Más destacados</option>
                 <option value="precio-menor">Menor precio primero</option>
@@ -406,12 +406,12 @@ export function CatalogView({
         <div className="fixed inset-0 z-50 lg:hidden flex">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity"
             onClick={() => setIsMobileDrawerOpen(false)}
           />
 
           {/* Drawer Sheet */}
-          <div className="relative ml-0 flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white p-5 shadow-2xl z-10">
+          <div className="relative ml-0 flex h-full w-full max-w-sm flex-col overflow-y-auto bg-white p-5 shadow-2xl z-10">
             <CatalogSidebar
               filters={filters}
               onFilterChange={(p) => {
@@ -427,11 +427,11 @@ export function CatalogView({
               onCloseMobile={() => setIsMobileDrawerOpen(false)}
             />
 
-            <div className="mt-8 pt-4 border-t border-slate-200">
+            <div className="mt-8 pt-4 border-t border-neutral-200">
               <button
                 type="button"
                 onClick={() => setIsMobileDrawerOpen(false)}
-                className="w-full rounded-xl bg-slate-900 py-3 text-center text-xs font-bold text-white shadow-md"
+                className="w-full rounded-xl bg-black hover:bg-neutral-900 py-3 text-center text-xs font-semibold text-white shadow-md transition-colors"
               >
                 Ver {sortedProducts.length} Resultados
               </button>

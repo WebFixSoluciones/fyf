@@ -116,7 +116,7 @@ export function Navbar() {
                 </button>
 
                 {megaMenuOpen && (
-                  <div className="absolute top-full left-0 mt-3 w-80 rounded-2xl bg-white border border-slate-200 shadow-xl p-3 grid grid-cols-1 gap-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="absolute top-full left-0 mt-3 w-96 rounded-2xl bg-white border border-neutral-200 shadow-xl p-3.5 grid grid-cols-1 gap-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                     <div className="px-2 py-1 text-[11px] font-medium text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1">
                       Todas las Categorías
                     </div>
