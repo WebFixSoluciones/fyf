@@ -197,24 +197,24 @@ export function Navbar() {
               </Link>
             </div>
 
-            {/* 2. Center: Wide Search Bar */}
+            {/* 2. Center: Search Bar */}
             <div
-              className="hidden md:flex items-center flex-1 max-w-2xl mx-3 lg:mx-6 relative"
+              className="hidden md:flex items-center flex-1 max-w-xl mx-3 lg:mx-6 relative"
               ref={searchContainerRef}
             >
               <form onSubmit={handleSearchSubmit} className="relative w-full">
-                <div className="relative flex items-center w-full bg-slate-50 hover:bg-slate-100/70 focus-within:bg-white border border-slate-200/90 focus-within:border-[#FF841D] rounded-2xl transition-all focus-within:ring-2 focus-within:ring-[#FF841D]/10 overflow-hidden">
-                  <Search className="size-4 text-slate-400 ml-4 shrink-0 pointer-events-none" />
+                <div className="relative flex items-center w-full h-10 bg-[#f3f3f3] hover:bg-[#ededed] focus-within:bg-white focus-within:ring-1 focus-within:ring-neutral-300 rounded-xl transition-all overflow-hidden px-3.5 gap-2.5">
+                  <Search className="size-4 text-[#555555] shrink-0 pointer-events-none" strokeWidth={1.75} />
                   <input
                     type="text"
-                    placeholder="Buscar uniformes, overoles, ropa térmica, calzado, sku..."
+                    placeholder="Buscar productos..."
                     value={query}
                     onChange={(e) => {
                       setQuery(e.target.value);
                       setIsSearchFocused(true);
                     }}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="w-full bg-transparent border-none pl-3 pr-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                    className="w-full bg-transparent border-none p-0 text-sm text-black placeholder:text-[#555555] focus:outline-none"
                   />
                 </div>
               </form>
@@ -319,14 +319,14 @@ export function Navbar() {
           {/* Mobile Search Row (visible on small screens below md) */}
           <div className="md:hidden pb-3 pt-1">
             <form onSubmit={handleSearchSubmit} className="relative">
-              <div className="relative flex items-center w-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-                <Search className="size-4 text-slate-400 ml-3 shrink-0" />
+              <div className="relative flex items-center w-full h-10 bg-[#f3f3f3] hover:bg-[#ededed] focus-within:bg-white focus-within:ring-1 focus-within:ring-neutral-300 rounded-xl transition-all overflow-hidden px-3.5 gap-2.5">
+                <Search className="size-4 text-[#555555] shrink-0 pointer-events-none" strokeWidth={1.75} />
                 <input
                   type="text"
-                  placeholder="Buscar uniformes, calzado, sku..."
+                  placeholder="Buscar productos..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full bg-transparent border-none pl-2.5 pr-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                  className="w-full bg-transparent border-none p-0 text-sm text-black placeholder:text-[#555555] focus:outline-none"
                 />
               </div>
             </form>
