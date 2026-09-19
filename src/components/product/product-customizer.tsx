@@ -474,7 +474,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
 
         {/* COLUMNA 3: Precios, Cantidad, Botones y Beneficios de Envío (3 cols) */}
         <div className="lg:col-span-3 xl:col-span-3 lg:sticky lg:top-24">
-          <div className="rounded-2xl border-2 border-slate-200/90 bg-white p-5 shadow-lg space-y-5">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5">
             {/* Header del Precio */}
             <div className="border-b border-slate-100 pb-4">
               <span className="text-xs font-medium uppercase text-slate-500 block mb-1">
@@ -485,7 +485,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                   {formatCurrency(pricing.effectiveUnitPrice)}
                 </span>
               </div>
-              <div className="mt-1 flex items-center justify-between text-xs text-slate-600 font-medium">
+              <div className="mt-1.5 flex items-center justify-between text-xs text-slate-600 font-medium">
                 <span>Total ({quantity} {quantity === 1 ? "und" : "unds"}):</span>
                 <strong className="text-slate-950 font-bold text-sm">{formatCurrency(pricing.itemSubtotal)}</strong>
               </div>
@@ -498,44 +498,48 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               )}
             </div>
 
-            {/* Selector de Cantidad */}
-            <div>
-              <label className="block text-xs font-medium uppercase text-slate-700 mb-2">
-                Cantidad:
+            {/* Selector de Cantidad y Accesos Rápidos */}
+            <div className="space-y-2">
+              <label className="block text-xs font-medium uppercase text-slate-500">
+                Cantidad
               </label>
-              <div className="flex items-center border border-slate-300 rounded-xl bg-white overflow-hidden shadow-2xs">
+              
+              {/* Stepper numérico minimalista */}
+              <div className="flex items-center h-12 border border-slate-200 rounded-xl bg-white overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3.5 py-2 text-slate-600 hover:bg-slate-100 font-bold transition-colors"
+                  className="w-14 h-full flex items-center justify-center text-slate-500 hover:text-black hover:bg-slate-50 text-xl font-medium transition-colors cursor-pointer select-none"
+                  aria-label="Reducir cantidad"
                 >
-                  -
+                  −
                 </button>
                 <input
                   type="number"
                   min="1"
                   value={quantity}
                   onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-full text-center font-bold text-sm text-slate-900 border-none focus:outline-none"
+                  className="w-full text-center font-bold text-base text-black border-none focus:outline-none bg-transparent"
                 />
                 <button
                   type="button"
                   onClick={() => setQuantity(quantity + 1)}
-                  className="px-3.5 py-2 text-slate-600 hover:bg-slate-100 font-bold transition-colors"
+                  className="w-14 h-full flex items-center justify-center text-slate-500 hover:text-black hover:bg-slate-50 text-xl font-medium transition-colors cursor-pointer select-none"
+                  aria-label="Aumentar cantidad"
                 >
                   +
                 </button>
               </div>
 
-              {/* Accesos directos: 1 Docena & 50+ Mayorista */}
-              <div className="grid grid-cols-2 gap-1.5 mt-2">
+              {/* Accesos rápidos de volumen: minimalistas, distribuidos y sin ruido */}
+              <div className="grid grid-cols-2 gap-2 pt-0.5">
                 <button
                   type="button"
                   onClick={() => setQuantity(12)}
-                  className={`py-1 px-2 rounded-lg text-xs font-bold border transition-all ${
+                  className={`h-11 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer flex items-center justify-center border ${
                     quantity === 12
-                      ? "bg-slate-900 text-white border-slate-900 shadow-2xs"
-                      : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                      ? "bg-black text-white border-black font-semibold"
+                      : "bg-slate-50/90 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-black"
                   }`}
                 >
                   1 Docena (12)
@@ -543,10 +547,10 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
                 <button
                   type="button"
                   onClick={() => setQuantity(50)}
-                  className={`py-1 px-2 rounded-lg text-xs font-bold border transition-all ${
+                  className={`h-11 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer flex items-center justify-center border ${
                     quantity === 50
-                      ? "bg-slate-900 text-white border-slate-900 shadow-2xs"
-                      : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                      ? "bg-black text-white border-black font-semibold"
+                      : "bg-slate-50/90 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-black"
                   }`}
                 >
                   50+ Mayor
@@ -554,15 +558,15 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               </div>
             </div>
 
-            {/* Botones de Acción */}
+            {/* Botones de Acción Homogéneos */}
             <div className="space-y-2.5 pt-1">
-              {/* Botón Principal Carrito / Agregar (Alto Contraste Naranja) */}
+              {/* Botón Principal: Agregar al Carrito */}
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-medium py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-sm active:scale-[0.99] cursor-pointer"
+                className="w-full h-12 bg-[#FF841D] hover:bg-[#e57212] text-white font-semibold rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm active:scale-[0.99] cursor-pointer"
               >
-                <ShoppingBag className="size-4.5 shrink-0" />
+                <ShoppingBag className="size-5 shrink-0" />
                 <span>Agregar al Carrito</span>
               </button>
 
@@ -570,19 +574,19 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               <button
                 type="button"
                 onClick={handleWhatsAppBuy}
-                className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-xs text-xs hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                className="w-full h-12 bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm active:scale-[0.99] cursor-pointer"
               >
-                <MessageCircle className="size-4 fill-current shrink-0" />
+                <MessageCircle className="size-5 fill-current shrink-0" />
                 <span>Cotizar por WhatsApp</span>
               </button>
 
-              {/* Botón Compra Directa */}
+              {/* Botón Compra Directa Tarjeta */}
               <button
                 type="button"
                 onClick={handleDirectBuy}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs hover:scale-[1.01] active:scale-[0.99] shadow-2xs cursor-pointer"
+                className="w-full h-12 bg-black hover:bg-neutral-900 text-white font-semibold rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm active:scale-[0.99] cursor-pointer"
               >
-                <CreditCard className="size-4 shrink-0" />
+                <CreditCard className="size-5 shrink-0" />
                 <span>Pagar con Tarjeta (Directo)</span>
               </button>
             </div>
@@ -591,22 +595,22 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             <div className="border-t border-slate-100 pt-3.5 space-y-2 text-xs">
               <div className="flex items-center gap-2.5">
                 <Truck className="size-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-slate-800">Envíos a todo el Ecuador</span>
+                <span className="font-medium text-slate-700">Envíos a todo el Ecuador</span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Clock className="size-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-slate-800">Despacho Rápido 24-48h</span>
+                <span className="font-medium text-slate-700">Despacho Rápido 24-48h</span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <PackageCheck className="size-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-slate-800">Empaque Reforzado Antichoque</span>
+                <span className="font-medium text-slate-700">Empaque Reforzado Antichoque</span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-slate-800">Garantía FYF Uniformes (+20 años)</span>
+                <span className="font-medium text-slate-700">Garantía FYF Uniformes (+20 años)</span>
               </div>
             </div>
 
@@ -926,9 +930,9 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         <button
           type="button"
           onClick={handleAddToCart}
-          className="w-full bg-[#FF841D] hover:bg-[#e57212] text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md text-sm active:scale-[0.99]"
+          className="w-full h-12 bg-[#FF841D] hover:bg-[#e57212] text-white font-semibold rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm active:scale-[0.99] cursor-pointer"
         >
-          <ShoppingBag className="size-4.5" />
+          <ShoppingBag className="size-5 shrink-0" />
           <span>Agregar al Carrito</span>
         </button>
 
@@ -937,18 +941,18 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
           <button
             type="button"
             onClick={handleWhatsAppBuy}
-            className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-medium py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
+            className="w-full h-11 bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all text-xs sm:text-sm active:scale-[0.99] cursor-pointer"
           >
-            <MessageCircle className="size-4 fill-current" />
-            <span>Cotizar por WhatsApp</span>
+            <MessageCircle className="size-4.5 fill-current shrink-0" />
+            <span>Cotizar WhatsApp</span>
           </button>
 
           <button
             type="button"
             onClick={handleDirectBuy}
-            className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
+            className="w-full h-11 bg-black hover:bg-neutral-900 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all text-xs sm:text-sm active:scale-[0.99] cursor-pointer"
           >
-            <CreditCard className="size-4" />
+            <CreditCard className="size-4.5 shrink-0" />
             <span>Pagar con Tarjeta</span>
           </button>
         </div>
