@@ -42,13 +42,13 @@ export function FeaturesSection() {
       />
       <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[2px]" />
 
-      <div className="relative mx-auto w-[92%] max-w-[1440px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-[85%] max-w-[1500px] px-4">
         {/* Title with left orange line matching Image 3 */}
-        <div className="border-l-[3px] border-amber-500 pl-4 mb-12 sm:mb-16">
+        <div className="border-l-[3px] border-[#ff6600] pl-4 mb-10 sm:mb-14">
           <span className="block text-xl sm:text-2xl font-light tracking-tight text-slate-100">
             Lo que nos hace
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-wider text-white">
+          <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-wider text-white">
             DIFERENTES
           </h2>
         </div>
@@ -60,12 +60,12 @@ export function FeaturesSection() {
             return (
               <div key={idx} className="flex flex-col items-center text-center sm:items-start sm:text-left">
                 {/* Minimalist line icon with circle */}
-                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white mb-4 bg-white/5 backdrop-blur-xs">
-                  <IconComponent className="w-6 h-6 stroke-[1.5]" />
+                <div className="size-12 rounded-full border border-white/20 flex items-center justify-center text-white mb-4 bg-white/5 backdrop-blur-xs">
+                  <IconComponent className="size-6 stroke-[1.5] text-[#ff6600]" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight mb-2">
+                <h3 className="text-base font-medium text-white tracking-tight mb-2">
                   {feature.title}
                 </h3>
 

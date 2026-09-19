@@ -7,11 +7,11 @@ import { CATEGORIES_DATA } from "@/lib/catalog-data";
 
 export function CategoryGrid() {
   return (
-    <section className="mx-auto w-[92%] max-w-[1440px] px-4 py-12 sm:py-16">
+    <section className="mx-auto w-[85%] max-w-[1500px] px-4 py-10 sm:py-14">
       {/* Clean section title matching Image 2 */}
-      <div className="text-center mb-10 sm:mb-12">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-normal text-slate-900 tracking-tight">
-          Explora Nuestras Líneas de <strong className="font-bold text-slate-950">Uniformes y Ropa de Trabajo</strong>
+      <div className="text-center mb-8 sm:mb-10">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-normal text-slate-800 tracking-tight">
+          Explora Nuestras Líneas de <span className="font-semibold text-slate-950">Uniformes y Ropa de Trabajo</span>
         </h2>
       </div>
 
@@ -23,7 +23,7 @@ export function CategoryGrid() {
             href={`/catalogo?categoria=${cat.slug}`}
             className="group flex flex-col items-center text-center transition-transform duration-200 hover:-translate-y-1"
           >
-            <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-slate-200/90 shadow-xs group-hover:shadow-md transition-all border-b-4 border-b-amber-500">
+            <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-slate-200 shadow-xs group-hover:shadow-md transition-all border-b-4 border-b-[#ff6600]">
               <Image
                 src={cat.image}
                 alt={cat.name}
@@ -33,7 +33,7 @@ export function CategoryGrid() {
               />
             </div>
 
-            <h3 className="mt-3 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-900 group-hover:text-amber-600 transition-colors leading-tight line-clamp-2">
+            <h3 className="mt-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-wider text-slate-900 group-hover:text-[#ff6600] transition-colors leading-snug line-clamp-2">
               {cat.name}
             </h3>
           </Link>

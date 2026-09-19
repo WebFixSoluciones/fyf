@@ -520,34 +520,34 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
 
             {/* Botones de Acción */}
             <div className="space-y-2.5 pt-1">
+              {/* Botón Principal Carrito / Agregar (Alto Contraste Naranja) */}
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg text-sm active:scale-[0.99] cursor-pointer"
+              >
+                <ShoppingBag className="size-4.5 shrink-0" />
+                <span>Agregar al Carrito</span>
+              </button>
+
               {/* Botón WhatsApp */}
               <button
                 type="button"
                 onClick={handleWhatsAppBuy}
-                className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-display font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg text-xs sm:text-sm hover:scale-[1.01] active:scale-[0.99]"
+                className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-xs text-xs hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
-                <MessageCircle className="size-4.5 fill-current shrink-0" />
-                <span>Comprar por WhatsApp</span>
+                <MessageCircle className="size-4 fill-current shrink-0" />
+                <span>Cotizar por WhatsApp</span>
               </button>
 
-              {/* Botón Compra Directa Shopify */}
+              {/* Botón Compra Directa */}
               <button
                 type="button"
                 onClick={handleDirectBuy}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-display font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs hover:scale-[1.01] active:scale-[0.99] shadow-sm"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs hover:scale-[1.01] active:scale-[0.99] shadow-2xs cursor-pointer"
               >
                 <CreditCard className="size-4 shrink-0" />
-                <span>Pagar con Tarjeta</span>
-              </button>
-
-              {/* Botón Carrito */}
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="w-full bg-white hover:bg-alina-50 border-2 border-alina-600 text-alina-700 font-display font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
-              >
-                <ShoppingBag className="size-4 shrink-0" />
-                <span>Agregar al Carrito</span>
+                <span>Pagar con Tarjeta (Directo)</span>
               </button>
             </div>
 
@@ -882,34 +882,34 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
 
       {/* 6. Botones de Acción Neurálgicos */}
       <div className="flex flex-col gap-2.5 pt-2">
-        {/* Botón WhatsApp */}
+        {/* Botón Principal Carrito / Agregar (Alto Contraste) */}
         <button
           type="button"
-          onClick={handleWhatsAppBuy}
-          className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-display font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg text-sm"
+          onClick={handleAddToCart}
+          className="w-full bg-[#ff6600] hover:bg-[#ea580c] text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md text-sm active:scale-[0.99]"
         >
-          <MessageCircle className="w-5 h-5 fill-current" />
-          <span>Comprar por WhatsApp (Cotización Lista)</span>
+          <ShoppingBag className="size-4.5" />
+          <span>Agregar al Carrito</span>
         </button>
 
-        {/* Botón Compra Directa Shopify Style & Carrito */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        {/* Botón WhatsApp & Tarjeta */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={handleDirectBuy}
-            className="bg-slate-900 hover:bg-slate-800 text-white font-display font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
+            onClick={handleWhatsAppBuy}
+            className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-medium py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
           >
-            <CreditCard className="w-4 h-4" />
-            <span>Pagar con Tarjeta</span>
+            <MessageCircle className="size-4 fill-current" />
+            <span>Cotizar por WhatsApp</span>
           </button>
 
           <button
             type="button"
-            onClick={handleAddToCart}
-            className="bg-white hover:bg-alina-50 border-2 border-alina-600 text-alina-600 font-display font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
+            onClick={handleDirectBuy}
+            className="bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all text-xs"
           >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Agregar al Carrito</span>
+            <CreditCard className="size-4" />
+            <span>Pagar con Tarjeta</span>
           </button>
         </div>
       </div>

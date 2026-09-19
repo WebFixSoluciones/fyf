@@ -38,13 +38,13 @@ export function ProductGrid({ products, className }: ProductGridProps) {
 
             {/* Product Meta */}
             <div className="pt-3 flex flex-col">
-              {/* Category Tag */}
-              <span className="text-[10px] sm:text-[11px] font-semibold tracking-wider text-slate-400 uppercase">
+              {/* Category Tag (High Contrast) */}
+              <span className="text-[10px] sm:text-[11px] font-medium tracking-wider text-[#ff6600] uppercase">
                 {product.categoryTag || product.categorySlug?.replace("-", " ")}
               </span>
 
               {/* Product Title */}
-              <h3 className="mt-1 text-xs sm:text-[13px] font-medium text-slate-900 leading-snug line-clamp-3 group-hover:text-slate-600 transition-colors">
+              <h3 className="mt-1 text-xs sm:text-[13px] font-medium text-slate-900 leading-snug line-clamp-3 group-hover:text-[#ff6600] transition-colors">
                 {product.name}
               </h3>
             </div>

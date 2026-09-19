@@ -61,7 +61,7 @@ export function PromotionTicker({
 
   return (
     <div className="w-full bg-slate-950 text-slate-300 border-b border-slate-800 text-[11px] font-normal transition-colors">
-      <div className="mx-auto w-[92%] max-w-[1440px] px-4 py-1.5 flex items-center justify-between gap-4">
+      <div className="mx-auto w-[85%] max-w-[1500px] px-4 py-1.5 flex items-center justify-between gap-4">
         {/* Left: Contact info */}
         <div className="hidden md:flex items-center gap-5 text-slate-400">
           <a

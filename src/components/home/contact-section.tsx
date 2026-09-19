@@ -24,12 +24,12 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="bg-white py-16 sm:py-24 border-t border-slate-100">
-      <div className="mx-auto w-[92%] max-w-[1440px] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section id="contacto" className="bg-white py-14 sm:py-20 border-t border-slate-100">
+      <div className="mx-auto w-[85%] max-w-[1500px] px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Left Column: Heading, description & Map Preview */}
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-slate-950">
+            <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-slate-950">
               CONTÁCTANOS
             </h2>
 

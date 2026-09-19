@@ -17,7 +17,7 @@ export default async function CatalogoPage({ searchParams }: CatalogoPageProps) 
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <main className="flex-1 w-[90%] min-w-[80%] max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 w-[85%] max-w-[1500px] mx-auto px-4 py-8">
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-1.5 text-xs text-slate-500 mb-6">
           <Link href="/" className="hover:text-slate-900 transition-colors">Inicio</Link>
