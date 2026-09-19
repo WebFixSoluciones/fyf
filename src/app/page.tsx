@@ -4,7 +4,6 @@ import React from "react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ProductGrid } from "@/components/catalog/product-grid";
-import { HeroBanner } from "@/components/home/hero-banner";
 import { CategoryGrid } from "@/components/home/category-grid";
 import { FeaturesSection } from "@/components/home/features-section";
 import { ContactSection } from "@/components/home/contact-section";
@@ -23,10 +22,7 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1 w-full">
-        {/* 1. Hero Banner */}
-        <HeroBanner />
-
-        {/* 2. Explora Nuestras Líneas de Uniformes y Ropa de Trabajo (Imagen 2) */}
+        {/* 1. Explora Nuestras Líneas de Uniformes y Ropa de Trabajo (Imagen 2) */}
         <CategoryGrid />
 
         {/* 3. Ropa Térmica (Imagen 1 & 2) */}

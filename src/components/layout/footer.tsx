@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShieldCheck, Truck, Factory, MessageCircle, MapPin, Phone, Mail } from "lucide-react";
 import { CATEGORIES_DATA } from "@/lib/catalog-data";
 
@@ -55,11 +56,14 @@ export function Footer() {
       <div className="mx-auto w-[92%] max-w-[1440px] px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12 text-xs leading-relaxed">
         {/* Brand overview */}
         <div className="md:col-span-1 space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-white font-black text-sm">
-              <span className="text-amber-500">F</span>
-              <span className="text-white font-light text-[10px]">&</span>
-              <span className="text-amber-500">F</span>
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-700 bg-white shrink-0">
+              <Image
+                src="/logo.jpg"
+                alt="FYF Uniformes"
+                fill
+                className="object-cover"
+              />
             </div>
             <span className="text-base font-extrabold uppercase tracking-wider text-white">
               FYF UNIFORMES

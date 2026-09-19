@@ -2,35 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Truck, Tag, Sparkles, CreditCard, Gift, ChevronRight } from "lucide-react";
+import { Phone, MapPin, Truck, Clock, ShieldCheck, Tag, Sparkles, CreditCard, Gift } from "lucide-react";
 import { NavbarPromotionItem } from "@/lib/promotions-store";
-
-const DEFAULT_MESSAGES: NavbarPromotionItem[] = [
-  {
-    id: "d1",
-    icon: "truck",
-    text: "Envíos a todo el Ecuador por Servientrega y LaarCourier",
-    linkUrl: "/rastreo",
-  },
-  {
-    id: "d2",
-    icon: "tag",
-    text: "Por la compra de la docena obtén precios mayoristas de fábrica",
-    linkUrl: "/catalogo",
-  },
-  {
-    id: "d3",
-    icon: "sparkles",
-    text: "Personaliza tus bases MDF con el logo de tu pastelería (+ $0.20)",
-    linkUrl: "/catalogo?categoria=bases-mdf",
-  },
-  {
-    id: "d4",
-    icon: "credit-card",
-    text: "Pagos 100% seguros con tarjetas de crédito / débito y WhatsApp",
-    linkUrl: "/checkout",
-  },
-];
 
 interface PromotionTickerProps {
   customMessages?: NavbarPromotionItem[];
@@ -44,141 +17,101 @@ export function PromotionTicker({
   customEnabled,
 }: PromotionTickerProps = {}) {
   const isControlled = customMessages !== undefined;
-  const [messages, setMessages] = useState<NavbarPromotionItem[]>(customMessages || DEFAULT_MESSAGES);
-  const [enabled, setEnabled] = useState(customEnabled ?? true);
-  const [intervalSec, setIntervalSec] = useState(customInterval ?? 4);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [currentIdx, setCurrentIdx] = useState(0);
 
-  // Si se pasan props controladas (ej. vista previa en admin)
-  useEffect(() => {
-    if (isControlled) {
-      if (customMessages) setMessages(customMessages);
-      if (customEnabled !== undefined) setEnabled(customEnabled);
-      if (customInterval !== undefined) setIntervalSec(customInterval);
-    }
-  }, [isControlled, customMessages, customInterval, customEnabled]);
+  const defaultNotices = [
+    {
+      text: "Fabricantes directos de uniformes corporativos e industriales en Ecuador",
+      icon: ShieldCheck,
+      link: "/catalogo",
+    },
+    {
+      text: "Cotizaciones inmediatas y pedidos a nivel nacional: +593 99 335 8701",
+      icon: Phone,
+      link: "https://wa.me/593993358701?text=Hola%2C%20deseo%20cotizar%20uniformes",
+    },
+    {
+      text: "Envíos seguros a todo el país | Ropa térmica, ignífuga y calzado certificado",
+      icon: Truck,
+      link: "/catalogo",
+    },
+  ];
 
-  // Si no está controlado, sincronizar con localStorage y API
-  useEffect(() => {
-    if (isControlled) return;
-
-    // 1. Carga inmediata desde almacenamiento local
-    try {
-      const cached = localStorage.getItem("alina_promotions_config");
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (parsed?.ticker) {
-          if (parsed.ticker.messages?.length > 0) {
-            setMessages(parsed.ticker.messages);
-          }
-          if (parsed.ticker.enabled !== undefined) {
-            setEnabled(parsed.ticker.enabled);
-          }
-          if (parsed.ticker.intervalSeconds) {
-            setIntervalSec(parsed.ticker.intervalSeconds);
-          }
-        }
-      }
-    } catch (e) {}
-
-    // 2. Consulta a la API en vivo
-    fetch(`/api/admin/promotions?t=${Date.now()}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.promotions?.ticker) {
-          if (data.promotions.ticker.messages?.length > 0) {
-            setMessages(data.promotions.ticker.messages);
-          }
-          setEnabled(data.promotions.ticker.enabled ?? true);
-          if (data.promotions.ticker.intervalSeconds) {
-            setIntervalSec(data.promotions.ticker.intervalSeconds);
-          }
-          try {
-            localStorage.setItem("alina_promotions_config", JSON.stringify(data.promotions));
-          } catch (e) {}
-        }
-      })
-      .catch(() => {});
-
-    // 3. Escuchar evento en vivo
-    const handleUpdate = (e: any) => {
-      const ticker = e.detail?.ticker;
-      if (ticker) {
-        if (ticker.messages?.length > 0) {
-          setMessages(ticker.messages);
-        }
-        if (ticker.enabled !== undefined) {
-          setEnabled(ticker.enabled);
-        }
-        if (ticker.intervalSeconds) {
-          setIntervalSec(ticker.intervalSeconds);
-        }
-      }
-    };
-
-    window.addEventListener("alina_promotions_updated", handleUpdate);
-    return () => {
-      window.removeEventListener("alina_promotions_updated", handleUpdate);
-    };
-  }, [isControlled]);
+  const notices = isControlled && customMessages && customMessages.length > 0
+    ? customMessages.map((m) => ({
+        text: m.text,
+        icon: m.icon === "truck" ? Truck : m.icon === "tag" ? Tag : m.icon === "credit-card" ? CreditCard : Sparkles,
+        link: m.linkUrl || "/catalogo",
+      }))
+    : defaultNotices;
 
   useEffect(() => {
-    if (!enabled || messages.length <= 1 || isPaused) return;
+    if (notices.length <= 1) return;
+    const intervalTime = (customInterval || 5) * 1000;
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % notices.length);
+    }, intervalTime);
+    return () => clearInterval(timer);
+  }, [notices.length, customInterval]);
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % messages.length);
-    }, intervalSec * 1000);
+  if (customEnabled === false) return null;
 
-    return () => clearInterval(interval);
-  }, [enabled, messages.length, intervalSec, isPaused]);
+  const activeNotice = notices[currentIdx] || notices[0];
+  const IconComp = activeNotice.icon;
 
-  if (!enabled || messages.length === 0) {
-    return null;
-  }
+  return (
+    <div className="w-full bg-slate-950 text-slate-300 border-b border-slate-800 text-[11px] font-normal transition-colors">
+      <div className="mx-auto w-[92%] max-w-[1440px] px-4 py-1.5 flex items-center justify-between gap-4">
+        {/* Left: Contact info */}
+        <div className="hidden md:flex items-center gap-5 text-slate-400">
+          <a
+            href="https://wa.me/593993358701"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+          >
+            <Phone className="size-3 text-amber-400" />
+            <span>+593 99 335 8701</span>
+          </a>
+          <span className="text-slate-700">|</span>
+          <div className="flex items-center gap-1.5">
+            <MapPin className="size-3 text-amber-400" />
+            <span>Quito, Ecuador</span>
+          </div>
+          <span className="text-slate-700">|</span>
+          <div className="flex items-center gap-1.5">
+            <Clock className="size-3 text-slate-400" />
+            <span>Lun - Vie 08:00 - 18:00</span>
+          </div>
+        </div>
 
-  const currentMsg = messages[currentIndex] || messages[0];
+        {/* Center: Dynamic Announcement */}
+        <div className="flex-1 flex items-center justify-center text-center">
+          <Link
+            href={activeNotice.link}
+            className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors truncate max-w-[320px] sm:max-w-md md:max-w-lg"
+          >
+            <IconComp className="size-3 text-amber-400 shrink-0" />
+            <span className="truncate">{activeNotice.text}</span>
+          </Link>
+        </div>
 
-  const renderIcon = (iconName: string) => {
-    switch (iconName) {
-      case "truck":
-        return <Truck className="size-3.5 text-emerald-400 shrink-0" />;
-      case "tag":
-        return <Tag className="size-3.5 text-amber-400 shrink-0" />;
-      case "sparkles":
-        return <Sparkles className="size-3.5 text-pink-400 shrink-0" />;
-      case "credit-card":
-        return <CreditCard className="size-3.5 text-blue-400 shrink-0" />;
-      case "gift":
-        return <Gift className="size-3.5 text-purple-400 shrink-0" />;
-      default:
-        return <Sparkles className="size-3.5 text-emerald-400 shrink-0" />;
-    }
-  };
-
-  const content = (
-    <div
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      className="flex items-center justify-center gap-2 text-neutral-200 text-xs py-0.5 px-2 hover:text-white transition-all cursor-pointer group"
-    >
-      {renderIcon(currentMsg.icon)}
-      <span className="font-medium tracking-tight truncate max-w-[300px] sm:max-w-lg md:max-w-2xl lg:max-w-4xl transition-all duration-300">
-        {currentMsg.text}
-      </span>
-      {currentMsg.linkUrl && (
-        <ChevronRight className="size-3 text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" />
-      )}
+        {/* Right: Quick actions */}
+        <div className="hidden sm:flex items-center gap-4 text-slate-400">
+          <Link href="/catalogo" className="hover:text-white transition-colors">
+            Catálogo 2026
+          </Link>
+          <span className="text-slate-700">|</span>
+          <a
+            href="https://wa.me/593993358701?text=Hola%2C%20solicito%20asesor%C3%ADa%20comercial"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-400 font-semibold hover:underline"
+          >
+            Asesoría Online
+          </a>
+        </div>
+      </div>
     </div>
   );
-
-  if (currentMsg.linkUrl) {
-    return (
-      <Link href={currentMsg.linkUrl} className="inline-flex items-center justify-center">
-        {content}
-      </Link>
-    );
-  }
-
-  return content;
 }

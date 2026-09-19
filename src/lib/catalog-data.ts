@@ -39,49 +39,49 @@ export const CATEGORIES_DATA: SeedCategory[] = [
     slug: "ropa-termica",
     description: "Chompas, chaveras y trajes con aislamiento térmico para cuartos fríos y bajas temperaturas.",
     order: 1,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-15.jpg",
+    image: "/images/categories/ropa-termica.jpg",
   },
   {
     name: "ROPA IGNÍFUGA",
     slug: "ropa-ignifuga",
     description: "Overoles y pantalones ignífugos retardantes al fuego con cintas reflectivas de alta visibilidad.",
     order: 2,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-17.jpg",
+    image: "/images/categories/ropa-ignifuga.jpg",
   },
   {
     name: "UNIFORMES PERSONALIZADOS",
     slug: "uniformes-personalizados",
     description: "Camisas, blusas, buzos polo y prendas corporativas con bordado y diseño a la medida.",
     order: 3,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-14.jpg",
+    image: "/images/categories/uniformes-personalizados.jpg",
   },
   {
     name: "ROPA INDUSTRIAL DE TRABAJO",
     slug: "ropa-industrial-trabajo",
     description: "Pantalones, blusas, capuchas y overoles jean 100% algodón prelavado para máxima resistencia.",
     order: 4,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/09/Copia-de-Diseno-sin-titulo.png",
+    image: "/images/categories/ropa-industrial-trabajo.png",
   },
   {
     name: "CALZADO INDUSTRIAL",
     slug: "calzado-industrial",
     description: "Botines de seguridad dieléctricos con puntera de acero o composite de marcas líderes como Bompel y Marluvas.",
     order: 5,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/09/Diseno-sin-titulo-2025-09-02T165158.414.png",
+    image: "/images/categories/calzado-industrial.jpg",
   },
   {
     name: "IMPLEMENTOS DE SEGURIDAD",
     slug: "implementos-seguridad",
     description: "Protección respiratoria, auditiva, guantes de nitrilo/poliuretano y cascos certificados Delta Plus y Libus.",
     order: 6,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/09/Diseno-sin-titulo-2025-09-02T165646.685.png",
+    image: "/images/categories/implementos-seguridad.jpg",
   },
   {
     name: "ROPA INDUSTRIAL PVC",
     slug: "ropa-industrial-pvc",
     description: "Trajes impermeables en PVC de alta densidad para trabajo bajo agua, químicos y condiciones extremas.",
     order: 7,
-    image: "https://www.fyf.com.ec/wp-content/uploads/2025/09/Diseno-sin-titulo-2025-09-02T165743.766.png",
+    image: "/images/categories/ropa-industrial-pvc.jpg",
   },
 ];
 
@@ -95,7 +95,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Poliéster térmico impermeable 3 capas + forro aislante",
     categorySlug: "ropa-termica",
     categoryTag: "ROPA TÉRMICA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2026/04/Quito-31-300x300.png",
+    mainImage: "/images/products/chompa-combinada-cinta.png",
     hasLogoOption: true,
     variants: [
       { sizeLabel: "S", unitPrice: 48.00, wholesalePrice: 42.00, stock: 50 },
@@ -112,7 +112,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Tela impermeable 3 capas + fibra siliconada",
     categorySlug: "ropa-termica",
     categoryTag: "ROPA TÉRMICA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2026/04/Quito-29-300x300.png",
+    mainImage: "/images/products/chompa-combinada-cuartos-frios.png",
     hasLogoOption: true,
     variants: [
       { sizeLabel: "S", unitPrice: 45.00, wholesalePrice: 39.50, stock: 40 },
@@ -128,7 +128,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Thinsulate térmico hidrofóbico",
     categorySlug: "ropa-termica",
     categoryTag: "ROPA TÉRMICA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2026/04/Quito-28-300x300.png",
+    mainImage: "/images/products/chavera-azul-rey.png",
     hasLogoOption: true,
     variants: [
       { sizeLabel: "Estándar", unitPrice: 16.50, wholesalePrice: 14.00, stock: 100 },
@@ -142,7 +142,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Nylon tafetán impermeable + aislamiento térmico",
     categorySlug: "ropa-termica",
     categoryTag: "ROPA TÉRMICA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2026/04/Quito-19-300x300.png",
+    mainImage: "/images/products/chavera-azul-marino.png",
     variants: [
       { sizeLabel: "Estándar", unitPrice: 16.50, wholesalePrice: 14.00, stock: 80 },
     ],
@@ -155,7 +155,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Thinsulate térmico 150g",
     categorySlug: "ropa-termica",
     categoryTag: "ROPA TÉRMICA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2026/04/Quito-25-300x300.png",
+    mainImage: "/images/products/chavera-gris.png",
     variants: [
       { sizeLabel: "Estándar", unitPrice: 16.50, wholesalePrice: 14.00, stock: 90 },
     ],
@@ -170,7 +170,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Algodón Ignífugo 100% Tratado FR 280g/m²",
     categorySlug: "ropa-ignifuga",
     categoryTag: "ROPA IGNÍFUGA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/images.jpg",
+    mainImage: "/images/products/overol-ignifugo-cinta.jpg",
     hasLogoOption: true,
     variants: [
       { sizeLabel: "38", unitPrice: 58.00, wholesalePrice: 51.00, stock: 40 },
@@ -186,7 +186,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Algodón Ignífugo FR certificado NFPA 2112",
     categorySlug: "ropa-ignifuga",
     categoryTag: "ROPA IGNÍFUGA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-29-300x300.jpg",
+    mainImage: "/images/products/overol-ignifugo-clasico.jpg",
     variants: [
       { sizeLabel: "38", unitPrice: 52.00, wholesalePrice: 46.00, stock: 30 },
       { sizeLabel: "40", unitPrice: 52.00, wholesalePrice: 46.00, stock: 30 },
@@ -200,7 +200,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Tela ignífuga 8.5 oz",
     categorySlug: "ropa-ignifuga",
     categoryTag: "ROPA IGNÍFUGA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-26-300x300.jpg",
+    mainImage: "/images/products/pantalon-ignifugo-cinta.jpg",
     variants: [
       { sizeLabel: "30", unitPrice: 34.00, wholesalePrice: 29.50, stock: 50 },
       { sizeLabel: "32", unitPrice: 34.00, wholesalePrice: 29.50, stock: 50 },
@@ -215,7 +215,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Algodón 100% tratamiento retardante",
     categorySlug: "ropa-ignifuga",
     categoryTag: "ROPA IGNÍFUGA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-22-300x300.jpg",
+    mainImage: "/images/products/pantalon-ignifugo-clasico.jpg",
     variants: [
       { sizeLabel: "30", unitPrice: 31.00, wholesalePrice: 27.00, stock: 45 },
       { sizeLabel: "32", unitPrice: 31.00, wholesalePrice: 27.00, stock: 45 },
@@ -229,7 +229,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Algodón ignífugo 9 oz tipo cargo",
     categorySlug: "ropa-ignifuga",
     categoryTag: "ROPA IGNÍFUGA",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Diseno-sin-titulo-21-300x300.jpg",
+    mainImage: "/images/products/pantalon-ignifugo-safari.jpg",
     variants: [
       { sizeLabel: "30", unitPrice: 36.00, wholesalePrice: 31.00, stock: 35 },
       { sizeLabel: "32", unitPrice: 36.00, wholesalePrice: 31.00, stock: 35 },
@@ -246,7 +246,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Denim 12 oz (98% Algodón / 2% Elastano)",
     categorySlug: "ropa-industrial-trabajo",
     categoryTag: "ROPA INDUSTRIAL DE TRABAJO",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-28-at-4.10.45-PM-1-300x300.jpeg",
+    mainImage: "/images/products/pantalon-jean-mujer.png",
     variants: [
       { sizeLabel: "28", unitPrice: 22.00, wholesalePrice: 18.50, stock: 60 },
       { sizeLabel: "30", unitPrice: 22.00, wholesalePrice: 18.50, stock: 60 },
@@ -261,7 +261,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Denim 14 oz 100% Algodón prelavado",
     categorySlug: "ropa-industrial-trabajo",
     categoryTag: "ROPA INDUSTRIAL DE TRABAJO",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-28-at-4.10.45-PM-300x300.jpeg",
+    mainImage: "/images/products/pantalon-jean-hombre.png",
     variants: [
       { sizeLabel: "30", unitPrice: 22.00, wholesalePrice: 18.50, stock: 70 },
       { sizeLabel: "32", unitPrice: 22.00, wholesalePrice: 18.50, stock: 70 },
@@ -276,7 +276,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Denim camisa 7.5 oz 100% Algodón",
     categorySlug: "ropa-industrial-trabajo",
     categoryTag: "ROPA INDUSTRIAL DE TRABAJO",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-28-at-4.10.46-PM-1-300x300.jpeg",
+    mainImage: "/images/products/blusa-jean-cinta.png",
     variants: [
       { sizeLabel: "S", unitPrice: 24.50, wholesalePrice: 21.00, stock: 40 },
       { sizeLabel: "M", unitPrice: 24.50, wholesalePrice: 21.00, stock: 40 },
@@ -291,7 +291,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Denim camisa 7.5 oz",
     categorySlug: "ropa-industrial-trabajo",
     categoryTag: "ROPA INDUSTRIAL DE TRABAJO",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-28-at-4.10.46-PM-300x300.jpeg",
+    mainImage: "/images/products/blusa-jean-clasica.png",
     variants: [
       { sizeLabel: "S", unitPrice: 21.00, wholesalePrice: 18.00, stock: 50 },
       { sizeLabel: "M", unitPrice: 21.00, wholesalePrice: 18.00, stock: 50 },
@@ -305,7 +305,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Denim 14 oz pesado",
     categorySlug: "ropa-industrial-trabajo",
     categoryTag: "ROPA INDUSTRIAL DE TRABAJO",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-28-at-4.10.46-PM-2-300x300.jpeg",
+    mainImage: "/images/products/capucha-jean.jpg",
     variants: [
       { sizeLabel: "Única", unitPrice: 8.50, wholesalePrice: 6.90, stock: 120 },
     ],
@@ -320,7 +320,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Cuero vaqueta legítimo hidrofugado",
     categorySlug: "calzado-industrial",
     categoryTag: "CALZADO INDUSTRIAL",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/Bompel-4004-Dama.png",
+    mainImage: "/images/products/botin-bompel-4004-dama.jpg",
     variants: [
       { sizeLabel: "35", unitPrice: 42.00, wholesalePrice: 37.00, stock: 25 },
       { sizeLabel: "36", unitPrice: 42.00, wholesalePrice: 37.00, stock: 25 },
@@ -336,7 +336,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Cuero Nobuck premium hidrofugado",
     categorySlug: "calzado-industrial",
     categoryTag: "CALZADO INDUSTRIAL",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/BT903CDHP.png",
+    mainImage: "/images/products/botin-bompel-bt903cdhp.jpg",
     variants: [
       { sizeLabel: "39", unitPrice: 46.00, wholesalePrice: 40.50, stock: 30 },
       { sizeLabel: "40", unitPrice: 46.00, wholesalePrice: 40.50, stock: 30 },
@@ -352,7 +352,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Cuero curtido al cromo resistente a aceites e hidrocarburos",
     categorySlug: "calzado-industrial",
     categoryTag: "CALZADO INDUSTRIAL",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/BT903CDTC.png",
+    mainImage: "/images/products/botin-bompel-bt903cdtc.jpg",
     variants: [
       { sizeLabel: "39", unitPrice: 45.00, wholesalePrice: 39.00, stock: 25 },
       { sizeLabel: "40", unitPrice: 45.00, wholesalePrice: 39.00, stock: 25 },
@@ -367,7 +367,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Cuero liso negro flor entera",
     categorySlug: "calzado-industrial",
     categoryTag: "CALZADO INDUSTRIAL",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/BT903CDTC3804.png",
+    mainImage: "/images/products/botin-bompel-bt903cdtc3804.jpg",
     variants: [
       { sizeLabel: "40", unitPrice: 44.00, wholesalePrice: 38.50, stock: 30 },
       { sizeLabel: "41", unitPrice: 44.00, wholesalePrice: 38.50, stock: 30 },
@@ -382,7 +382,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Cuero industrial con elásticos laterales reforzados",
     categorySlug: "calzado-industrial",
     categoryTag: "CALZADO INDUSTRIAL",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/BT903ELGI.png",
+    mainImage: "/images/products/botin-bompel-bt903elgi.jpg",
     variants: [
       { sizeLabel: "39", unitPrice: 43.00, wholesalePrice: 37.50, stock: 20 },
       { sizeLabel: "40", unitPrice: 43.00, wholesalePrice: 37.50, stock: 20 },
@@ -399,7 +399,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Polipropileno de alto impacto resistente a chispas",
     categorySlug: "implementos-seguridad",
     categoryTag: "IMPLEMENTOS DE SEGURIDAD",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/MASCARA-PARA-SOLDAR-SCREEN-DELTA-PLUS.png",
+    mainImage: "/images/products/mascara-soldar-screen.png",
     variants: [
       { sizeLabel: "Universal", unitPrice: 18.00, wholesalePrice: 15.00, stock: 60 },
     ],
@@ -412,7 +412,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Silicone termoplástico hipoalergénico",
     categorySlug: "implementos-seguridad",
     categoryTag: "IMPLEMENTOS DE SEGURIDAD",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/MASCARA-MEDIA-CARA-DELTA-PLUS.png",
+    mainImage: "/images/products/mascara-media-cara.png",
     variants: [
       { sizeLabel: "M/L", unitPrice: 22.00, wholesalePrice: 18.90, stock: 50 },
     ],
@@ -425,7 +425,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Nylon galga 13 + poliuretano",
     categorySlug: "implementos-seguridad",
     categoryTag: "IMPLEMENTOS DE SEGURIDAD",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/GUANTE-DE-NYLON-CON-RECUBRIMIENTO-DE-POLIURETANO-EN-PALMA-PLUX.png",
+    mainImage: "/images/products/guante-nylon-poliuretano.png",
     variants: [
       { sizeLabel: "M", unitPrice: 2.20, wholesalePrice: 1.65, stock: 500 },
       { sizeLabel: "L", unitPrice: 2.20, wholesalePrice: 1.65, stock: 500 },
@@ -433,13 +433,13 @@ export const PRODUCTS_DATA: SeedProduct[] = [
   },
   {
     sku: "FYF-SEG-004",
-    name: "Guantes Quimicos de Nitrilo Liso Delta Plus",
+    name: "Guantes Químicos de Nitrilo Liso Delta Plus",
     slug: "guantes-quimicos-nitrilo-liso-delta-plus",
     description: "Guantes resistentes a productos químicos agresivos, disolventes, grasas y aceites industriales.",
     material: "Nitrilo de alto grosor floculado en algodón",
     categorySlug: "implementos-seguridad",
     categoryTag: "IMPLEMENTOS DE SEGURIDAD",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/GUANTES-QUIMICOS-DE-NITRILO-LISO-DELTA-PLUS.png",
+    mainImage: "/images/products/guantes-quimicos-nitrilo.png",
     variants: [
       { sizeLabel: "8", unitPrice: 4.80, wholesalePrice: 3.90, stock: 200 },
       { sizeLabel: "9", unitPrice: 4.80, wholesalePrice: 3.90, stock: 200 },
@@ -453,7 +453,7 @@ export const PRODUCTS_DATA: SeedProduct[] = [
     material: "Poliéster + microespuma de nitrilo",
     categorySlug: "implementos-seguridad",
     categoryTag: "IMPLEMENTOS DE SEGURIDAD",
-    mainImage: "https://www.fyf.com.ec/wp-content/uploads/2025/08/GUANTE-DE-POLIESTER-CON-RECUBRIMIENTO-DE-NITRILO-EN-PALMA-PLUX.png",
+    mainImage: "/images/products/guante-poliester-nitrilo.png",
     variants: [
       { sizeLabel: "M", unitPrice: 2.50, wholesalePrice: 1.95, stock: 400 },
       { sizeLabel: "L", unitPrice: 2.50, wholesalePrice: 1.95, stock: 400 },
