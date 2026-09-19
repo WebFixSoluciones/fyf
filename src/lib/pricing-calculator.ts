@@ -33,9 +33,13 @@ export function calculateProductPrice(input: PricingInput): PricingResult {
   const quantity = Math.max(1, Math.floor(input.quantity || 1));
   const logoExtra = input.withLogo ? (input.logoPriceExtra ?? 0.20) : 0;
 
-  let baseUnitPrice = input.unitPrice;
-  let dozenPrice = input.dozenPrice;
-  let wholesalePrice = input.wholesalePrice;
+  let baseUnitPrice = Number(input.unitPrice) || 0;
+  let dozenPrice = Number(input.dozenPrice) > 0 
+    ? Number(input.dozenPrice) 
+    : (Number(input.wholesalePrice) > 0 ? Number(input.wholesalePrice) : baseUnitPrice);
+  let wholesalePrice = Number(input.wholesalePrice) > 0 
+    ? Number(input.wholesalePrice) 
+    : (dozenPrice > 0 ? dozenPrice : baseUnitPrice);
 
   // Si tiene dimensiones personalizadas, calcular precio base según área en cm2
   if (input.customDimensions && input.customDimensions.widthCm > 0 && input.customDimensions.heightCm > 0) {

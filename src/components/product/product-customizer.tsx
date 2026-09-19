@@ -15,7 +15,8 @@ import {
   Truck,
   Clock,
   PackageCheck,
-  ChevronDown
+  ChevronDown,
+  FileText
 } from "lucide-react";
 
 interface Variant {
@@ -74,13 +75,14 @@ export function ProductCustomizer({
   const [customWidth, setCustomWidth] = useState(25);
   const [customHeight, setCustomHeight] = useState(25);
   const [withLogo, setWithLogo] = useState(false);
-  const [quantity, setQuantity] = useState(12); // Default to a dozen for cake supplies
+  const [quantity, setQuantity] = useState(1);
+  const [isSpecsOpen, setIsSpecsOpen] = useState(true);
 
-  const activeVariant = product.variants[selectedVariantIndex] || {
-    sizeLabel: "20 cm",
-    unitPrice: 0.75,
-    dozenPrice: 0.64,
-    wholesalePrice: 0.55,
+  const activeVariant = product.variants[selectedVariantIndex] || product.variants[0] || {
+    sizeLabel: "Estándar",
+    unitPrice: 25.00,
+    dozenPrice: 22.00,
+    wholesalePrice: 20.00,
   };
 
   // Compute live price
@@ -288,8 +290,8 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
             <div className="border border-slate-200 rounded-xl p-3 sm:p-4 bg-white shadow-2xs">
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <label className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                  <Sliders className="w-3.5 h-3.5 text-alina-600" />
-                  3. Medida y Dimensiones
+                  <Sliders className="w-3.5 h-3.5 text-[#ff6600]" />
+                  Tallas y Medidas
                 </label>
                 {product.allowCustomSize && (
                   <span className="text-[10px] sm:text-[11px] text-alina-600 font-semibold bg-alina-50 px-2 py-0.5 rounded border border-alina-200">
@@ -376,53 +378,64 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
               )}
             </div>
 
-            {/* 4. Grabado de Logotipo Personalizado (+ $0.20 ctv) */}
+            {/* 4. Personalización con Logotipo Bordado / Estampado */}
             {product.hasLogoOption && (
               <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 sm:p-3.5 flex items-center justify-between">
                 <div>
                   <div className="font-display font-semibold text-xs text-slate-900 flex items-center gap-1.5">
-                    <span>¿Grabar el logo de tu pastelería?</span>
+                    <span>¿Personalizar con el logo de tu empresa?</span>
                   </div>
                   <p className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">
-                    Grabado láser permanente por <strong>+$0.20 ctvs</strong>/base
+                    Bordado computarizado o estampado de alta definición en tu uniforme
                   </p>
                 </div>
-                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-xs text-alina-600 shrink-0 ml-2">
+                <label className="flex items-center gap-1.5 cursor-pointer font-bold text-xs text-[#ff6600] shrink-0 ml-2">
                   <input
                     type="checkbox"
                     checked={withLogo}
                     onChange={(e) => setWithLogo(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-300 text-alina-600 focus:ring-alina-500"
+                    className="w-4 h-4 rounded border-slate-300 text-[#ff6600] focus:ring-orange-500"
                   />
-                  <span>Incluir</span>
+                  <span>Incluir Logo</span>
                 </label>
               </div>
             )}
           </div>
 
-          {/* Ficha Técnica Detallada y Especificaciones (Colapsable en móvil para agilidad) */}
-          <details className="group rounded-xl border border-slate-200/90 bg-slate-50/70 overflow-hidden text-xs" open={false}>
+          {/* Ficha Técnica Detallada y Especificaciones (Siempre abierta) */}
+          <details 
+            className="group rounded-xl border border-slate-200/90 bg-slate-50/70 overflow-hidden text-xs" 
+            open={isSpecsOpen}
+            onToggle={(e) => setIsSpecsOpen(e.currentTarget.open)}
+          >
             <summary className="p-3 sm:p-4 font-display text-xs font-bold uppercase tracking-wider text-slate-900 cursor-pointer flex items-center justify-between select-none hover:bg-slate-100/60 transition-colors">
-              <span>Ficha Técnica & Especificaciones</span>
+              <span className="flex items-center gap-2">
+                <FileText className="size-4 text-[#ff6600]" />
+                <span>Ficha Técnica & Especificaciones</span>
+              </span>
               <ChevronDown className="size-4 text-slate-500 transition-transform duration-200 group-open:rotate-180" />
             </summary>
             <div className="px-3 pb-3.5 sm:px-4 sm:pb-4 border-t border-slate-200/60 pt-2.5 sm:pt-3">
-              <ul className="text-xs text-slate-600 space-y-2 leading-relaxed">
+              <ul className="text-xs text-slate-600 space-y-2.5 leading-relaxed">
                 <li className="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-2">
-                  <span className="font-semibold text-slate-800 w-28 shrink-0">Material:</span>
-                  <span>{product.material || "MDF 3mm de alta densidad corte láser computarizado"}</span>
+                  <span className="font-semibold text-slate-800 w-32 shrink-0">Material / Tejido:</span>
+                  <span className="text-slate-900 font-medium">{product.material || "Textil técnico industrial de alta durabilidad y resistencia"}</span>
                 </li>
                 <li className="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-2">
-                  <span className="font-semibold text-slate-800 w-28 shrink-0">Código SKU:</span>
-                  <span className="font-mono font-semibold text-slate-800">{product.sku}</span>
+                  <span className="font-semibold text-slate-800 w-32 shrink-0">Código SKU:</span>
+                  <span className="font-mono font-semibold text-slate-900">{product.sku}</span>
                 </li>
                 <li className="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-2">
-                  <span className="font-semibold text-slate-800 w-28 shrink-0">Resistencia:</span>
-                  <span>Apto para tortas pesadas, pisos múltiples, buttercream y fondant sin flexión.</span>
+                  <span className="font-semibold text-slate-800 w-32 shrink-0">Confección:</span>
+                  <span>Costuras reforzadas con puntadas de seguridad y atraques en zonas de alta fricción.</span>
                 </li>
                 <li className="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-2">
-                  <span className="font-semibold text-slate-800 w-28 shrink-0">Acabado:</span>
-                  <span>Borde sellado por corte láser de precisión, suave y listo para entrega.</span>
+                  <span className="font-semibold text-slate-800 w-32 shrink-0">Uso Industrial:</span>
+                  <span>Diseñado para jornadas exigentes, protección laboral continua y lavados frecuentes.</span>
+                </li>
+                <li className="flex flex-col sm:flex-row sm:items-start gap-0.5 sm:gap-2">
+                  <span className="font-semibold text-slate-800 w-32 shrink-0">Garantía FYF:</span>
+                  <span>Confección directa de fábrica garantizada (+20 años en el mercado ecuatoriano).</span>
                 </li>
               </ul>
             </div>
@@ -803,23 +816,23 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         )}
       </div>
 
-      {/* 4. Grabado de Logotipo Personalizado (+ $0.20 ctv) */}
+      {/* 4. Personalización con Logotipo Bordado / Estampado */}
       {product.hasLogoOption && (
         <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-3.5 flex items-center justify-between">
           <div>
             <div className="font-display font-semibold text-xs text-slate-900 flex items-center gap-1.5">
-              <span>¿Deseas grabar el logo de tu pastelería?</span>
+              <span>¿Deseas personalizar con el logo de tu empresa?</span>
             </div>
             <p className="text-[11px] text-slate-500 mt-0.5">
-              Grabado láser permanente en cada base por solo <strong>+$0.20 ctvs</strong>
+              Bordado computarizado o estampado de alta definición en tu uniforme
             </p>
           </div>
-          <label className="flex items-center gap-2 cursor-pointer font-bold text-xs text-alina-600">
+          <label className="flex items-center gap-2 cursor-pointer font-bold text-xs text-[#ff6600]">
             <input
               type="checkbox"
               checked={withLogo}
               onChange={(e) => setWithLogo(e.target.checked)}
-              className="w-4 h-4 rounded border-slate-300 text-alina-600 focus:ring-alina-500"
+              className="w-4 h-4 rounded border-slate-300 text-[#ff6600] focus:ring-orange-500"
             />
             <span>Incluir Logo</span>
           </label>
