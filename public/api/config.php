@@ -8,9 +8,9 @@
  */
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'usuario_cpanel_fyf');      // <-- Cambia por el nombre de tu BD en cPanel
-define('DB_USER', 'usuario_cpanel_admin');    // <-- Cambia por tu usuario MySQL de cPanel
-define('DB_PASS', 'TuPasswordMySQL2026*');    // <-- Cambia por la contraseña de tu usuario MySQL
+define('DB_NAME', 'fyfcomec_dbtienda');
+define('DB_USER', 'fyfcomec_dbtienda');
+define('DB_PASS', 'Niv{Q6zrWmXxvKnT');
 define('DB_CHARSET', 'utf8mb4');
 
 /**
