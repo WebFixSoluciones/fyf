@@ -1,5 +1,8 @@
 node_modules
 /.next/
+/out/
+/.tmp_api_backup/
+cpanel_public_html.zip
 /.superpowers/
 .env
 .env.local

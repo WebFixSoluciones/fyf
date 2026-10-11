@@ -14,6 +14,10 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  return PRODUCTS_DATA.map((p) => ({ slug: p.slug }));
+}
+
 export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const product = PRODUCTS_DATA.find((p) => p.slug === slug);

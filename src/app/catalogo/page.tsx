@@ -6,13 +6,7 @@ import { CATEGORIES_DATA, PRODUCTS_DATA } from "@/lib/catalog-data";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-interface CatalogoPageProps {
-  searchParams: Promise<{ categoria?: string; busqueda?: string }>;
-}
-
-export default async function CatalogoPage({ searchParams }: CatalogoPageProps) {
-  const { categoria, busqueda } = await searchParams;
-
+export default function CatalogoPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
@@ -22,23 +16,13 @@ export default async function CatalogoPage({ searchParams }: CatalogoPageProps) 
         <nav className="flex items-center gap-1.5 text-xs text-slate-500 mb-6">
           <Link href="/" className="hover:text-slate-900 transition-colors">Inicio</Link>
           <ChevronRight className="w-3 h-3 text-slate-400" />
-          <Link href="/catalogo" className="hover:text-slate-900 transition-colors">Tienda Completa</Link>
-          {categoria && (
-            <>
-              <ChevronRight className="w-3 h-3 text-slate-400" />
-              <span className="text-slate-800 font-semibold capitalize">
-                {CATEGORIES_DATA.find((c) => c.slug === categoria)?.name || categoria}
-              </span>
-            </>
-          )}
+          <Link href="/catalogo" className="text-slate-800 font-semibold hover:text-slate-900 transition-colors">Tienda Completa</Link>
         </nav>
 
         <Suspense fallback={<div className="py-20 text-center text-xs font-semibold text-slate-400">Cargando tienda...</div>}>
           <CatalogView
             products={PRODUCTS_DATA}
             categories={CATEGORIES_DATA}
-            initialCategory={categoria}
-            initialSearch={busqueda}
           />
         </Suspense>
       </main>

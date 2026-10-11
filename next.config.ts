@@ -16,10 +16,19 @@ const securityHeaders = [
   }
 ];
 
+const isCpanelStatic = process.env.CPANEL_STATIC === "true";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  ...(isCpanelStatic
+    ? {
+        output: "export",
+        trailingSlash: true,
+      }
+    : {}),
   images: {
+    unoptimized: isCpanelStatic,
     remotePatterns: [
       {
         protocol: "https",
@@ -43,26 +52,30 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: securityHeaders,
-      },
-    ];
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/tienda",
-        destination: "/catalogo",
-      },
-      {
-        source: "/tienda/:path*",
-        destination: "/catalogo/:path*",
-      },
-    ];
-  },
+  ...(!isCpanelStatic
+    ? {
+        async headers() {
+          return [
+            {
+              source: "/(.*)",
+              headers: securityHeaders,
+            },
+          ];
+        },
+        async rewrites() {
+          return [
+            {
+              source: "/tienda",
+              destination: "/catalogo",
+            },
+            {
+              source: "/tienda/:path*",
+              destination: "/catalogo/:path*",
+            },
+          ];
+        },
+      }
+    : {}),
 };
 
 export default nextConfig;

@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -23,8 +23,23 @@ interface AdminSidebarProps {
   session?: SessionUser | null;
 }
 
-export function AdminSidebar({ session }: AdminSidebarProps) {
+export function AdminSidebar({ session: initialSession }: AdminSidebarProps) {
   const pathname = usePathname();
+  const [session, setSession] = useState<SessionUser | null>(initialSession || null);
+
+  useEffect(() => {
+    if (pathname === "/admin/login") return;
+    if (!initialSession) {
+      fetch("/api/admin/me")
+        .then((r) => r.json())
+        .then((d) => {
+          if (d?.authenticated && d?.user) {
+            setSession(d.user);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [pathname, initialSession]);
 
   // No renderizar barra lateral en la página de login
   if (pathname === "/admin/login") {

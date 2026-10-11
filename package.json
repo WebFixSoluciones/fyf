@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
+    "build:cpanel": "node scripts/build-cpanel.mjs",
     "start": "node server.js",
     "lint": "next lint",
     "postinstall": "prisma generate",
