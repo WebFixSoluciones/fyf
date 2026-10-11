@@ -7,6 +7,7 @@ import {
   resetFailedLoginAttempts,
 } from "@/lib/customers-store";
 import { setCustomerSession } from "@/lib/customer-auth";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
@@ -34,9 +35,42 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2. Buscar cliente
-    const customer = findCustomerByEmail(cleanEmail);
-    if (!customer) {
+    // 2. Buscar cliente en MySQL primero, luego en el store local
+    let customerRecord: {
+      id: string;
+      name: string;
+      email: string;
+      phone: string;
+      idNumber?: string;
+      passwordHash: string;
+    } | null = null;
+
+    try {
+      const dbUser = await prisma.user.findUnique({
+        where: { email: cleanEmail },
+      });
+      if (dbUser) {
+        customerRecord = {
+          id: dbUser.id,
+          name: dbUser.name,
+          email: dbUser.email,
+          phone: dbUser.phone || "",
+          idNumber: dbUser.idNumber || undefined,
+          passwordHash: dbUser.passwordHash,
+        };
+      }
+    } catch {
+      // Fallback al store local si MySQL no está disponible
+    }
+
+    if (!customerRecord) {
+      const localCustomer = findCustomerByEmail(cleanEmail);
+      if (localCustomer) {
+        customerRecord = localCustomer;
+      }
+    }
+
+    if (!customerRecord) {
       recordFailedLoginAttempt(cleanEmail);
       return NextResponse.json(
         { success: false, message: "Correo o contraseña incorrectos." },
@@ -45,7 +79,7 @@ export async function POST(req: Request) {
     }
 
     // 3. Verificar contraseña cifrada con bcrypt
-    const isValid = verifyCustomerPassword(password, customer.passwordHash);
+    const isValid = verifyCustomerPassword(password, customerRecord.passwordHash);
     if (!isValid) {
       const attemptResult = recordFailedLoginAttempt(cleanEmail);
       if (attemptResult.isLocked) {
@@ -67,18 +101,18 @@ export async function POST(req: Request) {
     resetFailedLoginAttempts(cleanEmail);
 
     const safeCustomer = {
-      id: customer.id,
-      name: customer.name,
-      email: customer.email,
-      phone: customer.phone,
-      idNumber: customer.idNumber,
+      id: customerRecord.id,
+      name: customerRecord.name,
+      email: customerRecord.email,
+      phone: customerRecord.phone,
+      idNumber: customerRecord.idNumber,
     };
 
     await setCustomerSession(safeCustomer);
 
     return NextResponse.json({
       success: true,
-      message: "¡Bienvenido de nuevo a Alina Shop!",
+      message: "¡Bienvenido de nuevo a FYF Uniformes!",
       customer: safeCustomer,
     });
   } catch (err: any) {

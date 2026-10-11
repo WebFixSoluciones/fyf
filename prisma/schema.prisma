@@ -1,14 +1,16 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x"]
 }
 
 enum Role {
   ADMIN
+  COLABORADOR
   CLIENTE
 }
 
@@ -30,10 +32,14 @@ enum PaymentMethod {
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
+  username      String?   @unique
   passwordHash  String
   name          String
   phone         String?
+  idNumber      String?   // Cédula o RUC
   role          Role      @default(CLIENTE)
+  isActive      Boolean   @default(true)
+  lastLogin     DateTime?
   addresses     Address[]
   orders        Order[]
   createdAt     DateTime  @default(now())
@@ -49,8 +55,8 @@ model Address {
   phone        String
   province     String
   city         String
-  street       String
-  reference    String?
+  street       String   @db.Text
+  reference    String?  @db.Text
   isDefault    Boolean  @default(false)
   createdAt    DateTime @default(now())
 }
@@ -59,61 +65,63 @@ model Category {
   id          String    @id @default(cuid())
   name        String    @unique
   slug        String    @unique
-  description String?
+  description String?   @db.Text
+  image       String?
   order       Int       @default(0)
   products    Product[]
 }
 
 model Product {
-  id              String           @id @default(cuid())
-  sku             String           @unique
+  id              String                @id @default(cuid())
+  sku             String                @unique
   name            String
-  slug            String           @unique
-  description     String
-  material        String?          // Ej: "MDF 3mm", "Acrílico", "Cartulina"
+  slug            String                @unique
+  description     String                @db.Text
+  material        String?
   categoryId      String
-  category        Category         @relation(fields: [categoryId], references: [id])
-  mainImage       String           // URL en Vercel Blob o placeholder
-  images          String[]         // Galería
-  hasLogoOption   Boolean          @default(false) // Grabado láser (+ $0.20)
-  logoPriceExtra  Decimal          @default(0.20) @db.Decimal(10, 2)
-  allowCustomSize Boolean          @default(false) // Medidas bajo pedido
-  isActive        Boolean          @default(true)
+  category        Category              @relation(fields: [categoryId], references: [id])
+  mainImage       String
+  images          Json?                 // Array JSON de URLs de galería compatible con MySQL
+  hasLogoOption   Boolean               @default(false)
+  logoPriceExtra  Decimal               @default(0.20) @db.Decimal(10, 2)
+  allowCustomSize Boolean               @default(false)
+  isActive        Boolean               @default(true)
   variants        ProductVariant[]
   interactions    WhatsAppInteraction[]
   orderItems      OrderItem[]
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
 }
 
 model ProductVariant {
-  id            String   @id @default(cuid())
-  productId     String
-  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  code          String?  // Ej: BBRSL10, TAC001
-  sizeLabel     String   // Ej: "10 cm", "20 cm", "30x15 cm"
-  shape         String?  // Ej: "Rizada", "Cuadrada", "Redonda", "Estrella", "Corazón", "Punta Redonda"
-  color         String?  // Ej: "Blanco", "Wengué", "Dorado"
-  unitPrice     Decimal  @db.Decimal(10, 2) // Precio unitario base (<12)
-  dozenPrice    Decimal  @db.Decimal(10, 2) // Precio por docena (12-49)
-  wholesalePrice Decimal @db.Decimal(10, 2) // Precio al por mayor (50+)
-  stock         Int      @default(999)
-  isActive      Boolean  @default(true)
+  id             String  @id @default(cuid())
+  productId      String
+  product        Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  code           String?
+  sizeLabel      String
+  shape          String?
+  color          String?
+  unitPrice      Decimal @db.Decimal(10, 2)
+  dozenPrice     Decimal @db.Decimal(10, 2)
+  wholesalePrice Decimal @db.Decimal(10, 2)
+  stock          Int     @default(999)
+  isActive       Boolean @default(true)
 }
 
 model Order {
   id                    String            @id @default(cuid())
-  orderNumber           String            @unique // Ej: ALN-2026-1001
+  orderNumber           String            @unique // Ej: FYF-2026-1001
   userId                String?
-  user                  User?             @relation(fields: [userId], references: [id])
+  user                  User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   customerName          String
   customerIdNumber      String            // Cédula o RUC
   customerEmail         String
   customerPhone         String
-  shippingAddress       String
+  shippingAddress       String            @db.Text
   shippingCity          String
   shippingProvince      String
-  shippingReference     String?
+  shippingReference     String?           @db.Text
+  shippingMethod        String            @default("domicilio")
   paymentMethod         PaymentMethod
   paymentStatus         String            @default("PENDING") // PENDING, APPROVED, REJECTED
   payphoneTransactionId String?
@@ -121,7 +129,7 @@ model Order {
   subtotal              Decimal           @db.Decimal(10, 2)
   shippingCost          Decimal           @default(0.00) @db.Decimal(10, 2)
   total                 Decimal           @db.Decimal(10, 2)
-  notes                 String?
+  notes                 String?           @db.Text
   items                 OrderItem[]
   tracking              ShippingTracking?
   createdAt             DateTime          @default(now())
@@ -129,37 +137,38 @@ model Order {
 }
 
 model OrderItem {
-  id              String   @id @default(cuid())
-  orderId         String
-  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productId       String
-  product         Product  @relation(fields: [productId], references: [id])
-  variantDetails  Json     // { size, shape, color, customDimensions, withLogo }
-  quantity        Int
-  unitPrice       Decimal  @db.Decimal(10, 2)
-  subtotal        Decimal  @db.Decimal(10, 2)
+  id             String   @id @default(cuid())
+  orderId        String
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId      String?
+  product        Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName    String   @default("Producto FYF Uniformes")
+  variantDetails Json     // { size, shape, color, customDimensions, withLogo }
+  quantity       Int
+  unitPrice      Decimal  @db.Decimal(10, 2)
+  subtotal       Decimal  @db.Decimal(10, 2)
 }
 
 model ShippingTracking {
-  id            String    @id @default(cuid())
-  orderId       String    @unique
-  order         Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  courier       String    // Ej: "Servientrega", "LaarCourier", "Entrega Local", "Cooperativa"
+  id             String    @id @default(cuid())
+  orderId        String    @unique
+  order          Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  courier        String    // Ej: "Servientrega", "LaarCourier", "Entrega Local"
   trackingNumber String
-  trackingUrl   String?
-  shippedAt     DateTime  @default(now())
-  deliveredAt   DateTime?
-  notes         String?
+  trackingUrl    String?
+  shippedAt      DateTime  @default(now())
+  deliveredAt    DateTime?
+  notes          String?   @db.Text
 }
 
 model WhatsAppInteraction {
-  id             String   @id @default(cuid())
-  productId      String
-  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variantDetails Json     // Parámetros con los que se dio clic
-  calculatedPrice Decimal @db.Decimal(10, 2)
-  quantity       Int
-  createdAt      DateTime @default(now())
+  id              String   @id @default(cuid())
+  productId       String?
+  product         Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variantDetails  Json
+  calculatedPrice Decimal  @db.Decimal(10, 2)
+  quantity        Int
+  createdAt       DateTime @default(now())
 }
 
 model StoreSettings {
@@ -167,12 +176,13 @@ model StoreSettings {
   whatsappPrimary       String   @default("593993358701")
   whatsappSecondary     String   @default("593988742584")
   whatsappActiveNumber  String   @default("593993358701")
-  whatsappTemplate      String   @default("Hola FYF Uniformes, deseo realizar una cotización/pedido: *{orderNumber}*...")
+  whatsappTemplate      String   @default("Hola FYF Uniformes, deseo realizar una cotización/pedido: *{orderNumber}*...") @db.VarChar(500)
   payphoneClientId      String?
   payphoneAppId         String?
-  payphoneToken         String?
+  payphoneToken         String?  @db.Text
   payphoneIsSandbox     Boolean  @default(true)
   shippingBasePichincha Decimal  @default(3.50) @db.Decimal(10, 2)
   shippingBaseNational  Decimal  @default(5.50) @db.Decimal(10, 2)
+  promotionsJson        Json?
   updatedAt             DateTime @updatedAt
 }

@@ -12,17 +12,25 @@ export async function POST(req: Request) {
 
     try {
       if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("dummy")) {
+        // Verificar si existe el producto en MySQL por id, sku o slug
+        const dbProduct = await prisma.product.findFirst({
+          where: {
+            OR: [{ id: productId }, { sku: productId }, { slug: productId }],
+          },
+          select: { id: true },
+        });
+
         await prisma.whatsAppInteraction.create({
           data: {
-            productId,
-            variantDetails: variantDetails || {},
+            productId: dbProduct ? dbProduct.id : null,
+            variantDetails: { ...(variantDetails || {}), requestedProductRef: productId },
             calculatedPrice: Number(calculatedPrice) || 0,
             quantity: Number(quantity) || 1,
           },
         });
       }
     } catch (dbErr) {
-      console.warn("Could not persist WhatsApp interaction to db:", dbErr);
+      console.warn("Could not persist WhatsApp interaction to MySQL:", dbErr);
     }
 
     return NextResponse.json({ success: true, timestamp: new Date().toISOString() });
@@ -34,13 +42,12 @@ export async function POST(req: Request) {
 
 export async function GET() {
   try {
-    // Return sample or real analytics summary
     const sampleStats = [
-      { name: "Base MDF Rizada 20cm", count: 142, percentage: 38 },
-      { name: "Caja Acetato Tapa Blanca 21.5x24", count: 89, percentage: 24 },
-      { name: "Toppers Acrílico Personalizado", count: 64, percentage: 17 },
-      { name: "Base MDF Rectangular 30x20", count: 48, percentage: 13 },
-      { name: "Mangas Desechables 30cm", count: 31, percentage: 8 },
+      { name: "Chompa Combinada Térmica 3 Capas", count: 142, percentage: 38 },
+      { name: "Overol Clásico Ignífugo con Cinta", count: 89, percentage: 24 },
+      { name: "Botín de Seguridad Bompel Dieléctrico", count: 64, percentage: 17 },
+      { name: "Pantalón Jean Industrial Prelavado", count: 48, percentage: 13 },
+      { name: "Chavera Térmico Impermeable Thinsulate", count: 31, percentage: 8 },
     ];
 
     return NextResponse.json({

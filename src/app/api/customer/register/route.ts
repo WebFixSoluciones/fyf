@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { createCustomer } from "@/lib/customers-store";
+import { createCustomer, hashPassword } from "@/lib/customers-store";
 import { setCustomerSession } from "@/lib/customer-auth";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +11,7 @@ export async function POST(req: Request) {
     // 1. Validaciones de entrada estrictas
     if (!name || typeof name !== "string" || name.trim().length < 2) {
       return NextResponse.json(
-        { success: false, message: "Ingresa tu nombre o el de tu pastelería (mínimo 2 caracteres)." },
+        { success: false, message: "Ingresa tu nombre o razón social (mínimo 2 caracteres)." },
         { status: 400 }
       );
     }
@@ -37,22 +38,71 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2. Crear cliente con hash bcrypt
-    const newCustomer = await createCustomer({
-      name: name.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      password,
-      idNumber: idNumber ? String(idNumber).trim() : undefined,
-    });
+    const cleanEmail = email.trim().toLowerCase();
+    let registeredCustomer: {
+      id: string;
+      name: string;
+      email: string;
+      phone: string;
+      idNumber?: string;
+    };
+
+    try {
+      const existingDbUser = await prisma.user.findUnique({
+        where: { email: cleanEmail },
+      });
+      if (existingDbUser) {
+        return NextResponse.json(
+          { success: false, message: "Ya existe una cuenta registrada con este correo electrónico." },
+          { status: 400 }
+        );
+      }
+
+      const passwordHash = await hashPassword(password);
+      const dbUser = await prisma.user.create({
+        data: {
+          name: name.trim(),
+          email: cleanEmail,
+          phone: phone.trim(),
+          idNumber: idNumber ? String(idNumber).trim() : null,
+          passwordHash,
+          role: "CLIENTE",
+          isActive: true,
+        },
+      });
+
+      registeredCustomer = {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        phone: dbUser.phone || phone.trim(),
+        idNumber: dbUser.idNumber || undefined,
+      };
+    } catch {
+      // Fallback local si MySQL no está accesible en desarrollo
+      const localCustomer = await createCustomer({
+        name: name.trim(),
+        email: cleanEmail,
+        phone: phone.trim(),
+        password,
+        idNumber: idNumber ? String(idNumber).trim() : undefined,
+      });
+      registeredCustomer = {
+        id: localCustomer.id,
+        name: localCustomer.name,
+        email: localCustomer.email,
+        phone: localCustomer.phone,
+        idNumber: localCustomer.idNumber,
+      };
+    }
 
     // 3. Emitir cookie de sesión segura HttpOnly
-    await setCustomerSession(newCustomer);
+    await setCustomerSession(registeredCustomer);
 
     return NextResponse.json({
       success: true,
-      message: "¡Cuenta creada exitosamente! Bienvenido a Alina Shop.",
-      customer: newCustomer,
+      message: "¡Cuenta creada exitosamente! Bienvenido a FYF Uniformes.",
+      customer: registeredCustomer,
     });
   } catch (err: any) {
     return NextResponse.json(

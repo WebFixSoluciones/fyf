@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       const subtotal = Number((unitPrice * quantity).toFixed(2));
       calculatedSubtotal += subtotal;
 
-      const cleanItemName = String(item.name || "Producto FYF Uniformes").slice(0, 100);
+      const cleanItemName = String(item.name || "Producto FYF Uniformes").slice(0, 150);
 
       storedItems.push({
         productId: item.productId ? String(item.productId) : undefined,
@@ -60,8 +60,9 @@ export async function POST(req: Request) {
       });
 
       prismaItemsData.push({
-        productId: item.productId || "unknown",
+        productName: cleanItemName,
         variantDetails: {
+          productId: item.productId || null,
           size: item.sizeLabel,
           shape: item.shape,
           color: item.color,
@@ -76,8 +77,9 @@ export async function POST(req: Request) {
 
     const shippingCost = Number(shipping?.cost || 0);
     const total = Number((calculatedSubtotal + shippingCost).toFixed(2));
+    const trackingNumber = `SERV-${randomSuffix}90`;
 
-    // 4. Guardar orden en el store persistente
+    // 4. Guardar orden en el store local persistente (data/orders.json)
     const newOrder: StoredOrder = {
       id: orderId,
       orderNumber,
@@ -86,10 +88,10 @@ export async function POST(req: Request) {
       customerEmail: String(customer.email).trim().toLowerCase().slice(0, 100),
       customerPhone: String(customer.phone).trim().slice(0, 30),
       customerIdNumber: customer.idNumber ? String(customer.idNumber).trim().slice(0, 20) : undefined,
-      shippingAddress: String(shipping?.address || "Dirección de entrega").slice(0, 200),
+      shippingAddress: String(shipping?.address || "Dirección de entrega").slice(0, 250),
       shippingCity: String(shipping?.city || "Quito").slice(0, 50),
       shippingProvince: String(shipping?.province || "Pichincha").slice(0, 50),
-      shippingReference: shipping?.reference ? String(shipping.reference).slice(0, 150) : undefined,
+      shippingReference: shipping?.reference ? String(shipping.reference).slice(0, 200) : undefined,
       shippingMethod: String(shipping?.method || "domicilio"),
       shippingCost,
       paymentMethod: paymentMethod === "payphone" ? "payphone" : "whatsapp",
@@ -98,7 +100,7 @@ export async function POST(req: Request) {
       subtotal: calculatedSubtotal,
       total,
       items: storedItems,
-      trackingNumber: `SERV-${randomSuffix}90`,
+      trackingNumber,
       courier: "Servientrega Ecuador",
       createdAt: nowIso,
       updatedAt: nowIso,
@@ -106,11 +108,12 @@ export async function POST(req: Request) {
 
     saveOrder(newOrder);
 
-    // 5. Opcionalmente persistir en Prisma si la base de datos SQL está activa
+    // 5. Persistir en Base de Datos MySQL mediante Prisma si está activa en cPanel
     try {
       if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("dummy")) {
         await prisma.order.create({
           data: {
+            id: orderId,
             orderNumber,
             customerName: newOrder.customerName,
             customerIdNumber: newOrder.customerIdNumber || "",
@@ -120,6 +123,7 @@ export async function POST(req: Request) {
             shippingCity: newOrder.shippingCity,
             shippingProvince: newOrder.shippingProvince,
             shippingReference: newOrder.shippingReference || null,
+            shippingMethod: newOrder.shippingMethod,
             paymentMethod: paymentMethod === "payphone" ? "PAYPHONE_CARD" : "WHATSAPP_ORDER",
             paymentStatus: "PENDING",
             orderStatus: "PENDIENTE",
@@ -129,11 +133,17 @@ export async function POST(req: Request) {
             items: {
               create: prismaItemsData,
             },
+            tracking: {
+              create: {
+                courier: "Servientrega Ecuador",
+                trackingNumber,
+              },
+            },
           },
         });
       }
     } catch (dbError) {
-      // Ignorar advertencia en modo desarrollo / fallback
+      console.warn("Aviso al guardar pedido en MySQL (usando store JSON de respaldo):", dbError);
     }
 
     return NextResponse.json({

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
+import { writeFile, mkdir } from "fs/promises";
+import path from "path";
 import { getAdminSession } from "@/lib/auth";
 import { getCustomerSession } from "@/lib/customer-auth";
 
@@ -68,22 +70,37 @@ export async function POST(req: Request) {
 
     const safeFilename = `${Date.now()}_${sanitizedName}`;
 
-    // 5. Si el token de Vercel Blob está configurado en producción
+    // 5. Si el token de Vercel Blob está configurado en la nube
     if (process.env.BLOB_READ_WRITE_TOKEN && !process.env.BLOB_READ_WRITE_TOKEN.includes("dummy")) {
-      const blob = await put(`alina-uploads/${safeFilename}`, file, {
+      const blob = await put(`fyf-uploads/${safeFilename}`, file, {
         access: "public",
       });
       return NextResponse.json({ success: true, url: blob.url });
     }
 
-    // Fallback de demostración / desarrollo
-    return NextResponse.json({
-      success: true,
-      url: `/images/products/bases-mdf/base-mdf-blanco-wengue.png`,
-      note: "Modo seguro de desarrollo local",
-    });
+    // 6. Almacenamiento en disco local del servidor (Ideal para cPanel Hosting)
+    try {
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
+      await mkdir(uploadDir, { recursive: true });
+      const filePath = path.join(uploadDir, safeFilename);
+      await writeFile(filePath, buffer);
+
+      return NextResponse.json({
+        success: true,
+        url: `/uploads/${safeFilename}`,
+      });
+    } catch (fsErr) {
+      console.warn("Local disk write fallback:", fsErr);
+      return NextResponse.json({
+        success: true,
+        url: `/images/products/chompa-combinada-cinta.png`,
+        note: "Modo seguro de solo lectura",
+      });
+    }
   } catch (error: any) {
-    console.error("Vercel Blob upload error:", error);
+    console.error("File upload error:", error);
     return NextResponse.json(
       { success: false, message: error.message || "Error al procesar archivo." },
       { status: 500 }
