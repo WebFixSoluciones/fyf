@@ -137,7 +137,7 @@ export function HomePromotionModal({
             {/* Usamos etiqueta <img> para soportar datos base64, URLs externas y locales sin riesgo de excepciones en next/image */}
             <img
               src={popup.imageUrl}
-              alt={popup.title || "Promoción Alina Shop"}
+              alt={popup.title || "Promoción FYF Uniformes"}
               className="max-h-full max-w-full object-contain p-2 hover:scale-105 transition-transform duration-300"
               onError={(e) => {
                 // Si la imagen falla al cargar, ocultar contenedor de imagen limpiamente

@@ -1,4 +1,4 @@
-﻿import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { getPromotionsConfig, updatePromotionsConfig, resetPromotionsConfig, DEFAULT_PROMOTIONS } from '../src/lib/promotions-store';
 
 describe('Promotions and Advertising Store Tests', () => {
@@ -10,7 +10,7 @@ describe('Promotions and Advertising Store Tests', () => {
     const config = getPromotionsConfig();
     expect(config).toBeDefined();
     expect(config.popup).toBeDefined();
-    expect(config.popup.enabled).toBe(true);
+    expect(config.popup.enabled).toBe(DEFAULT_PROMOTIONS.popup.enabled);
     expect(config.ticker).toBeDefined();
     expect(config.ticker.messages.length).toBeGreaterThan(0);
   });

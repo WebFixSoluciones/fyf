@@ -15,8 +15,8 @@ export function FloatingSocial() {
   // Don't show in admin dashboard
   if (pathname?.startsWith("/admin")) return null;
 
-  const whatsappPhone = "593985890956";
-  const defaultMessage = "¡Hola Alina Shop! Quisiera información y asesoría sobre sus productos de repostería y pedidos.";
+  const whatsappPhone = "593993358701";
+  const defaultMessage = "¡Hola FYF Uniformes! Quisiera información y cotización sobre sus uniformes industriales y equipos de seguridad.";
 
   const handleWhatsAppClick = () => {
     try {
@@ -40,16 +40,16 @@ export function FloatingSocial() {
       {/* 1. REDES SOCIALES FLOTANTES CENTRADAS VERTICALMENTE EN EL LADO IZQUIERDO  */}
       {/* ========================================================================= */}
       <aside
-        aria-label="Redes sociales oficiales Alina Shop"
+        aria-label="Redes sociales oficiales FYF Uniformes"
         className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-start gap-1 pointer-events-auto"
       >
         {/* Facebook */}
         <a
-          href="https://facebook.com/alinashop.ec"
+          href="https://facebook.com/fyfuniformes"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Facebook Alina Shop"
-          title="Visitar Facebook Alina Shop"
+          aria-label="Facebook FYF Uniformes"
+          title="Visitar Facebook FYF Uniformes"
           className="group flex items-center bg-[#1877F2] hover:bg-[#166fe5] text-white rounded-r-lg shadow-md transition-all duration-300 hover:shadow-lg hover:translate-x-0.5"
         >
           <div className="size-8 flex items-center justify-center shrink-0">
@@ -64,11 +64,11 @@ export function FloatingSocial() {
 
         {/* Instagram */}
         <a
-          href="https://instagram.com/alinashop.ec"
+          href="https://instagram.com/fyfuniformes"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Instagram Alina Shop"
-          title="Visitar Instagram @alinashop.ec"
+          aria-label="Instagram FYF Uniformes"
+          title="Visitar Instagram @fyfuniformes"
           className="group flex items-center bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-95 text-white rounded-r-lg shadow-md transition-all duration-300 hover:shadow-lg hover:translate-x-0.5"
         >
           <div className="size-8 flex items-center justify-center shrink-0">
@@ -83,11 +83,11 @@ export function FloatingSocial() {
 
         {/* TikTok */}
         <a
-          href="https://tiktok.com/@alinashop.ec"
+          href="https://tiktok.com/@fyfuniformes"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="TikTok Alina Shop"
-          title="Visitar TikTok @alinashop.ec"
+          aria-label="TikTok FYF Uniformes"
+          title="Visitar TikTok @fyfuniformes"
           className="group flex items-center bg-black hover:bg-neutral-900 border-r border-t border-b border-neutral-800 text-white rounded-r-lg shadow-md transition-all duration-300 hover:shadow-lg hover:translate-x-0.5"
         >
           <div className="size-8 flex items-center justify-center shrink-0">
@@ -102,16 +102,16 @@ export function FloatingSocial() {
 
         {/* Teléfono / Llamar */}
         <a
-          href="tel:0985890956"
-          aria-label="Llamar a taller Alina Shop"
-          title="Llamar: 0985890956"
+          href="tel:0993358701"
+          aria-label="Llamar a FYF Uniformes"
+          title="Llamar: 099 335 8701"
           className="group flex items-center bg-slate-900 hover:bg-slate-800 text-white rounded-r-lg shadow-md transition-all duration-300 hover:shadow-lg hover:translate-x-0.5"
         >
           <div className="size-8 flex items-center justify-center shrink-0">
-            <Phone className="size-3.5 text-emerald-400" />
+            <Phone className="size-3.5 text-[#FF841D]" />
           </div>
           <span className="max-w-0 overflow-hidden whitespace-nowrap text-[11px] font-semibold transition-all duration-300 ease-in-out group-hover:max-w-xs group-hover:pr-2.5">
-            0985890956
+            099 335 8701
           </span>
         </a>
       </aside>

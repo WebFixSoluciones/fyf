@@ -22,7 +22,7 @@ export interface PricingResult {
 }
 
 /**
- * Motor de cálculo oficial de precios para Alina Shop
+ * Motor de cálculo oficial de precios para FYF Uniformes
  * - < 12 unds: precio unitario
  * - 12 a 49 unds: precio por docena
  * - 50+ unds: precio por mayor

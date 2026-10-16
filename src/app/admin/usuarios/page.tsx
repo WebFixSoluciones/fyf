@@ -338,7 +338,7 @@ export default function AdminUsersPage() {
       <div className="bg-slate-100/70 border border-slate-200 rounded-2xl p-5 text-xs text-slate-600 space-y-2">
         <h3 className="font-bold text-slate-900 flex items-center gap-2">
           <KeyRound className="size-4 text-alina-600" />
-          <span>Alcance de Permisos por Rol en Alina Shop</span>
+          <span>Alcance de Permisos por Rol en FYF Uniformes</span>
         </h3>
         <ul className="list-disc pl-5 space-y-1 text-slate-600">
           <li>

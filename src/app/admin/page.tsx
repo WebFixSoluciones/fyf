@@ -32,7 +32,7 @@ export default function AdminDashboardPage() {
             Panel de Control General
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Resumen operativo en tiempo real de Alina Shop (Ecuador)
+            Resumen operativo en tiempo real de FYF Uniformes (Ecuador)
           </p>
         </div>
 

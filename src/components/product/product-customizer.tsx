@@ -970,7 +970,7 @@ ${selectedShape ? `*Tipo / Modelo:* ${selectedShape}\n` : ""}${selectedColor ? `
         </div>
         <div className="flex items-center justify-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-          <span>Garantía en Taller</span>
+          <span>Garantía FYF Uniformes</span>
         </div>
       </div>
     </div>

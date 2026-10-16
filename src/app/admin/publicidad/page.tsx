@@ -271,7 +271,7 @@ export default function AdminPublicidadPage() {
       : {
           id: `msg_${Date.now()}`,
           icon: "sparkles",
-          text: "Nueva promoción exclusiva de Alina Shop",
+          text: "Nueva promoción exclusiva de FYF Uniformes",
           linkUrl: "/catalogo",
         };
 
@@ -513,7 +513,7 @@ export default function AdminPublicidadPage() {
                       popup: { ...config.popup, badge: e.target.value },
                     })
                   }
-                  placeholder="Ej: OFERTA MAYORISTA ALINA SHOP"
+                  placeholder="Ej: OFERTA INDUSTRIAL FYF UNIFORMES"
                   className="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-alina-600 font-semibold"
                 />
               </div>
@@ -643,7 +643,7 @@ export default function AdminPublicidadPage() {
                 {/* Galería de productos predeterminados de Alina Shop */}
                 <div>
                   <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    O selecciona una foto del catálogo oficial Alina Shop:
+                    O selecciona una foto del catálogo oficial FYF Uniformes:
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {CATALOG_PRESETS.map((item) => {
@@ -866,7 +866,7 @@ export default function AdminPublicidadPage() {
               {/* Plantillas rápidas predefinidas */}
               <div>
                 <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-                  Plantillas Rápidas Alina Shop (Clic para agregar frase):
+                  Plantillas Rápidas FYF Uniformes (Clic para agregar frase):
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_TICKER_TEMPLATES.map((tpl, i) => (
@@ -997,7 +997,7 @@ export default function AdminPublicidadPage() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
           <div className="text-xs text-slate-500 flex items-center gap-1.5">
             <CheckCircle2 className="size-4 text-emerald-600" />
-            <span>Los cambios se reflejan en tiempo real en la tienda virtual Alina Shop.</span>
+            <span>Los cambios se reflejan en tiempo real en la tienda virtual FYF Uniformes.</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -1035,7 +1035,7 @@ export default function AdminPublicidadPage() {
                 ¿Restablecer Publicidad de Fábrica?
               </h3>
               <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                Esto restaurará el Pop-up y las frases del carrusel a las ofertas predeterminadas de Alina Shop.
+                Esto restaurará el Pop-up y las frases del carrusel a las ofertas predeterminadas de FYF Uniformes.
               </p>
             </div>
 
