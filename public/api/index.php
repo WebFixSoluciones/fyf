@@ -37,20 +37,28 @@ function sendJson(array $data, int $status = 200): void {
 // 1. CREAR PEDIDO (/api/orders/create)
 // ============================================================================
 if ($route === 'orders/create' && $method === 'POST') {
-    $customerName     = trim($body['customerName'] ?? '');
-    $customerIdNumber = trim($body['customerIdNumber'] ?? '9999999999');
-    $customerEmail    = trim($body['customerEmail'] ?? 'ventas@fyf.com.ec');
-    $customerPhone    = trim($body['customerPhone'] ?? '');
-    $shippingProvince = trim($body['shippingProvince'] ?? 'Pichincha');
-    $shippingCity     = trim($body['shippingCity'] ?? 'Quito');
-    $shippingAddress  = trim($body['shippingAddress'] ?? 'Retiro en tienda');
-    $shippingRef      = trim($body['shippingReference'] ?? '');
-    $shippingMethod   = trim($body['shippingMethod'] ?? 'domicilio');
-    $shippingCost     = (float)($body['shippingCost'] ?? 0);
+    $customerName     = trim($body['customerName'] ?? ($body['customer']['name'] ?? ''));
+    $customerIdNumber = trim($body['customerIdNumber'] ?? ($body['customer']['idNumber'] ?? '9999999999'));
+    $customerEmail    = trim($body['customerEmail'] ?? ($body['customer']['email'] ?? 'ventas@fyf.com.ec'));
+    $customerPhone    = trim($body['customerPhone'] ?? ($body['customer']['phone'] ?? ''));
+    $shippingProvince = trim($body['shippingProvince'] ?? ($body['shipping']['province'] ?? 'Pichincha'));
+    $shippingCity     = trim($body['shippingCity'] ?? ($body['shipping']['city'] ?? 'Quito'));
+    $shippingAddress  = trim($body['shippingAddress'] ?? ($body['shipping']['address'] ?? 'Retiro en tienda'));
+    $shippingRef      = trim($body['shippingReference'] ?? ($body['shipping']['reference'] ?? ''));
+    $shippingMethod   = trim($body['shippingMethod'] ?? ($body['shipping']['method'] ?? 'domicilio'));
+    $shippingCost     = (float)($body['shippingCost'] ?? ($body['shipping']['cost'] ?? 0));
     $paymentMethodRaw = trim($body['paymentMethod'] ?? 'whatsapp');
     $subtotal         = (float)($body['subtotal'] ?? 0);
-    $total            = (float)($body['total'] ?? ($subtotal + $shippingCost));
     $items            = is_array($body['items'] ?? null) ? $body['items'] : [];
+
+    if ($subtotal <= 0) {
+        foreach ($items as $item) {
+            $qty  = (int)($item['quantity'] ?? 1);
+            $uPrc = (float)($item['unitPrice'] ?? 0);
+            $subtotal += ($qty * $uPrc);
+        }
+    }
+    $total = (float)($body['total'] ?? ($subtotal + $shippingCost));
 
     if ($customerName === '' || $customerPhone === '' || empty($items)) {
         sendJson(['success' => false, 'message' => 'Datos de cliente o carrito incompletos.'], 400);
@@ -564,6 +572,174 @@ if ($route === 'admin/promotions') {
             } catch (Throwable $e) {}
         }
         sendJson(['success' => true, 'promotions' => $body]);
+    }
+}
+
+// ============================================================================
+// 8. PASARELA PAYPHONE ECUADOR (/api/payphone/create-payment, /api/payphone/confirm)
+// ============================================================================
+if ($route === 'payphone/create-payment' && $method === 'POST') {
+    $orderId          = $body['orderId'] ?? 'new';
+    $orderNumber      = $body['orderNumber'] ?? '';
+    $total            = (float)($body['total'] ?? 0);
+    $customerName     = trim($body['customerName'] ?? ($body['customer']['name'] ?? ''));
+    $customerEmail    = trim($body['customerEmail'] ?? ($body['customer']['email'] ?? 'ventas@fyf.com.ec'));
+    $customerPhone    = trim($body['customerPhone'] ?? ($body['customer']['phone'] ?? '593993358701'));
+    $customerIdNumber = trim($body['customerIdNumber'] ?? ($body['customer']['idNumber'] ?? '9999999999'));
+
+    if ($orderNumber === '' || $total <= 0) {
+        sendJson(['success' => false, 'message' => 'Datos de pedido inválidos.'], 400);
+    }
+
+    $amountInCents = (int)round($total * 100);
+
+    // Obtener token de Payphone desde StoreSettings de MySQL o constantes
+    $payphoneToken = PAYPHONE_TOKEN;
+    if ($pdo) {
+        try {
+            $stmt = $pdo->query("SELECT `payphoneToken` FROM `StoreSettings` WHERE `id` = 'default' LIMIT 1");
+            $row  = $stmt->fetch();
+            if (!empty($row['payphoneToken'])) {
+                $payphoneToken = $row['payphoneToken'];
+            }
+        } catch (Throwable $e) {}
+    }
+
+    $host = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'www.fyf.com.ec');
+
+    if (!empty($payphoneToken) && strlen($payphoneToken) > 10) {
+        $cleanPhone = preg_replace('/\D/', '', $customerPhone);
+        $formattedPhone = str_starts_with($cleanPhone, '593') ? '+' . $cleanPhone : '+593' . ltrim($cleanPhone, '0');
+
+        $payload = [
+            'responseUrl'         => $host . '/api/payphone/confirm',
+            'cancellationUrl'     => $host . '/checkout',
+            'amount'              => $amountInCents,
+            'amountWithoutTax'    => $amountInCents,
+            'amountWithTax'       => 0,
+            'tax'                 => 0,
+            'service'             => 0,
+            'tip'                 => 0,
+            'clientTransactionId' => $orderNumber,
+            'reference'           => 'Pedido FYF Uniformes ' . $orderNumber,
+            'currency'            => 'USD',
+            'email'               => $customerEmail,
+            'phoneNumber'         => $formattedPhone,
+            'documentId'          => $customerIdNumber,
+        ];
+
+        $ch = curl_init('https://pay.payphonetodoesposible.com/api/button/Prepare');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $payphoneToken,
+            'Content-Type: application/json',
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode >= 200 && $httpCode < 300 && $response) {
+            $data = json_decode($response, true);
+            if (!empty($data['payWithCard'])) {
+                sendJson([
+                    'success'     => true,
+                    'isSandbox'   => false,
+                    'paymentId'   => $data['paymentId'] ?? null,
+                    'payWithCard' => $data['payWithCard'],
+                ]);
+            }
+        }
+    }
+
+    // Modo Pruebas / Sandbox si no hay token en producción
+    $sandboxUrl = '/pedido/' . $orderId . '/exito?num=' . urlencode($orderNumber) . '&method=payphone&status=approved';
+    sendJson([
+        'success'     => true,
+        'isSandbox'   => true,
+        'message'     => 'Modo Pruebas / Sandbox activo.',
+        'payWithCard' => $sandboxUrl,
+    ]);
+}
+
+if ($route === 'payphone/confirm' && $method === 'GET') {
+    $paymentId  = $_GET['id'] ?? null;
+    $clientTxId = $_GET['clientTransactionId'] ?? $_GET['clientTxId'] ?? null;
+
+    $host = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'www.fyf.com.ec');
+
+    if (!$clientTxId) {
+        header('Location: ' . $host . '/catalogo');
+        exit;
+    }
+
+    if ($pdo && $paymentId) {
+        try {
+            $stmt = $pdo->prepare("
+                UPDATE `Order` 
+                SET `paymentStatus` = 'PAGADO', `orderStatus` = 'PAGADO', `payphoneTransactionId` = :pid, `updatedAt` = NOW(3)
+                WHERE `orderNumber` = :ord
+            ");
+            $stmt->execute([':pid' => (string)$paymentId, ':ord' => (string)$clientTxId]);
+        } catch (Throwable $e) {}
+    }
+
+    header('Location: ' . $host . '/pedido/confirmado/exito?num=' . urlencode($clientTxId) . '&method=payphone&status=approved');
+    exit;
+}
+
+// ============================================================================
+// 9. AJUSTES GENERALES DE TIENDA (/api/admin/settings)
+// ============================================================================
+if ($route === 'admin/settings') {
+    if (empty($_SESSION['admin_user'])) {
+        sendJson(['success' => false, 'message' => 'No autorizado'], 401);
+    }
+
+    if ($method === 'GET') {
+        $settings = null;
+        if ($pdo) {
+            try {
+                $stmt = $pdo->query("SELECT * FROM `StoreSettings` WHERE `id` = 'default' LIMIT 1");
+                $settings = $stmt->fetch();
+            } catch (Throwable $e) {}
+        }
+        sendJson(['success' => true, 'settings' => $settings]);
+    }
+
+    if ($method === 'POST') {
+        if ($pdo) {
+            try {
+                $stmt = $pdo->prepare("
+                    UPDATE `StoreSettings` SET
+                        `whatsappPrimary` = :wp,
+                        `whatsappSecondary` = :ws,
+                        `whatsappActiveNumber` = :wa,
+                        `payphoneAppId` = :pApp,
+                        `payphoneClientId` = :pClient,
+                        `payphoneToken` = :pToken,
+                        `payphoneIsSandbox` = :pSand,
+                        `shippingBasePichincha` = :sPich,
+                        `shippingBaseNational` = :sNat,
+                        `updatedAt` = NOW(3)
+                    WHERE `id` = 'default'
+                ");
+                $stmt->execute([
+                    ':wp'      => $body['whatsappPrimary'] ?? '593993358701',
+                    ':ws'      => $body['whatsappSecondary'] ?? '593988742584',
+                    ':wa'      => $body['whatsappActive'] ?? '593993358701',
+                    ':pApp'    => $body['payphoneAppId'] ?? null,
+                    ':pClient' => $body['payphoneClientId'] ?? null,
+                    ':pToken'  => $body['payphoneToken'] ?? null,
+                    ':pSand'   => !empty($body['payphoneIsSandbox']) ? 1 : 0,
+                    ':sPich'   => (float)($body['shippingPichincha'] ?? 3.50),
+                    ':sNat'    => (float)($body['shippingNational'] ?? 5.50),
+                ]);
+            } catch (Throwable $e) {}
+        }
+        sendJson(['success' => true, 'message' => 'Ajustes guardados en MySQL']);
     }
 }
 

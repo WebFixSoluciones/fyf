@@ -44,6 +44,7 @@ function CheckoutContent() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittingStatus, setSubmittingStatus] = useState("Procesando Pedido...");
   const [errorMessage, setErrorMessage] = useState("");
 
   // Pre-fill logged-in customer info
@@ -106,6 +107,7 @@ function CheckoutContent() {
     }
 
     setIsSubmitting(true);
+    setSubmittingStatus("Registrando tu pedido...");
 
     try {
       // 1. Create order on server (server recalculates exact prices for anti-tampering)
@@ -128,6 +130,8 @@ function CheckoutContent() {
             cost: shippingCost,
           },
           paymentMethod: formData.paymentMethod,
+          subtotal,
+          total,
           items: checkoutItems.map((i) => ({
             productId: i.productId,
             name: i.productName,
@@ -137,6 +141,8 @@ function CheckoutContent() {
             withLogo: i.withLogo,
             customDimensions: i.customDimensions,
             quantity: i.quantity,
+            unitPrice: i.unitPrice,
+            subtotal: Number((i.unitPrice * i.quantity).toFixed(2)),
           })),
         }),
       });
@@ -171,7 +177,32 @@ He seleccionado pago por transferencia/WhatsApp. Por favor envíenme los datos b
 
       // If Payphone payment:
       if (formData.paymentMethod === "payphone") {
-        router.push(`/pedido/${orderId}/exito?num=${orderNumber}&method=payphone`);
+        setSubmittingStatus("Conectando con la pasarela segura Payphone...");
+        try {
+          const payRes = await fetch("/api/payphone/create-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              orderId,
+              orderNumber,
+              total,
+              customerName: formData.fullName,
+              customerEmail: formData.email,
+              customerPhone: formData.phone,
+              customerIdNumber: formData.idNumber,
+            }),
+          });
+          const payData = await payRes.json();
+          if (payRes.ok && payData.payWithCard) {
+            window.location.href = payData.payWithCard;
+            return;
+          }
+        } catch (payErr) {
+          console.warn("Payphone redirection error:", payErr);
+        }
+
+        // Fallback seguro a confirmación de pedido
+        router.push(`/pedido/${orderId}/exito?num=${orderNumber}&method=payphone&status=approved`);
       }
     } catch (err: any) {
       setErrorMessage(err.message || "Ocurrió un error inesperado. Por favor intenta de nuevo.");
@@ -672,14 +703,23 @@ He seleccionado pago por transferencia/WhatsApp. Por favor envíenme los datos b
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-12 sm:h-13 bg-black hover:bg-neutral-900 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm sm:text-base transition-all active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                  className="w-full h-12 sm:h-13 bg-black hover:bg-neutral-900 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm sm:text-base transition-all active:scale-[0.99] disabled:opacity-60 cursor-pointer shadow-sm"
                 >
                   {isSubmitting ? (
-                    <span>Procesando Pedido...</span>
+                    <span className="flex items-center gap-2.5">
+                      <span className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin shrink-0" />
+                      <span>{submittingStatus}</span>
+                    </span>
                   ) : formData.paymentMethod === "payphone" ? (
-                    <span>Pagar con Payphone · {formatCurrency(total)}</span>
+                    <span className="flex items-center gap-2">
+                      <CreditCard className="size-4 shrink-0 text-[#FF841D]" />
+                      <span>Pagar con Payphone · {formatCurrency(total)}</span>
+                    </span>
                   ) : (
-                    <span>Confirmar por WhatsApp · {formatCurrency(total)}</span>
+                    <span className="flex items-center gap-2">
+                      <MessageCircle className="size-4 shrink-0 text-[#25D366]" />
+                      <span>Confirmar por WhatsApp · {formatCurrency(total)}</span>
+                    </span>
                   )}
                 </button>
 

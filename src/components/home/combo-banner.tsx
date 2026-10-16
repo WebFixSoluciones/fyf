@@ -81,12 +81,13 @@ export function ComboBanner() {
 
           {/* Right Column: Visual Showcase */}
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative aspect-square w-full max-w-sm sm:max-w-md rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-2xl group">
+            <div className="relative aspect-square w-full max-w-sm sm:max-w-md rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-2xl group flex items-center justify-center p-4">
               <Image
-                src="https://www.fyf.com.ec/wp-content/uploads/2025/04/uniformes-y-ropa-de-trabajo-en-ecuador.jpg"
+                src="/images/categories/ropa-industrial-trabajo.png"
                 alt="Dotaciones de uniformes y ropa de trabajo en Ecuador"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 1024px) 90vw, 400px"
+                className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
             </div>

@@ -13,6 +13,12 @@ define('DB_USER', 'fyfcomec_dbtienda');
 define('DB_PASS', 'Niv{Q6zrWmXxvKnT');
 define('DB_CHARSET', 'utf8mb4');
 
+// Configuración Pasarela Payphone Ecuador
+define('PAYPHONE_APP_ID', 'live_app_fyf_uniformes');
+define('PAYPHONE_CLIENT_ID', 'live_client_fyf_uniformes');
+define('PAYPHONE_TOKEN', '');
+define('PAYPHONE_IS_SANDBOX', true);
+
 /**
  * Obtiene la conexión PDO a MySQL.
  */

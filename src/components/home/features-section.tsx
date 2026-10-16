@@ -35,9 +35,9 @@ export function FeaturesSection() {
     <section className="relative overflow-hidden bg-black text-white py-14 sm:py-20 my-8">
       {/* Background overlay with subtle industrial feel */}
       <div 
-        className="absolute inset-0 opacity-15 bg-cover bg-center mix-blend-overlay"
+        className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay"
         style={{
-          backgroundImage: `url('https://www.fyf.com.ec/wp-content/uploads/2025/04/uniformes-y-ropa-de-trabajo-en-ecuador.jpg')`
+          backgroundImage: `url('/images/categories/ropa-termica.jpg')`
         }}
       />
       <div className="absolute inset-0 bg-black/90 backdrop-blur-[2px]" />

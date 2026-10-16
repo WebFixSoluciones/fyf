@@ -33,34 +33,34 @@ import { PromotionTicker } from "@/components/layout/promotion-ticker";
 
 const CATALOG_PRESETS = [
   {
-    name: "Base MDF Blanco / Wengué",
-    url: "/images/products/bases-mdf/base-mdf-blanco-wengue.png",
-    category: "Bases",
+    name: "Chompa Combinada Térmica 3 Capas",
+    url: "/images/products/chompa-combinada-cinta.png",
+    category: "Ropa Térmica",
   },
   {
-    name: "Base Personalizada Logo Láser",
-    url: "/images/products/bases-mdf/base-mdf-personalizada-logo.png",
-    category: "Bases",
+    name: "Chavera Térmico Thinsulate Azul",
+    url: "/images/products/chavera-azul-rey.png",
+    category: "Ropa Térmica",
   },
   {
-    name: "Topper Acrílico Espejo Dorado",
-    url: "/images/products/toppers/topper-acrilico-espejo-dorado.png",
-    category: "Toppers",
+    name: "Overol Ignífugo con Cinta Reflectiva",
+    url: "/images/products/overol-ignifugo-cinta.jpg",
+    category: "Ropa Ignífuga",
   },
   {
-    name: "Caja Acetato Cristal 360°",
-    url: "/images/products/cajas/caja-acetato-tapa-transparente.png",
-    category: "Cajas",
+    name: "Pantalón Jean Hombre 14 oz",
+    url: "/images/products/pantalon-jean-hombre.png",
+    category: "Ropa Industrial",
   },
   {
-    name: "Apliques Miniatura en Acrílico",
-    url: "/images/products/apliques/aplique-acrilico-miniatura-4cm-6cm-01.png",
-    category: "Apliques",
+    name: "Botín Bompel Dieléctrico BT903CDTC",
+    url: "/images/products/botin-bompel-bt903cdtc.jpg",
+    category: "Calzado Industrial",
   },
   {
-    name: "Colección Diseños y Siluetas",
-    url: "/images/products/bases-disenos/base-diseno-coleccion.png",
-    category: "Diseños",
+    name: "Máscara para Soldar Screen Delta Plus",
+    url: "/images/products/mascara-soldar-screen.png",
+    category: "Implementos de Seguridad",
   },
 ];
 
@@ -699,7 +699,7 @@ export default function AdminPublicidadPage() {
                         popup: { ...config.popup, imageUrl: e.target.value },
                       })
                     }
-                    placeholder="/images/products/bases-mdf/base-mdf-blanco-wengue.png"
+                    placeholder="/images/products/chompa-combinada-cinta.png"
                     className="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-alina-600 font-mono text-[11px]"
                   />
                 </div>

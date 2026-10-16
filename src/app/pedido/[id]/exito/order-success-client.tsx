@@ -11,6 +11,7 @@ export function OrderSuccessClient() {
   const id = params?.id || "new";
   const num = searchParams.get("num");
   const method = searchParams.get("method");
+  const status = searchParams.get("status");
   const orderNumber = num || `FYF-2026-${String(id).slice(-4)}`;
 
   return (
@@ -37,9 +38,15 @@ export function OrderSuccessClient() {
           <div className="text-xs text-slate-500 mt-2">
             Método seleccionado:{" "}
             <strong className="text-slate-800">
-              {method === "whatsapp" ? "Pedido por WhatsApp (Transferencia)" : "Tarjeta con Payphone"}
+              {method === "whatsapp" ? "Pedido por WhatsApp (Transferencia)" : "Tarjeta de Crédito/Débito con Payphone"}
             </strong>
           </div>
+          {method === "payphone" && (
+            <div className="mt-2.5 pt-2.5 border-t border-slate-200 text-xs flex items-center gap-2 text-emerald-700 font-semibold">
+              <span className="size-2 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
+              <span>Transacción procesada y aprobada por Payphone Ecuador</span>
+            </div>
+          )}
         </div>
 
         <p className="text-xs text-slate-600 leading-relaxed mb-6">
